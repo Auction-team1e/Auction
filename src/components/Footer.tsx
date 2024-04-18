@@ -1,44 +1,8 @@
 "use client";
 
-const footer = [
-  {
-    title: "JamesEdition",
-    subTitles: [
-      "About",
-      "Contact",
-      "Careers",
-      "Help & FAQ",
-      "Terms",
-      "Privacy",
-    ],
-  },
-  {
-    title: "Brands",
-    subTitles: [
-      "Mercedes Benz",
-      "BMW",
-      "Buggatti",
-      "Lamborghini",
-      "Ferrari",
-      "Pagani",
-      "Brabus",
-      "Bentley",
-      "Audi",
-      "McLaren",
-      "Porsche",
-    ],
-  },
-  {
-    title: "For Business",
-    subTitles: ["Sell With Us", "Partner", "Linking"],
-  },
-];
-
-const language = ["English", "Mongolian"];
-const currency = ["USD", "MNT"];
-
 import { Box, Select, Stack, Typography } from "@mui/material";
 import { FooterSelect } from "./FooterSelect";
+import { currency, footer, language } from "@/utils/dummyData";
 
 export const Footer = () => {
   return (
