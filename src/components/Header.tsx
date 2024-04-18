@@ -20,12 +20,8 @@ export function Header() {
           <IconButton sx={{ mr: 2, color: "black" }}>
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, color: "black" }}
-          >
-            JamesAuction
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            News
           </Typography>
           <SearchSharpIcon />
           <TextField variant="outlined" label="Search Car"></TextField>
