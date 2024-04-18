@@ -7,11 +7,13 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
+import SearchSharpIcon from "@mui/icons-material/SearchSharp";
+
 export default function Header() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ bgcolor: "transparent" }}>
-        <Toolbar>
+        <Toolbar sx={{ boxShadow: 0 }}>
           <IconButton sx={{ mr: 2, color: "black" }}>
             <MenuIcon />
           </IconButton>
@@ -22,7 +24,25 @@ export default function Header() {
           >
             JamesAuction
           </Typography>
-          <Button sx={{ color: "black" }}>Login</Button>
+          <SearchSharpIcon />
+          <Button
+            disableElevation={true}
+            variant="contained"
+            sx={{
+              textTransform: "none",
+              color: "#717171",
+              fontSize: "16",
+              background: "#fff",
+              borderRadius: "100px",
+              "&:hover": { background: "#fff" },
+              width: 540,
+              height: 38,
+            }}
+          >
+            Search Cars
+          </Button>
+
+          <Button sx={{ color: "black", borderRadius: "1" }}>Log in</Button>
         </Toolbar>
       </AppBar>
     </Box>
