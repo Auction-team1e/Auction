@@ -1,8 +1,9 @@
-import { Header } from "@/components/Header";
+import PrimarySearchAppBar from "@/components/Header";
+
 export default function Home() {
   return (
     <>
-      <Header />
+      <PrimarySearchAppBar />
     </>
   );
 }
