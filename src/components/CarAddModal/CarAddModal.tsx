@@ -1,7 +1,7 @@
 "use client";
 
 import { modalStyle } from "@/utils/dummyData";
-import { Button, Modal, Stack, Typography } from "@mui/material";
+import { Button, Modal, Stack } from "@mui/material";
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { Inputs } from "./Inputs";
@@ -10,15 +10,33 @@ import { useCarData, ContextType } from "@/app/context/CarContext";
 export const CarAddModal = () => {
   const { selected } = useCarData() as ContextType;
   const [open, setOpen] = useState(false);
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     const carInfo = {
+      userId: "id",
       model: e.target.model.value,
-      desc: e.target.desc.value,
+      description: e.target.desc.value,
       information: e.target.info.value,
       startPrice: e.target.price.value,
       Time: e.target.time.value,
       brand: selected,
+      img: [],
+      carDetails: [
+        e.target.year.value,
+        e.target.location.value,
+        e.target.address.value,
+        e.target.mileage.value,
+        e.target.engine.value,
+        e.target.gearbox.value,
+        e.target.carType.value,
+        e.target.drive.value,
+        e.target.driveTrain.value,
+        e.target.fuelType.value,
+        e.target.power.value,
+        e.target.condition.value,
+        e.target.color.value,
+        e.target.intColor.value,
+      ],
     };
     console.log("🚀 ~ handleSubmit ~ carInfo:", carInfo);
   };

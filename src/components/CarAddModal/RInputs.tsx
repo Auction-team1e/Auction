@@ -10,6 +10,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+const fields = [carDetails, carDetailsSecod];
 
 export const RInputs = () => {
   const { selected, setSelected } = useCarData() as ContextType;
@@ -40,66 +41,40 @@ export const RInputs = () => {
           Car Details
         </Typography>
         <Stack direction={`row`} justifyContent={`space-between`}>
-          <Stack mr={2}>
-            {carDetails.map((val) => {
-              return (
-                <Stack
-                  key={val.name}
-                  direction={`row`}
-                  justifyContent={`space-between`}
-                  alignItems={`center`}
-                  mb={1}
-                >
-                  <Typography mr={1} mb={`8px`} fontSize={16}>
-                    {val.label}:
-                  </Typography>
-                  <Box
-                    component={`textarea`}
-                    width={190}
-                    bgcolor={`#F7F7F8`}
-                    border={`1px solid #D6D8DB`}
-                    borderRadius={`8px`}
-                    px={`12px`}
-                    py={`10px`}
-                    fontSize={18}
-                    height={44}
-                    name={val.name}
-                    sx={{ resize: `none`, outline: `none` }}
-                  ></Box>
-                </Stack>
-              );
-            })}
-          </Stack>
-          <Stack>
-            {carDetailsSecod.map((val) => {
-              return (
-                <Stack
-                  key={val.name}
-                  direction={`row`}
-                  justifyContent={`space-between`}
-                  alignItems={`center`}
-                  mb={1}
-                >
-                  <Typography mr={1} mb={`8px`} fontSize={16}>
-                    {val.label}:
-                  </Typography>
-                  <Box
-                    component={`textarea`}
-                    width={200}
-                    bgcolor={`#F7F7F8`}
-                    border={`1px solid #D6D8DB`}
-                    borderRadius={`8px`}
-                    px={`12px`}
-                    py={`10px`}
-                    fontSize={18}
-                    height={44}
-                    name={val.name}
-                    sx={{ resize: `none`, outline: `none` }}
-                  ></Box>
-                </Stack>
-              );
-            })}
-          </Stack>
+          {fields.map((value, index) => {
+            return (
+              <Stack key={index} mr={2}>
+                {value.map((val) => {
+                  return (
+                    <Stack
+                      key={val.name}
+                      direction={`row`}
+                      justifyContent={`space-between`}
+                      alignItems={`center`}
+                      mb={1}
+                    >
+                      <Typography mr={1} mb={`8px`} fontSize={16}>
+                        {val.label}:
+                      </Typography>
+                      <Box
+                        component={"input"}
+                        width={190}
+                        bgcolor={`#F7F7F8`}
+                        border={`1px solid #D6D8DB`}
+                        borderRadius={`8px`}
+                        px={`12px`}
+                        py={`10px`}
+                        fontSize={18}
+                        height={44}
+                        name={val.name}
+                        sx={{ outline: `none` }}
+                      ></Box>
+                    </Stack>
+                  );
+                })}
+              </Stack>
+            );
+          })}
         </Stack>
       </Stack>
       <Stack direction={`row`} gap={`8px`} justifyContent={`flex-end`}>

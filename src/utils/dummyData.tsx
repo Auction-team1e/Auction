@@ -110,7 +110,7 @@ export const carDetailsSecod = [
   { label: "Drive train", name: "driveTrain" },
   { label: "Fuel type", name: "fuelType" },
   { label: "Power", name: "power" },
-  { label: "Condition", name: "condition8" },
+  { label: "Condition", name: "condition" },
   { label: "Color", name: "color" },
   { label: "Interior color", name: "intColor" },
 ];

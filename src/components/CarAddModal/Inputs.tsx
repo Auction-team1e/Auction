@@ -6,7 +6,7 @@ import { RInputs } from "./RInputs";
 export const Inputs = () => {
   return (
     <>
-      <Stack width={`563px`} gap={`24px`}>
+      <Stack width={`593px`} gap={`24px`}>
         <Stack height={`fit-content`} gap={`16px`}>
           {inputs.map((val) => {
             return (
@@ -30,18 +30,13 @@ export const Inputs = () => {
             );
           })}
         </Stack>
-        <Stack height={`213px`} border={`1px solid black`}>
+        <Stack height={`213px`}>
           <Typography mb={`8px`} fontSize={16} fontWeight={600}>
             Car Image
           </Typography>
           <AddImg />
         </Stack>
-        <Stack
-          height={`fit-content`}
-          border={`1px solid black`}
-          direction={`row`}
-          gap={`16px`}
-        >
+        <Stack height={`fit-content`} direction={`row`} gap={`16px`}>
           {NumInputs.map((val) => {
             return (
               <Stack key={val.name}>
