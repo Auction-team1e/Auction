@@ -1,16 +1,23 @@
 import { CircularProgress, Input, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
+import { useCarData, ContextType } from "@/app/context/CarContext";
 
 const CLOUD_NAME = "dlfnavahp";
 const UPLOAD_PRESET = "zas8prdn";
 
 export const AddImg = () => {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [imageUrlOne, setImageUrlOne] = useState<string | null>(null);
-  const [imageUrlTwo, setImageUrlTwo] = useState<string | null>(null);
-  const [imageUrlThree, setImageUrlThree] = useState<string | null>(null);
-  const [imageUrlFour, setImageUrlFour] = useState<string | null>(null);
+  const {
+    imageUrlOne,
+    setImageUrlOne,
+    imageUrlTwo,
+    setImageUrlTwo,
+    imageUrlThree,
+    setImageUrlThree,
+    imageUrlFour,
+    setImageUrlFour,
+  } = useCarData() as ContextType;
+  const [index, setIndex] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const images = ["One", "Two", "Three", "Four"];
 
@@ -31,7 +38,15 @@ export const AddImg = () => {
       );
       const resJson = await res.json();
       if (resJson.url) {
-        setImageUrl(resJson.url);
+        {
+          index == 0
+            ? setImageUrlOne(resJson.url)
+            : index == 1
+            ? setImageUrlTwo(resJson.url)
+            : index == 2
+            ? setImageUrlThree(resJson.url)
+            : setImageUrlFour(resJson.url);
+        }
       }
       setLoading(false);
     }
@@ -62,6 +77,7 @@ export const AddImg = () => {
         {images.map((value, index) => {
           return (
             <Stack
+              onClick={() => setIndex(index)}
               key={index}
               width={135}
               height={175}
@@ -72,7 +88,7 @@ export const AddImg = () => {
               sx={{
                 backgroundImage: `url(${
                   index == 0
-                    ? imageUrl
+                    ? imageUrlOne
                     : index == 1
                     ? imageUrlTwo
                     : index == 2

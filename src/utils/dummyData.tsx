@@ -75,7 +75,7 @@ export const inputs = [
 
 export const NumInputs = [
   { label: "Starting Bid Price", name: "price" },
-  { label: "Time", name: "time" },
+  { label: "Time ends at:", name: "time" },
 ];
 
 export const Brands = [

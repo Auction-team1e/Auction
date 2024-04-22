@@ -1,26 +1,36 @@
 "use client";
-
 import { modalStyle } from "@/utils/dummyData";
 import { Button, Modal, Stack } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { Inputs } from "./Inputs";
 import { useCarData, ContextType } from "@/app/context/CarContext";
 
 export const CarAddModal = () => {
-  const { selected } = useCarData() as ContextType;
+  const { selected, imageUrlOne, imageUrlTwo, imageUrlThree, imageUrlFour } =
+    useCarData() as ContextType;
   const [open, setOpen] = useState(false);
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
+
+    var today = new Date();
+    const options = {
+      timeZone: "Asia/Ulaanbaatar",
+      hour12: false,
+    };
+    const mongoliaTime = today.toLocaleString("en-US", options);
+
     const carInfo = {
-      userId: "id",
-      model: e.target.model.value,
+      userId: "662493855942867ee5ccfd65",
+      carModel: e.target.model.value,
       description: e.target.desc.value,
       information: e.target.info.value,
       startPrice: e.target.price.value,
-      Time: e.target.time.value,
+      endTime: e.target.time.value,
+      createdAt: mongoliaTime,
       brand: selected,
-      img: [],
+      img: [imageUrlOne, imageUrlTwo, imageUrlThree, imageUrlFour],
       carDetails: [
         e.target.year.value,
         e.target.location.value,
@@ -38,8 +48,13 @@ export const CarAddModal = () => {
         e.target.intColor.value,
       ],
     };
-    console.log("🚀 ~ handleSubmit ~ carInfo:", carInfo);
+    fetch("http://localhost:4000/api/car", {
+      method: "POST",
+      body: JSON.stringify(carInfo),
+      headers: { "Content-Type": "application/json" },
+    });
   };
+
   return (
     <Stack>
       <Button
