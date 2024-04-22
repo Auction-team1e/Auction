@@ -2,6 +2,9 @@
 
 import { Box, Stack } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import { ClassNames } from "@emotion/react";
 
 const cars = [
   {
@@ -25,7 +28,14 @@ const cars = [
 export const CarouselSlider = () => {
   return (
     <Box width={"560.66px"} height={"343.78px"}>
-      <Carousel fullHeightHover={false} NextIcon="next" PrevIcon="prev">
+      <Carousel
+        NextIcon={<NavigateNextIcon />}
+        PrevIcon={<NavigateBeforeIcon />}
+        autoPlay={false}
+        indicatorContainerProps={{
+          style: { position: "absolute", bottom: 0, zIndex: 100 },
+        }}
+      >
         {cars.map((a) => (
           <Stack
             width={"560px"}
