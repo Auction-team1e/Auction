@@ -1,4 +1,4 @@
-import { FeaturedCard } from "@/components/FeaturedCard";
+import { FeaturedCard } from "@/components/FeaturedCard/FeaturedCard";
 import { Stack } from "@mui/material";
 
 export default function Home() {
@@ -8,4 +8,3 @@ export default function Home() {
     </Stack>
   );
 }
-//ads
