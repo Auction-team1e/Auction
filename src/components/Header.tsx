@@ -1,5 +1,6 @@
 "use client";
 
 export const Header = () => {
-  return <>Header component</>;
+  return;
+  <>Header component</>;
 };
