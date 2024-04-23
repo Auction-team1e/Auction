@@ -1,5 +1,4 @@
 import { Box, Button, Input, Stack, Typography } from "@mui/material";
-import { Carousel } from "react-responsive-carousel";
 import { CarouselSlider } from "./CarouselSlider";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 
