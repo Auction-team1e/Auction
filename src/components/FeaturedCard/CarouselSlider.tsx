@@ -4,7 +4,6 @@ import { Box, Stack } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import { ClassNames } from "@emotion/react";
 
 const cars = [
   {
