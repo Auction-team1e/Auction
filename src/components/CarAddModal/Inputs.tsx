@@ -6,7 +6,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { useCarData, ContextType } from "@/app/context/CarContext";
+import { useCarData, ContextType } from "@/context/CarContext";
 
 export const Inputs = () => {
   const { setEndDate, endDate } = useCarData() as ContextType;

@@ -1,4 +1,4 @@
-import { useCarData, ContextType } from "@/app/context/CarContext";
+import { useCarData, ContextType } from "@/context/CarContext";
 import { Brands, carDetails, carDetailsSecod } from "@/utils/dummyData";
 import {
   Box,
