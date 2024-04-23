@@ -3,38 +3,61 @@ import React, { useState, useEffect } from "react";
 import { ArrowLeft, ArrowRight } from "@/svgs/index";
 import { Button, Stack, Typography } from "@mui/material";
 
-const images: string[] = [
-  "https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60",
-  "https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60",
-  "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250",
-  "https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
-];
+interface Car {
+  carModel: string;
+  img: string[];
+}
 
 export function Carousel() {
+  const [cars, setCars] = useState<Car[]>([]);
   const [curr, setCurr] = useState(0);
+  const [currentTitle, setCurrentTitle] = useState("");
 
   const prev = () => {
-    setCurr((curr) => (curr === 0 ? images.length - 1 : curr - 1));
+    setCurr(curr === 0 ? cars.length - 1 : curr - 1);
+    setCurrentTitle(
+      cars[curr === 0 ? cars.length - 1 : curr - 1]?.carModel || ""
+    );
   };
 
   const next = () => {
-    setCurr((curr) => (curr === images.length - 1 ? 0 : curr + 1));
+    setCurr(curr === cars.length - 1 ? 0 : curr + 1);
+    setCurrentTitle(
+      cars[curr === cars.length - 1 ? 0 : curr + 1]?.carModel || ""
+    );
   };
 
   useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch(`http://localhost:4000/api/car`);
+        const data = await res.json();
+        setCars(data);
+        setCurrentTitle(data[0]?.carModel || "");
+      } catch (error) {
+        console.error("Error fetching car data:", error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
     const interval = setInterval(() => {
-      setCurr((curr) => (curr === images.length - 1 ? 0 : curr + 1));
+      setCurr((curr) => (curr === cars.length - 1 ? 0 : curr + 1));
+      setCurrentTitle(
+        cars[curr === cars.length - 1 ? 0 : curr + 1]?.carModel || ""
+      );
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [cars]);
 
   return (
     <Stack width={"full"} overflow={"hidden"} position={"relative"}>
       <Stack direction={"row"}>
-        {images.map((imageUrl, index) => (
+        {cars.map((car, index) => (
           <Stack
+            key={index}
             sx={{
-              bgcolor: "aqua",
               display: "flex",
               width: "100%",
               transition: "transform 1s ease",
@@ -42,10 +65,9 @@ export function Carousel() {
             }}
           >
             <img
-              key={index}
-              src={imageUrl}
-              alt={`image${index}`}
-              style={{ width: "1920px", height: "960px" }}
+              src={car.img[0]}
+              alt={car.carModel}
+              style={{ width: "1920px", height: "920px" }}
             />
           </Stack>
         ))}
@@ -89,7 +111,7 @@ export function Carousel() {
                 justifyContent={"center"}
                 gap={2}
               >
-                {images.map((e, i) => (
+                {cars.map((_, i) => (
                   <Stack
                     key={i}
                     sx={{
@@ -98,7 +120,6 @@ export function Carousel() {
                       height: "1px",
                       bgcolor: "white",
                       ...(curr === i && { bgcolor: "black" }),
-                      animation: "width-increase ease 1s infinity",
                     }}
                   />
                 ))}
@@ -119,7 +140,7 @@ export function Carousel() {
               lineHeight={"15px"}
               letterSpacing={"1px"}
             >
-              House in Franschhoek, Western Cape, South Africa • $5,…
+              {currentTitle}
             </Typography>
           </Stack>
         </Stack>
