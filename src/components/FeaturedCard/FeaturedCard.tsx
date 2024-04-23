@@ -46,22 +46,6 @@ export const FeaturedCard = () => {
         <Stack>
           <Typography>2018 Bentley Bentayga Black Edition Sedan 4D</Typography>
           <Typography>Las Vegas, NV, United States</Typography>
-          <Stack
-            direction={"row"}
-            gap={"50px"}
-            justifyContent={"space-between"}
-          >
-            <Typography>Opening bid</Typography>
-            <Typography fontWeight={700}>2000$</Typography>
-          </Stack>
-          <Box>
-            <Input
-              type="number"
-              placeholder="Max bid(usd)"
-              disableUnderline
-            ></Input>
-            <Button>Bid</Button>
-          </Box>
         </Stack>
       </Stack>
     </Stack>
