@@ -52,6 +52,25 @@ export const footer = [
   },
 ];
 
+export const CarImages = [
+  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
+  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
+  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
+  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
+  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
+  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
+  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
+  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
+  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
+  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
+  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
+  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
+  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
+  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
+  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
+  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
+];
+
 export const language = ["English", "Mongolian"];
 export const currency = ["USD", "MNT"];
 
