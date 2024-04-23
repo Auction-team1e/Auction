@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Select, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { FooterSelect } from "./FooterSelect";
 import { currency, footer, language } from "@/utils/dummyData";
 

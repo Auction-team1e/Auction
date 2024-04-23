@@ -2,6 +2,7 @@ import { CircularProgress, Input, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { useCarData, ContextType } from "@/app/context/CarContext";
+import { LoadingCover } from "../Loading";
 
 const CLOUD_NAME = "dlfnavahp";
 const UPLOAD_PRESET = "zas8prdn";
@@ -54,25 +55,7 @@ export const AddImg = () => {
 
   return (
     <>
-      {loading && (
-        <Stack
-          sx={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "101vh",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 1000,
-          }}
-        >
-          <Typography color={"white"}>Loading..</Typography>
-          <CircularProgress />
-        </Stack>
-      )}
+      {loading && <LoadingCover />}
       <Stack direction={"row"} gap={1}>
         {images.map((value, index) => {
           return (
