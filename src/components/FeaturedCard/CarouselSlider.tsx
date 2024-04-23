@@ -36,7 +36,7 @@ export const CarouselSlider = () => {
           style: { position: "absolute", bottom: 0, zIndex: 100 },
         }}
       >
-        {cars.map((a) => (
+        {cars.map((a, index) => (
           <Stack
             width={"560px"}
             height={"344px"}
@@ -45,6 +45,7 @@ export const CarouselSlider = () => {
               backgroundRepeat: "no-repeat",
               objectFit: "cover",
             }}
+            key={index}
           ></Stack>
         ))}
       </Carousel>
