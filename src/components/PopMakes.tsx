@@ -14,9 +14,30 @@ export const PopMakes = () => {
           </Typography>
         </ButtonBase>
       </Stack>
-      <Stack direction="row" spacing={2}>
+      <Stack
+        justifyContent={"space-between"}
+        gap={"20px"}
+        direction="row"
+        flexWrap={"wrap"}
+      >
         {CarImages.map((img, index) => (
-          <Stack key={index} width={"195px"} height={"148px"}>
+          <Stack
+            key={index}
+            width={"195px"}
+            height={"148px"}
+            sx={{
+              border: "#E0E0E0 1px solid",
+              transition: "border-color 300ms linear",
+              "&:hover": {
+                border: "black 1px solid",
+              },
+              "& img": {
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              },
+            }}
+          >
             <img src={img} alt={`Car ${index}`} />
           </Stack>
         ))}
