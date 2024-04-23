@@ -7,7 +7,7 @@ export const FeaturedCard = () => {
   return (
     <Stack width={"558.66px"} height={"467.8px"}>
       <CarouselSlider />
-      <Stack px={3}>
+      <Stack px={3} gap={"10px"}>
         <Stack direction={"row"} justifyContent={"space-between"} mt={"10px"}>
           <Stack justifyContent={"center"}>
             <Box>
@@ -22,6 +22,7 @@ export const FeaturedCard = () => {
               gap={"50px"}
               justifyContent={"space-between"}
               px={"10px"}
+              mt={"10px"}
             >
               <Typography>Opening bid</Typography>
               <Stack justifyContent={"center"}>
