@@ -1,3 +1,10 @@
+import CarProvider from "./context/CarContext";
+
 export default function Home() {
-  return;
+  return (
+    <CarProvider>
+      <></>
+    </CarProvider>
+  );
 }
+//ads
