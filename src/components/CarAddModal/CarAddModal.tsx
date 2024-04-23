@@ -1,20 +1,27 @@
 "use client";
 import { modalStyle } from "@/utils/dummyData";
 import { Button, Modal, Stack } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { Inputs } from "./Inputs";
 import { useCarData, ContextType } from "@/app/context/CarContext";
 
 export const CarAddModal = () => {
-  const { selected, imageUrlOne, imageUrlTwo, imageUrlThree, imageUrlFour } =
-    useCarData() as ContextType;
+  const {
+    selected,
+    imageUrlOne,
+    imageUrlTwo,
+    imageUrlThree,
+    imageUrlFour,
+    endDate,
+  } = useCarData() as ContextType;
   const [open, setOpen] = useState(false);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
     var today = new Date();
+    today.setSeconds(0, 0);
     const options = {
       timeZone: "Asia/Ulaanbaatar",
       hour12: false,
@@ -27,7 +34,7 @@ export const CarAddModal = () => {
       description: e.target.desc.value,
       information: e.target.info.value,
       startPrice: e.target.price.value,
-      endTime: e.target.time.value,
+      endTime: endDate,
       createdAt: mongoliaTime,
       brand: selected,
       img: [imageUrlOne, imageUrlTwo, imageUrlThree, imageUrlFour],

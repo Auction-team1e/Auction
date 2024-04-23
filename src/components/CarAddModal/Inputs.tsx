@@ -1,47 +1,15 @@
 import { inputs } from "@/utils/dummyData";
-import { Box, Input, Stack, Tooltip, Typography } from "@mui/material";
+import { Box, Input, Stack, Typography } from "@mui/material";
 import { AddImg } from "./AddImg";
 import { RInputs } from "./RInputs";
-import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import styled from "styled-components";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { useCarData, ContextType } from "@/app/context/CarContext";
 
-const ProSpan = styled("span")({
-  display: "inline-block",
-  height: "1em",
-  width: "1em",
-  verticalAlign: "middle",
-  marginLeft: "0.3em",
-  marginBottom: "0.08em",
-  backgroundSize: "contain",
-  backgroundRepeat: "no-repeat",
-  backgroundImage: "url(https://mui.com/static/x/pro.svg)",
-});
 export const Inputs = () => {
-  function Label({
-    isProOnly,
-  }: {
-    componentName: string;
-    valueType: string;
-    isProOnly?: boolean;
-  }) {
-    if (isProOnly) {
-      return (
-        <Stack direction="row" spacing={0.5} component="span">
-          <Tooltip title="Included on Pro package">
-            <a
-              href="https://mui.com/x/introduction/licensing/#pro-plan"
-              aria-label="Included on Pro package"
-            >
-              <ProSpan />
-            </a>
-          </Tooltip>
-        </Stack>
-      );
-    }
-  }
+  const { setEndDate, endDate } = useCarData() as ContextType;
   return (
     <>
       <Stack width={`593px`} gap={`24px`}>
@@ -98,22 +66,20 @@ export const Inputs = () => {
           </Stack>
           <Stack>
             <Typography fontSize={16} fontWeight={600}>
-              Starting Bid Price
+              Auction ends at:
             </Typography>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en">
               <DemoContainer components={["DateTimePicker"]}>
-                <DemoItem
-                  label={
-                    <Label
-                      componentName="DateTimePicker"
-                      valueType="date time"
-                    />
-                  }
-                >
-                  <DateTimePicker />
-                </DemoItem>
+                <DateTimePicker
+                  ampm={false}
+                  value={endDate}
+                  disablePast
+                  onChange={(newValue) => setEndDate(newValue)}
+                  slotProps={{ textField: { size: "small" } }}
+                />
               </DemoContainer>
             </LocalizationProvider>
+            <Typography></Typography>
           </Stack>
         </Stack>
       </Stack>

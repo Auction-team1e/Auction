@@ -1,6 +1,7 @@
 "use client";
 
 import { Dispatch, createContext, useContext, useState } from "react";
+import { Dayjs } from "dayjs";
 export type ContextType = {
   selected: string;
   setSelected: Dispatch<React.SetStateAction<string>>;
@@ -12,6 +13,8 @@ export type ContextType = {
   setImageUrlThree: Dispatch<React.SetStateAction<string>>;
   imageUrlFour: string;
   setImageUrlFour: Dispatch<React.SetStateAction<string>>;
+  endDate: Dayjs | null;
+  setEndDate: Dispatch<React.SetStateAction<Dayjs | null>>;
 };
 
 const CarContext = createContext<ContextType | null>(null);
@@ -23,6 +26,8 @@ const CarProvider = ({ children }: { children: any }) => {
   const [imageUrlTwo, setImageUrlTwo] = useState<string>("");
   const [imageUrlThree, setImageUrlThree] = useState<string>("");
   const [imageUrlFour, setImageUrlFour] = useState<string>("");
+  const [endDate, setEndDate] = useState<Dayjs | null>(null);
+  console.log(endDate?.toString());
 
   return (
     <CarContext.Provider
@@ -37,6 +42,8 @@ const CarProvider = ({ children }: { children: any }) => {
         setImageUrlThree,
         imageUrlFour,
         setImageUrlFour,
+        endDate,
+        setEndDate,
       }}
     >
       {children}
