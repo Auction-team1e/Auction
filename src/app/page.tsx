@@ -1,4 +1,6 @@
+import { PopMakes } from "@/components/PopMakes";
+
 export default function Home() {
-  return;
+  return <PopMakes />;
 }
 //ads
