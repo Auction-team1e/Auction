@@ -4,7 +4,7 @@ import { Button, Modal, Stack } from "@mui/material";
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { Inputs } from "./Inputs";
-import { useCarData, ContextType } from "@/context/CarContext";
+import { useCarData, ContextType } from "@/context/DataContext";
 
 export const CarAddModal = () => {
   const {

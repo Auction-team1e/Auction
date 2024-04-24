@@ -15,6 +15,8 @@ export type ContextType = {
   setImageUrlFour: Dispatch<React.SetStateAction<string>>;
   endDate: Dayjs | null;
   setEndDate: Dispatch<React.SetStateAction<Dayjs | null>>;
+  open: boolean;
+  setOpen: Dispatch<React.SetStateAction<boolean>>;
 };
 
 const CarContext = createContext<ContextType | null>(null);
@@ -27,7 +29,7 @@ const CarProvider = ({ children }: { children: any }) => {
   const [imageUrlThree, setImageUrlThree] = useState<string>("");
   const [imageUrlFour, setImageUrlFour] = useState<string>("");
   const [endDate, setEndDate] = useState<Dayjs | null>(null);
-  console.log(endDate?.toString());
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
     <CarContext.Provider
@@ -44,6 +46,8 @@ const CarProvider = ({ children }: { children: any }) => {
         setImageUrlFour,
         endDate,
         setEndDate,
+        open,
+        setOpen,
       }}
     >
       {children}

@@ -2,6 +2,7 @@
 import { Box, Button, Divider, Link, Stack, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { fields, signUpBtn } from "@/utils/dummyData";
+import { useCarData, ContextType } from "@/context/DataContext";
 
 export const SignUp = () => {
   const handleSubmit = async (e: any) => {
@@ -13,16 +14,13 @@ export const SignUp = () => {
     };
     console.log("🚀 ~ handleSubmit ~ signUp:", signUp);
   };
+  const { setOpen, open } = useCarData() as ContextType;
   return (
-    <Stack
-      alignItems={`center`}
-      width={424}
-      border={`1px solid black`}
-      height={666.5}
-      py={1.6}
-      m={2}
-    >
-      <CloseIcon sx={{ position: `relative`, left: 170, fontSize: 30 }} />
+    <Stack alignItems={`center`} width={424} height={666.5} py={1.6}>
+      <CloseIcon
+        onClick={() => setOpen(!open)}
+        sx={{ position: `relative`, left: 170, fontSize: 30 }}
+      />
       <Typography mb={`32px`} fontSize={24} fontWeight={500}>
         Sign up
       </Typography>
