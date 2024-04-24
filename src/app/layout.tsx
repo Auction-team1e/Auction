@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import CarProvider from "../context/CarContext";
+
 import { Footer } from "@/components/Footer/Footer";
 import { Stack } from "@mui/material";
+import CarProvider from "@/context/DataContext";
 
 const inter = Inter({ subsets: ["latin"] });
 

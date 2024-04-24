@@ -17,15 +17,6 @@ export const SignUpNextStepInputs = [
   { pl: "Confirm password", name: "confirmPass" },
 ];
 
-export const footerTitles = [
-  "About",
-  "Contact",
-  "Careers",
-  "Help & FAQ",
-  "Terms",
-  "Privacy",
-];
-
 export const language = ["English", "Mongolian"];
 export const currency = ["USD", "MNT"];
 
@@ -88,3 +79,14 @@ export const carDetailsSecod = [
   { label: "Color", name: "color" },
   { label: "Interior color", name: "intColor" },
 ];
+
+export const footerTitles = [
+  "About",
+  "Contact",
+  "Careers",
+  "Help & FAQ",
+  "Terms",
+  "Privacy",
+];
+
+export const footerSubtitles = ["Sell With Us", "Partner", "Linking"];
