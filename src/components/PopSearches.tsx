@@ -1,5 +1,4 @@
 "use client";
-import React, { useState, useEffect } from "react";
 import { ArrowSmall, ShortArrow, ShortArrowRight } from "@/svgs";
 import { ButtonBase, Stack, Typography } from "@mui/material";
 import { CarData } from "@/utils/dummyData";
