@@ -1,5 +1,12 @@
+import { Carousel } from "@/components/CarouselComp";
+import { Stack } from "@mui/material";
+
 export default function Home() {
-  return <></>;
+  return (
+    <Stack>
+      <Carousel />
+    </Stack>
+  );
 }
 
 //ads

@@ -1,8 +1,8 @@
 import { UserSvg } from "@/svgs/User";
-import { Box, Modal, Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import { Box, Modal, Stack } from "@mui/material";
 import { SignUp } from "../SignUp/SignUp";
 import { useCarData, ContextType } from "@/context/DataContext";
+import { Login } from "../Login/Login";
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -20,19 +20,25 @@ export const LoginModal = () => {
     <Stack
       width={94.21}
       height={38}
-      onClick={() => setOpen(!open)}
       border={`1px solid black`}
-      alignItems={`center`}
       justifyContent={`center`}
       borderRadius={`100px`}
     >
-      <Stack direction={`row`} gap={1} alignItems={`center`}>
+      <Stack
+        width={"100%"}
+        height={"100%"}
+        onClick={() => setOpen(true)}
+        direction={`row`}
+        gap={1}
+        alignItems={`center`}
+        justifyContent={`center`}
+      >
         <UserSvg />
         Log in
       </Stack>
       <Modal open={open}>
         <Box sx={style}>
-          <SignUp />
+          <Login />
         </Box>
       </Modal>
     </Stack>

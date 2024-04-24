@@ -2,8 +2,8 @@ import { Google } from "@/svgs/google";
 import { FaceBook } from "@/svgs/facebook";
 
 export const fields = [
-  { pl: "First name", name: "first" },
-  { pl: "Last name", name: "last" },
+  { pl: "First name", name: "firstName" },
+  { pl: "Last name", name: "lastName" },
   { pl: "Email", name: "email" },
 ];
 
@@ -90,3 +90,18 @@ export const footerTitles = [
 ];
 
 export const footerSubtitles = ["Sell With Us", "Partner", "Linking"];
+
+export const loginFields = [
+  { pl: "Email", name: "email" },
+  { pl: "Password", name: "password" },
+];
+
+export const LinkStyle = {
+  textUnderlineOffset: `4.3px`,
+  textDecorationColor: "rgba(120, 120, 120, 0.4)",
+  transitionDuration: "0.22s",
+  ":hover": {
+    textDecorationColor: "black",
+    transitionDuration: "0.22s",
+  },
+};
