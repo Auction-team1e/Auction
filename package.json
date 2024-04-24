@@ -22,13 +22,16 @@
     "eslint-plugin-no-secrets": "^0.8.9",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-unicorn": "^52.0.0",
+    "formik": "^2.4.5",
     "jsonc-eslint-parser": "^2.4.0",
     "next": "14.2.1",
     "react": "^18",
     "react-dom": "^18",
     "react-material-ui-carousel": "^3.4.2",
     "react-responsive-carousel": "^3.2.23",
-    "styled-components": "^6.1.8"
+    "react-toastify": "^10.0.5",
+    "styled-components": "^6.1.8",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/node": "^20",

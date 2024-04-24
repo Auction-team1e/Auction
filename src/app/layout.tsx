@@ -3,9 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import { Footer } from "@/components/Footer/Footer";
-import { Stack } from "@mui/material";
 import CarProvider from "@/context/DataContext";
 import { Header } from "@/components/Header/Header";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +23,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           <Header />
-          <Stack>{children}</Stack>
+          {children}
           <Footer />
         </body>
       </html>
