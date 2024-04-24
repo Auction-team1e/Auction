@@ -1,6 +1,5 @@
 import { Google } from "@/svgs/google";
 import { FaceBook } from "@/svgs/facebook";
-import { Height } from "@mui/icons-material";
 
 export const fields = [
   { pl: "First name", name: "first" },
@@ -50,25 +49,6 @@ export const footer = [
     title: "For Business",
     subTitles: ["Sell With Us", "Partner", "Linking"],
   },
-];
-
-export const CarImages = [
-  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
-  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
-  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
-  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
-  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
-  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
-  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
-  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
-  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
-  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
-  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
-  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
-  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
-  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
-  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
-  "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
 ];
 
 export const language = ["English", "Mongolian"];

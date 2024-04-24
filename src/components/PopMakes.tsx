@@ -1,7 +1,28 @@
+"use client";
 import { Stack, Typography, ButtonBase } from "@mui/material";
-import { CarImages } from "@/utils/dummyData";
+import { useEffect, useState } from "react";
+type ObjType = {
+  name: string;
+  img: string;
+};
 
 export const PopMakes = () => {
+  const [brand, setBrand] = useState<Array<ObjType>>();
+
+  useEffect(() => {
+    async function fetchCarData() {
+      try {
+        const res = await fetch(`http://localhost:4000/api/brand`);
+        const data = await res.json();
+        console.log(data);
+        setBrand(data);
+      } catch (error) {
+        console.error("error fetching car data:", error);
+      }
+    }
+    fetchCarData();
+  }, []);
+
   return (
     <Stack alignItems={"center"} justifyContent={"center"} width={"1730px"}>
       <Stack marginBottom={"30px"} gap={"1470px"} direction={"row"}>
@@ -20,7 +41,7 @@ export const PopMakes = () => {
         direction="row"
         flexWrap={"wrap"}
       >
-        {CarImages.map((img, index) => (
+        {brand?.map((e: { img: string }, index: number) => (
           <Stack
             key={index}
             width={"195px"}
@@ -38,7 +59,7 @@ export const PopMakes = () => {
               },
             }}
           >
-            <img src={img} alt={`Car ${index}`} />
+            <img src={e.img} alt={`Car ${index}`} />
           </Stack>
         ))}
       </Stack>
