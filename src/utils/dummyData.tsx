@@ -134,7 +134,21 @@ export const CarData = [
       "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
     ],
     carName: "Bugatti Chiron",
-    listings: "10 Listings",
+    listings: "17 Listings",
+  },
+  {
+    imgPath: [
+      "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
+    ],
+    carName: "Lamborghini Aventador",
+    listings: "40 Listings",
+  },
+  {
+    imgPath: [
+      "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
+    ],
+    carName: "Bugatti Chiron",
+    listings: "17 Listings",
   },
 ];
 
