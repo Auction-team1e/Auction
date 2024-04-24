@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import CarProvider from "../context/DataContext";
+
+import { Footer } from "@/components/Footer/Footer";
+import { Stack } from "@mui/material";
+import CarProvider from "@/context/DataContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +20,10 @@ export default function RootLayout({
   return (
     <CarProvider>
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <Stack>{children}</Stack>
+          <Footer />
+        </body>
       </html>
     </CarProvider>
   );

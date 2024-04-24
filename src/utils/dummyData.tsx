@@ -17,40 +17,6 @@ export const SignUpNextStepInputs = [
   { pl: "Confirm password", name: "confirmPass" },
 ];
 
-export const footer = [
-  {
-    title: "JamesEdition",
-    subTitles: [
-      "About",
-      "Contact",
-      "Careers",
-      "Help & FAQ",
-      "Terms",
-      "Privacy",
-    ],
-  },
-  {
-    title: "Brands",
-    subTitles: [
-      "Mercedes Benz",
-      "BMW",
-      "Buggatti",
-      "Lamborghini",
-      "Ferrari",
-      "Pagani",
-      "Brabus",
-      "Bentley",
-      "Audi",
-      "McLaren",
-      "Porsche",
-    ],
-  },
-  {
-    title: "For Business",
-    subTitles: ["Sell With Us", "Partner", "Linking"],
-  },
-];
-
 export const language = ["English", "Mongolian"];
 export const currency = ["USD", "MNT"];
 
@@ -113,3 +79,14 @@ export const carDetailsSecod = [
   { label: "Color", name: "color" },
   { label: "Interior color", name: "intColor" },
 ];
+
+export const footerTitles = [
+  "About",
+  "Contact",
+  "Careers",
+  "Help & FAQ",
+  "Terms",
+  "Privacy",
+];
+
+export const footerSubtitles = ["Sell With Us", "Partner", "Linking"];

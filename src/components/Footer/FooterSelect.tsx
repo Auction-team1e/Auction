@@ -22,8 +22,12 @@ export const FooterSelect = ({ data }: { data: string[] }) => {
           onChange={handleChange}
           sx={{ color: "white", fontSize: "14px", fontWeight: 400 }}
         >
-          {data.map((a) => {
-            return <MenuItem value={a}>{a}</MenuItem>;
+          {data.map((a, index) => {
+            return (
+              <MenuItem value={a} key={index}>
+                {a}
+              </MenuItem>
+            );
           })}
         </Select>
       </FormControl>
