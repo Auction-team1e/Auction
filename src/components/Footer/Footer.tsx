@@ -2,9 +2,27 @@
 
 import { Stack, Typography } from "@mui/material";
 import { FooterSelect } from "./FooterSelect";
-import { currency, footer, language } from "@/utils/dummyData";
+import {
+  currency,
+  footerSubtitles,
+  footerTitles,
+  language,
+} from "@/utils/dummyData";
+import { useEffect, useState } from "react";
+
+type dataType = { brandTitle: string; img: string };
 
 export const Footer = () => {
+  const [data, setData] = useState<Array<dataType>>();
+
+  useEffect(() => {
+    async function getData() {
+      const res = await fetch("http://localhost:4000/api/brand");
+      const brands = await res.json();
+      setData(brands);
+    }
+    getData();
+  }, []);
   return (
     <Stack
       px={"96px"}
@@ -15,29 +33,57 @@ export const Footer = () => {
       justifyContent={"space-between"}
     >
       <Stack direction={"row"}>
-        {footer.map((a, index) => {
-          return (
-            <Stack width={"200px"} height={"700px"} key={index} gap={"16px"}>
-              <Typography
-                fontSize={"12px"}
-                fontWeight={600}
-                textTransform={"uppercase"}
-                color={"#ADADAD"}
-              >
-                {a.title}
-              </Typography>
-              <Stack gap={"20px"}>
-                {a.subTitles.map((b) => {
-                  return (
-                    <Typography fontWeight={400} fontSize={"14px"}>
-                      {b}
-                    </Typography>
-                  );
-                })}
+        <Stack width={"200px"} height={"700px"} gap={"16px"}>
+          <Typography
+            fontSize={"12px"}
+            fontWeight={600}
+            textTransform={"uppercase"}
+            color={"#ADADAD"}
+          >
+            JAMESEDITION
+          </Typography>
+          {footerTitles.map((a, index) => {
+            return (
+              <Stack gap={"20px"} key={index}>
+                {a}
               </Stack>
-            </Stack>
-          );
-        })}
+            );
+          })}
+        </Stack>
+        <Stack width={"200px"} height={"700px"} gap={"16px"}>
+          <Typography
+            fontSize={"12px"}
+            fontWeight={600}
+            textTransform={"uppercase"}
+            color={"#ADADAD"}
+          >
+            BRANDS
+          </Typography>
+          {data?.map((b, index) => {
+            return (
+              <Stack gap={"20px"} key={index}>
+                {b.brandTitle}
+              </Stack>
+            );
+          })}
+        </Stack>
+        <Stack width={"200px"} height={"700px"} gap={"16px"}>
+          <Typography
+            fontSize={"12px"}
+            fontWeight={600}
+            textTransform={"uppercase"}
+            color={"#ADADAD"}
+          >
+            FOR BUSINESS
+          </Typography>
+          {footerSubtitles.map((a, index) => {
+            return (
+              <Stack gap={"20px"} key={index}>
+                {a}
+              </Stack>
+            );
+          })}
+        </Stack>
       </Stack>
       <Stack width={"200px"} gap={"16px"}>
         <Typography

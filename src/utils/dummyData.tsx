@@ -17,38 +17,13 @@ export const SignUpNextStepInputs = [
   { pl: "Confirm password", name: "confirmPass" },
 ];
 
-export const footer = [
-  {
-    title: "JamesEdition",
-    subTitles: [
-      "About",
-      "Contact",
-      "Careers",
-      "Help & FAQ",
-      "Terms",
-      "Privacy",
-    ],
-  },
-  {
-    title: "Brands",
-    subTitles: [
-      "Mercedes Benz",
-      "BMW",
-      "Buggatti",
-      "Lamborghini",
-      "Ferrari",
-      "Pagani",
-      "Brabus",
-      "Bentley",
-      "Audi",
-      "McLaren",
-      "Porsche",
-    ],
-  },
-  {
-    title: "For Business",
-    subTitles: ["Sell With Us", "Partner", "Linking"],
-  },
+export const footerTitles = [
+  "About",
+  "Contact",
+  "Careers",
+  "Help & FAQ",
+  "Terms",
+  "Privacy",
 ];
 
 export const language = ["English", "Mongolian"];
