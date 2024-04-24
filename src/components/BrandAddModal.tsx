@@ -51,7 +51,7 @@ export const BrandAddModal = () => {
     <Stack>
       <Button
         sx={{
-          width: 280,
+          width: 180,
           height: 48,
           bgcolor: `black`,
           borderRadius: `8px`,
@@ -62,7 +62,7 @@ export const BrandAddModal = () => {
         onClick={() => setOpen(true)}
       >
         <AddIcon sx={{ mr: 1 }} />
-        Create Brand
+        Add Brand
       </Button>
       <Modal open={open} onClose={() => setOpen(false)}>
         <form onSubmit={handleSubmit}>
@@ -72,7 +72,7 @@ export const BrandAddModal = () => {
             sx={{
               position: "absolute" as "absolute",
               top: "50%",
-              left: "80%",
+              left: "50%",
               transform: "translate(-50%, -50%)",
               width: 420,
               height: `fit-content`,
