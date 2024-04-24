@@ -1,5 +1,7 @@
+import { PopSearches } from "@/components/PopSearches";
+
 export default function Home() {
-  return <></>;
+  return <PopSearches />;
 }
 
 //ads
