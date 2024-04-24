@@ -1,7 +1,7 @@
 import { Input, Stack } from "@mui/material";
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
-import { useCarData, ContextType } from "@/context/CarContext";
+import { useCarData, ContextType } from "@/context/DataContext";
 import { LoadingCover } from "../Loading";
 
 const CLOUD_NAME = "dlfnavahp";
