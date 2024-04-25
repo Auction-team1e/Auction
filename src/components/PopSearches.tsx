@@ -1,21 +1,43 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ArrowSmall, ShortArrow, ShortArrowRight } from "@/svgs";
 import { ButtonBase, Stack, Typography } from "@mui/material";
 import { CarData } from "@/utils/dummyData";
 
+type ObjType = {
+  brandTitle: string;
+  __v: string;
+  img: string;
+};
+
 export const PopSearches = () => {
   const [startIdx, setStartIdx] = useState(0);
+  const [brand, setBrand] = useState<Array<ObjType>>([]);
+
+  useEffect(() => {
+    async function fetchCarData() {
+      try {
+        const res = await fetch(`http://localhost:4000/api/brand`);
+        const data = await res.json();
+        setBrand(data);
+      } catch (error) {
+        console.error("error fetching car data:", error);
+      }
+    }
+    fetchCarData();
+  }, []);
+  console.log(brand.length);
+  console.log(startIdx);
 
   const prev = () => {
     setStartIdx((prevStartIdx) =>
-      prevStartIdx === 0 ? CarData.length - 6 : prevStartIdx - 6
+      prevStartIdx === 0 ? brand.length / 2 - 2 : prevStartIdx - 2
     );
   };
 
   const next = () => {
     setStartIdx((prevStartIdx) =>
-      prevStartIdx + 6 >= CarData.length ? 0 : prevStartIdx + 6
+      prevStartIdx == brand.length / 2 ? 0 : prevStartIdx + 2
     );
   };
 
@@ -27,33 +49,39 @@ export const PopSearches = () => {
         </Typography>
         <Stack gap={"20px"} direction={"row"}>
           <ButtonBase
-            sx={{ p: "8px", border: "#E0E0E0 1px solid", borderRadius: "100%" }}
+            sx={{
+              p: "8px",
+              border: "#E0E0E0 1px solid",
+              borderRadius: "100%",
+            }}
             onClick={prev}
           >
             <ShortArrow />
           </ButtonBase>
           <ButtonBase
-            sx={{ p: "8px", border: "#E0E0E0 1px solid", borderRadius: "100%" }}
+            sx={{
+              p: "8px",
+              border: "#E0E0E0 1px solid",
+              borderRadius: "100%",
+            }}
             onClick={next}
           >
             <ShortArrowRight />
           </ButtonBase>
         </Stack>
       </Stack>
-      <Stack
-        overflow={"hidden"}
-        width={"1730px"}
-        direction={"row"}
-        height={"280px"}
-      >
+      <Stack overflow={"hidden"} direction={"row"} width={"100%"}>
         <Stack
-          justifyContent={"center"}
-          width={"full"}
-          direction={"column"}
           gap={"20px"}
+          direction={"column"}
           flexWrap={"wrap"}
+          height={"280px"}
+          style={{
+            transition: "transform 1s ease",
+            transform: `translateX(-${startIdx * 580}px)`,
+          }}
         >
-          {CarData.slice(startIdx, startIdx + 6).map((car, index) => (
+          {brand.map((car, index) => (
             <Stack
               direction={"row"}
               key={index}
@@ -61,7 +89,7 @@ export const PopSearches = () => {
               width={"560px"}
               height={"128px"}
               sx={{
-                transition: "border-color 300ms linear",
+                transition: "border-color 0.3s linear",
                 "&:hover": {
                   border: "black 1px solid",
                 },
@@ -78,12 +106,12 @@ export const PopSearches = () => {
                 width={"128px"}
                 height={"126px"}
               >
-                <img src={car.imgPath[0]} alt={car.carName} />
+                <img src={car.img} alt={car.brandTitle} />
               </Stack>
-              <Stack gap={"50px"} p={"15px"}>
-                <Typography>{car.carName}</Typography>
+              <Stack direction={"column"} gap={"50px"} p={"15px"}>
+                <Typography>{car.brandTitle}</Typography>
                 <Stack gap={"305px"} direction={"row"} alignItems={"center"}>
-                  <Typography>{car.listings}</Typography>
+                  <Typography>{car.__v}</Typography>
                   <ButtonBase>
                     <ArrowSmall />
                   </ButtonBase>
