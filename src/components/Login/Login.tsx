@@ -7,8 +7,13 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ContinueWith } from "./ContinueWith";
 import { ToastContainer, toast } from "react-toastify";
+import { Dispatch } from "react";
 
-export const Login = () => {
+export const Login = ({
+  setHandle,
+}: {
+  setHandle: Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const { setOpen, open } = useCarData() as ContextType;
   const notify = () => toast("Wow so easy!");
 
@@ -114,7 +119,7 @@ export const Login = () => {
             <Typography color={`#717171`} fontSize={14} fontWeight={400}>
               Not a member yet?
             </Typography>
-            <Link
+            <Stack
               sx={{
                 color: `black`,
                 textUnderlineOffset: `4.3px`,
@@ -127,9 +132,10 @@ export const Login = () => {
               }}
               fontSize={14}
               fontWeight={400}
+              onClick={() => setHandle(false)}
             >
               Sign up
-            </Link>
+            </Stack>
           </Stack>
         </Stack>
       </Stack>

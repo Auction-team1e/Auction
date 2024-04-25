@@ -3,6 +3,7 @@ import { Box, Modal, Stack } from "@mui/material";
 import { SignUp } from "../SignUp/SignUp";
 import { useCarData, ContextType } from "@/context/DataContext";
 import { Login } from "../Login/Login";
+import { useState } from "react";
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -15,6 +16,7 @@ const style = {
 
 export const LoginModal = () => {
   const { open, setOpen } = useCarData() as ContextType;
+  const [handle, setHandle] = useState(true);
 
   return (
     <Stack
@@ -38,7 +40,11 @@ export const LoginModal = () => {
       </Stack>
       <Modal open={open}>
         <Box sx={style}>
-          <Login />
+          {handle == true ? (
+            <Login setHandle={setHandle} />
+          ) : (
+            <SignUp setHandle={setHandle} />
+          )}
         </Box>
       </Modal>
     </Stack>

@@ -115,7 +115,7 @@ export function Carousel() {
                   <Stack
                     key={i}
                     sx={{
-                      transition: "all 0.3s ease",
+                      transition: "all 0.3s ease stroke-dasharray",
                       width: "15px",
                       height: "1px",
                       bgcolor: "white",

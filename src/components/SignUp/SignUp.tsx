@@ -6,8 +6,13 @@ import { useCarData, ContextType } from "@/context/DataContext";
 import { useFormik } from "formik";
 import { ToastContainer, toast } from "react-toastify";
 import * as Yup from "yup";
+import { Dispatch } from "react";
 
-export const SignUp = () => {
+export const SignUp = ({
+  setHandle,
+}: {
+  setHandle: Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const { setOpen, open } = useCarData() as ContextType;
   const notify = () => toast("Wow so easy!");
 
@@ -139,6 +144,7 @@ export const SignUp = () => {
             }}
             fontSize={14}
             fontWeight={400}
+            onClick={() => setHandle(true)}
           >
             Log in
           </Link>
