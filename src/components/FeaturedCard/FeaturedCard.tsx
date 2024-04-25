@@ -1,6 +1,5 @@
-import { Box, Button, Input, Stack, Typography } from "@mui/material";
+import { Button, Input, Stack, Typography } from "@mui/material";
 import { CarouselSlider } from "./CarouselSlider";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
 
 export const FeaturedCard = () => {
   return (
@@ -9,43 +8,38 @@ export const FeaturedCard = () => {
       <Stack px={3} gap={"10px"}>
         <Stack direction={"row"} justifyContent={"space-between"} mt={"10px"}>
           <Stack justifyContent={"center"}>
-            <Box>
-              <Stack direction={"row"} alignItems={"center"} gap={1}>
-                Contact <MailOutlineIcon />
-              </Stack>
-            </Box>
+            <Typography fontSize={"16px"} fontWeight={700}>
+              2018 Bentley Bentayga
+            </Typography>
+            <Typography color={"#606060"}>
+              Las Vegas, NV, United States
+            </Typography>
           </Stack>
-          <Stack gap={"3px"}>
-            <Stack
-              direction={"row"}
-              gap={"50px"}
-              justifyContent={"space-between"}
-              px={"10px"}
-              mt={"10px"}
-            >
-              <Typography>Opening bid</Typography>
-              <Stack justifyContent={"center"}>
-                <Typography fontWeight={700}>2000$</Typography>
-              </Stack>
-            </Stack>
-            <Box>
-              <Input
-                type="number"
-                placeholder="Max bid(usd)"
-                disableUnderline
-                sx={{
-                  border: "0.1px solid grey",
-                  borderRadius: "5px",
-                  px: "10px",
-                }}
-              ></Input>
-              <Button>Bid</Button>
-            </Box>
+          <Stack gap={"3px"} justifyContent={"center"} direction={"row"}>
+            <Input
+              type="number"
+              placeholder="Max bid(usd)"
+              disableUnderline
+              sx={{
+                border: "0.1px solid grey",
+                borderRadius: "5px",
+                px: "10px",
+              }}
+            ></Input>
+            <Button sx={{ backgroundColor: "#006C75", color: "white" }}>
+              Bid
+            </Button>
           </Stack>
         </Stack>
-        <Stack>
-          <Typography>2018 Bentley Bentayga Black Edition Sedan 4D</Typography>
-          <Typography>Las Vegas, NV, United States</Typography>
+        <Stack direction={"row"} gap={"120px"} mt={"10px"}>
+          <Stack direction={"row"} gap={"5px"}>
+            <Typography>Opening bid</Typography>
+            <Typography fontWeight={600}>2000$</Typography>
+          </Stack>
+          <Stack direction={"row"} gap={"5px"}>
+            <Typography>Auction Ends</Typography>
+            <Typography fontWeight={600}>8h 59m</Typography>
+          </Stack>
         </Stack>
       </Stack>
     </Stack>
