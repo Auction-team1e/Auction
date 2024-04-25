@@ -23,7 +23,7 @@ export const Header = () => {
     <Stack width={1} position={`fixed`} zIndex={100} alignItems={`center`}>
       <Stack
         height={66}
-        width={1920}
+        width={1723}
         direction={`row`}
         alignItems={`center`}
         px={7}
@@ -61,7 +61,7 @@ export const Header = () => {
       <Stack
         direction={`row`}
         alignItems={`center`}
-        width={1920}
+        width={1723}
         height={46}
         gap={2.7}
         px={7}

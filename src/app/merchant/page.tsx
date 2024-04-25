@@ -1,9 +1,9 @@
-import { BrandAddModal } from "@/components/BrandAddModal";
+import { CarAddModal } from "@/components/CarAddModal/CarAddModal";
 
 export default function Page() {
   return (
     <>
-      <BrandAddModal />
+      <CarAddModal />
     </>
   );
 }
