@@ -15,14 +15,14 @@ const style = {
 };
 
 export const LoginModal = () => {
-  const { open, setOpen } = useCarData() as ContextType;
+  const { open, setOpen, scrolling } = useCarData() as ContextType;
   const [handle, setHandle] = useState(true);
 
   return (
     <Stack
       width={94.21}
       height={38}
-      border={`1px solid white`}
+      border={scrolling ? `1px solid #006C75` : `1px solid white`}
       justifyContent={`center`}
       borderRadius={`100px`}
       sx={{ cursor: `pointer` }}
@@ -35,7 +35,7 @@ export const LoginModal = () => {
         gap={1}
         alignItems={`center`}
         justifyContent={`center`}
-        color={`white`}
+        color={scrolling ? "black" : `white`}
         fontSize={14}
       >
         <UserSvg />
