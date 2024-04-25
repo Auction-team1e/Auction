@@ -1,3 +1,4 @@
+import { CarDetail } from "@/components/CarDetail";
 import { Carousel } from "@/components/CarouselComp";
 import { FeaturedCard } from "@/components/FeaturedCard/FeaturedCard";
 import { PopMakes } from "@/components/PopMakes";
@@ -9,9 +10,7 @@ export default function Home() {
     <Stack width={`100%`} gap={8} position={`relative`}>
       <Carousel />
       <Stack alignItems={`center`} gap={8}>
-        <PopMakes />
-        <PopSearches />
-        <FeaturedCard />
+        <CarDetail />
       </Stack>
     </Stack>
   );
