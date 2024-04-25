@@ -36,6 +36,7 @@ export const LoginModal = () => {
         alignItems={`center`}
         justifyContent={`center`}
         color={`white`}
+        fontSize={14}
       >
         <UserSvg />
         Log in

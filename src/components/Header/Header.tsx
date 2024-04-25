@@ -48,6 +48,7 @@ export const Header = () => {
               },
             }}
             justifyContent={`center`}
+            fontSize={14}
           >
             Sell With Us
           </Stack>
@@ -71,7 +72,7 @@ export const Header = () => {
             <Typography
               key={val.brandTitle}
               color={`white`}
-              fontSize={18}
+              fontSize={14}
               fontWeight={100}
               sx={{ cursor: `pointer` }}
             >
