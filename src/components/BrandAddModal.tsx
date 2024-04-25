@@ -48,7 +48,7 @@ export const BrandAddModal = () => {
   };
 
   return (
-    <Stack>
+    <Stack mt={15}>
       <Button
         sx={{
           width: 180,

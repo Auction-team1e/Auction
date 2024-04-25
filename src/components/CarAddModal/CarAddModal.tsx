@@ -63,7 +63,7 @@ export const CarAddModal = () => {
   };
 
   return (
-    <Stack>
+    <Stack mt={15}>
       <Button
         sx={{
           width: 280,
