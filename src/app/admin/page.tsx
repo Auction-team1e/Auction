@@ -3,8 +3,10 @@ import { Stack } from "@mui/material";
 
 export default function Page() {
   return (
-    <Stack>
-      <BrandAddModal />
+    <Stack alignItems={`center`}>
+      <Stack width={1720}>
+        <BrandAddModal />
+      </Stack>
     </Stack>
   );
 }
