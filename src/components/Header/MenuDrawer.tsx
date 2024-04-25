@@ -13,9 +13,11 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useCarData, ContextType } from "@/context/DataContext";
 
 export const MenuDrawer = () => {
   const [open, setOpen] = useState(false);
+  const { scrolling } = useCarData() as ContextType;
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
@@ -52,7 +54,10 @@ export const MenuDrawer = () => {
   );
   return (
     <Stack mr={3} sx={{ cursor: `pointer` }}>
-      <MenuIcon sx={{ color: `white` }} onClick={toggleDrawer(true)} />
+      <MenuIcon
+        sx={scrolling ? { color: `black` } : { color: `white` }}
+        onClick={toggleDrawer(true)}
+      />
       <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>

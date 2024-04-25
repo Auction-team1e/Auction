@@ -5,11 +5,26 @@ import { MenuDrawer } from "./MenuDrawer";
 import { SearchModal } from "./SearchModal";
 import { LoginModal } from "./LoginModal";
 import { useEffect, useState } from "react";
+import { useCarData, ContextType } from "@/context/DataContext";
+
 type dataType = { brandTitle: string; img: string };
 
 export const Header = () => {
   const [data, setData] = useState<Array<dataType>>();
-  console.log("🚀 ~ Header ~ data:", data);
+  const { scrolling, setScrolling } = useCarData() as ContextType;
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleScroll = () => {
+    if (window.scrollY > 20) {
+      setScrolling(true);
+    } else {
+      setScrolling(false);
+    }
+  };
 
   useEffect(() => {
     async function getData() {
@@ -20,7 +35,14 @@ export const Header = () => {
     getData();
   }, []);
   return (
-    <Stack width={1} position={`fixed`} zIndex={100} alignItems={`center`}>
+    <Stack
+      className={scrolling ? "navbar-scroll" : ""}
+      sx={{ transition: `all 0.3s ease` }}
+      width={1}
+      position={`fixed`}
+      zIndex={100}
+      alignItems={`center`}
+    >
       <Stack
         height={66}
         width={1723}
@@ -28,11 +50,20 @@ export const Header = () => {
         alignItems={`center`}
         px={7}
         justifyContent={`space-between`}
+        sx={{
+          ":before": {
+            bgcolor: `white`,
+          },
+        }}
         bgcolor={`transparent`}
       >
         <Stack direction={`row`} alignItems={`center`}>
           <MenuDrawer />
-          <Typography color={`white`} fontSize={24} width={140}>
+          <Typography
+            color={scrolling ? "black" : `white`}
+            fontSize={24}
+            width={140}
+          >
             JamesEdition
           </Typography>
         </Stack>
@@ -40,7 +71,7 @@ export const Header = () => {
         <Stack height={`100%`} direction={`row`} alignItems={`center`} gap={3}>
           <Stack
             height={`100%`}
-            color={`white`}
+            color={scrolling ? "black" : `white`}
             sx={{
               cursor: `pointer`,
               ":hover": {
@@ -71,7 +102,7 @@ export const Header = () => {
           return (
             <Typography
               key={val.brandTitle}
-              color={`white`}
+              color={scrolling ? "black" : `white`}
               fontSize={14}
               fontWeight={100}
               sx={{ cursor: `pointer` }}

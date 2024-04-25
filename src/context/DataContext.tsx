@@ -17,6 +17,8 @@ export type ContextType = {
   setEndDate: Dispatch<React.SetStateAction<Dayjs | null>>;
   open: boolean;
   setOpen: Dispatch<React.SetStateAction<boolean>>;
+  scrolling: boolean;
+  setScrolling: Dispatch<React.SetStateAction<boolean>>;
 };
 
 const CarContext = createContext<ContextType | null>(null);
@@ -30,6 +32,7 @@ const CarProvider = ({ children }: { children: any }) => {
   const [imageUrlFour, setImageUrlFour] = useState<string>("");
   const [endDate, setEndDate] = useState<Dayjs | null>(null);
   const [open, setOpen] = useState<boolean>(false);
+  const [scrolling, setScrolling] = useState<boolean>(false);
 
   return (
     <CarContext.Provider
@@ -48,6 +51,8 @@ const CarProvider = ({ children }: { children: any }) => {
         setEndDate,
         open,
         setOpen,
+        scrolling,
+        setScrolling,
       }}
     >
       {children}
