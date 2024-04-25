@@ -51,8 +51,8 @@ export const MenuDrawer = () => {
     </Box>
   );
   return (
-    <Stack mr={3}>
-      <MenuIcon onClick={toggleDrawer(true)} />
+    <Stack mr={3} sx={{ cursor: `pointer` }}>
+      <MenuIcon sx={{ color: `white` }} onClick={toggleDrawer(true)} />
       <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>

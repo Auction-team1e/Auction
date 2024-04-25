@@ -14,7 +14,6 @@ export const PopMakes = () => {
       try {
         const res = await fetch(`http://localhost:4000/api/brand`);
         const data = await res.json();
-        console.log(data);
         setBrand(data);
       } catch (error) {
         console.error("error fetching car data:", error);
@@ -30,7 +29,22 @@ export const PopMakes = () => {
           Popular Makes
         </Typography>
         <ButtonBase sx={{ width: "60px", height: "24px", alignSelf: "center" }}>
-          <Typography fontSize={"16px"} fontWeight={500} lineHeight={"24px"}>
+          <Typography
+            sx={{
+              cursor: `pointer`,
+              textDecoration: "underline",
+              textUnderlineOffset: `4.3px`,
+              textDecorationColor: "rgba(120, 120, 120, 0.4)",
+              transitionDuration: "0.22s",
+              ":hover": {
+                textDecorationColor: "black",
+                transitionDuration: "0.22s",
+              },
+            }}
+            fontSize={"16px"}
+            fontWeight={500}
+            lineHeight={"24px"}
+          >
             View all
           </Typography>
         </ButtonBase>
@@ -47,6 +61,7 @@ export const PopMakes = () => {
             width={"195px"}
             height={"148px"}
             sx={{
+              cursor: `pointer`,
               border: "#E0E0E0 1px solid",
               transition: "border-color 300ms linear",
               "&:hover": {

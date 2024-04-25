@@ -24,79 +24,74 @@ export const Footer = () => {
     getData();
   }, []);
   return (
-    <Stack
-      px={"96px"}
-      direction={"row"}
-      bgcolor={"black"}
-      color={"white"}
-      pt={"48px"}
-      justifyContent={"space-between"}
-    >
-      <Stack direction={"row"}>
-        <Stack width={"200px"} height={"700px"} gap={"16px"}>
+    <Stack bgcolor={"black"} color={"white"} pt={"48px"} alignItems={`center`}>
+      <Stack direction={"row"} width={1673} justifyContent={`space-between`}>
+        <Stack direction={"row"}>
+          <Stack width={"200px"} height={"700px"} gap={"16px"}>
+            <Typography
+              fontSize={"12px"}
+              fontWeight={600}
+              textTransform={"uppercase"}
+              color={"#ADADAD"}
+            >
+              JAMESEDITION
+            </Typography>
+            {footerTitles.map((a, index) => {
+              return (
+                <Stack gap={"20px"} key={index}>
+                  {a}
+                </Stack>
+              );
+            })}
+          </Stack>
+          <Stack width={"200px"} height={"700px"} gap={"16px"}>
+            <Typography
+              fontSize={"12px"}
+              fontWeight={600}
+              textTransform={"uppercase"}
+              color={"#ADADAD"}
+            >
+              BRANDS
+            </Typography>
+            {data?.map((b, index) => {
+              return (
+                <Stack gap={"20px"} key={index}>
+                  {b.brandTitle}
+                </Stack>
+              );
+            })}
+          </Stack>
+          <Stack width={"200px"} height={"700px"} gap={"16px"}>
+            <Typography
+              fontSize={"12px"}
+              fontWeight={600}
+              textTransform={"uppercase"}
+              color={"#ADADAD"}
+            >
+              FOR BUSINESS
+            </Typography>
+            {footerSubtitles.map((a, index) => {
+              return (
+                <Stack gap={"20px"} key={index}>
+                  {a}
+                </Stack>
+              );
+            })}
+          </Stack>
+        </Stack>
+        <Stack width={"200px"} gap={"16px"}>
           <Typography
             fontSize={"12px"}
             fontWeight={600}
             textTransform={"uppercase"}
             color={"#ADADAD"}
           >
-            JAMESEDITION
+            Settings
           </Typography>
-          {footerTitles.map((a, index) => {
-            return (
-              <Stack gap={"20px"} key={index}>
-                {a}
-              </Stack>
-            );
-          })}
-        </Stack>
-        <Stack width={"200px"} height={"700px"} gap={"16px"}>
-          <Typography
-            fontSize={"12px"}
-            fontWeight={600}
-            textTransform={"uppercase"}
-            color={"#ADADAD"}
-          >
-            BRANDS
-          </Typography>
-          {data?.map((b, index) => {
-            return (
-              <Stack gap={"20px"} key={index}>
-                {b.brandTitle}
-              </Stack>
-            );
-          })}
-        </Stack>
-        <Stack width={"200px"} height={"700px"} gap={"16px"}>
-          <Typography
-            fontSize={"12px"}
-            fontWeight={600}
-            textTransform={"uppercase"}
-            color={"#ADADAD"}
-          >
-            FOR BUSINESS
-          </Typography>
-          {footerSubtitles.map((a, index) => {
-            return (
-              <Stack gap={"20px"} key={index}>
-                {a}
-              </Stack>
-            );
-          })}
-        </Stack>
-      </Stack>
-      <Stack width={"200px"} gap={"16px"}>
-        <Typography
-          fontSize={"12px"}
-          fontWeight={600}
-          textTransform={"uppercase"}
-          color={"#ADADAD"}
-        >
-          Settings
-        </Typography>
-        <Stack>
-          <FooterSelect data={language} />
-          <FooterSelect data={currency} />
+          <Stack>
+            <FooterSelect data={language} />
+            <FooterSelect data={currency} />
+          </Stack>
         </Stack>
       </Stack>
     </Stack>

@@ -29,6 +29,7 @@ export const SearchModal = () => {
         onClick={() => setOpen(true)}
         color={`#717171`}
         gap={1}
+        sx={{ cursor: `text` }}
       >
         <SearchIcon sx={{ fontSize: 23 }} />
         Search Cars

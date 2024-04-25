@@ -22,9 +22,10 @@ export const LoginModal = () => {
     <Stack
       width={94.21}
       height={38}
-      border={`1px solid black`}
+      border={`1px solid white`}
       justifyContent={`center`}
       borderRadius={`100px`}
+      sx={{ cursor: `pointer` }}
     >
       <Stack
         width={"100%"}
@@ -34,6 +35,7 @@ export const LoginModal = () => {
         gap={1}
         alignItems={`center`}
         justifyContent={`center`}
+        color={`white`}
       >
         <UserSvg />
         Log in

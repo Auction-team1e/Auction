@@ -4,9 +4,11 @@ import { Stack } from "@mui/material";
 
 export default function Home() {
   return (
-    <Stack gap={8}>
+    <Stack width={`100%`} gap={8} position={`relative`}>
       <Carousel />
-      <PopMakes />
+      <Stack alignItems={`center`}>
+        <PopMakes />
+      </Stack>
     </Stack>
   );
 }
