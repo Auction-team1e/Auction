@@ -4,3 +4,6 @@ export * from "./ShortArrow";
 export * from "./ShortArrowRight";
 export * from "./ArrowSmall";
 export * from "./BreadCrumbArrow";
+export * from "./Heart";
+export * from "./UpRightArrow";
+export * from "./Camera";
