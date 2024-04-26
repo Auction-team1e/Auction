@@ -1,15 +1,24 @@
 import { Button, Input, Stack, Typography } from "@mui/material";
 import { CarouselSlider } from "./CarouselSlider";
+import { NumericFormat } from "react-number-format";
 
-export const FeaturedCard = () => {
+export const FeaturedCard = ({
+  carModel,
+  startPrice,
+  img,
+}: {
+  carModel: string;
+  startPrice: number;
+  img: string[];
+}) => {
   return (
-    <Stack width={"558.66px"} height={"467.8px"}>
-      <CarouselSlider />
-      <Stack px={3} gap={"10px"}>
+    <Stack border={"1px solid #e0e0e0"}>
+      <CarouselSlider img={img} />
+      <Stack px={3} py={3} gap={"10px"}>
         <Stack direction={"row"} justifyContent={"space-between"} mt={"10px"}>
           <Stack justifyContent={"center"}>
             <Typography fontSize={"16px"} fontWeight={700}>
-              2018 Bentley Bentayga
+              {carModel}
             </Typography>
             <Typography color={"#606060"}>
               Las Vegas, NV, United States
@@ -24,17 +33,36 @@ export const FeaturedCard = () => {
                 border: "0.1px solid grey",
                 borderRadius: "5px",
                 px: "10px",
+                height: "50px",
               }}
             ></Input>
-            <Button sx={{ backgroundColor: "#006C75", color: "white" }}>
+            <Button
+              sx={{
+                backgroundColor: "#006C75",
+                color: "white",
+                height: "50px",
+              }}
+            >
               Bid
             </Button>
           </Stack>
         </Stack>
-        <Stack direction={"row"} gap={"120px"} mt={"10px"}>
-          <Stack direction={"row"} gap={"5px"}>
-            <Typography>Opening bid</Typography>
-            <Typography fontWeight={600}>2000$</Typography>
+        <Stack direction={"row"} mt={"10px"}>
+          <Stack direction={"row"} gap={"5px"} alignItems={"center"}>
+            <Typography noWrap>Opening bid</Typography>
+            <NumericFormat
+              value={`${startPrice}`}
+              thousandSeparator=","
+              suffix="$"
+              disabled
+              style={{
+                border: "none",
+                backgroundColor: "white",
+                fontWeight: "600",
+                fontSize: "16px",
+                color: "black",
+              }}
+            />
           </Stack>
           <Stack direction={"row"} gap={"5px"}>
             <Typography>Auction Ends</Typography>

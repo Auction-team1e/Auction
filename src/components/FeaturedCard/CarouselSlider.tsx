@@ -5,44 +5,30 @@ import Carousel from "react-material-ui-carousel";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 
-const cars = [
-  {
-    name: "neo",
-    img: "https://imgur.com/RF2a3PB.jpg",
-  },
-  {
-    name: "neo",
-    img: "https://imgur.com/RF2a3PB.jpg",
-  },
-  {
-    name: "morpheus",
-    img: "https://imgur.com/B0SNpZI.jpg",
-  },
-  {
-    name: "trinity",
-    img: "https://imgur.com/KnXHM0K.jpg",
-  },
-];
-
-export const CarouselSlider = () => {
+export const CarouselSlider = ({ img }: { img: string[] }) => {
   return (
-    <Box width={"560.66px"} height={"343.78px"}>
+    <Box>
       <Carousel
         NextIcon={<NavigateNextIcon />}
         PrevIcon={<NavigateBeforeIcon />}
         autoPlay={false}
         indicatorContainerProps={{
-          style: { position: "absolute", bottom: 0, zIndex: 100 },
+          style: {
+            position: "absolute",
+            bottom: 10,
+            zIndex: 100,
+          },
         }}
       >
-        {cars.map((a, index) => (
+        {img.map((a, index) => (
           <Stack
             width={"560px"}
             height={"344px"}
             sx={{
-              backgroundImage: `url(${a.img})`,
+              backgroundImage: `url(${a})`,
               backgroundRepeat: "no-repeat",
-              objectFit: "cover",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
             key={index}
           ></Stack>

@@ -1,5 +1,6 @@
 import Carousel from "@/components/CarouselComp";
 import { FeaturedCard } from "@/components/FeaturedCard/FeaturedCard";
+import { FeaturedCars } from "@/components/FeaturedCars";
 import { PopMakes } from "@/components/PopMakes";
 import { PopSearches } from "@/components/PopSearches";
 import { Stack } from "@mui/material";
@@ -11,7 +12,7 @@ const Home = () => {
       <Stack alignItems={`center`} gap={8}>
         <PopMakes />
         <PopSearches />
-        <FeaturedCard />
+        <FeaturedCars />
       </Stack>
     </Stack>
   );
