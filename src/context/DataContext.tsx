@@ -3,9 +3,9 @@
 import { Dispatch, createContext, useContext, useState } from "react";
 import { Dayjs } from "dayjs";
 type SignUpType = {
-  firstName?: string;
-  lastName?: string;
-  email?: string;
+  firstName: string;
+  lastName: string;
+  email: string;
 };
 export type ContextType = {
   selected: string;
@@ -24,8 +24,8 @@ export type ContextType = {
   setOpen: Dispatch<React.SetStateAction<boolean>>;
   scrolling: boolean;
   setScrolling: Dispatch<React.SetStateAction<boolean>>;
-  singUpFields: SignUpType;
-  setSingUpFields: Dispatch<React.SetStateAction<SignUpType>>;
+  signUpFields: SignUpType;
+  setSignUpFields: Dispatch<React.SetStateAction<SignUpType>>;
 };
 
 const CarContext = createContext<ContextType | null>(null);
@@ -40,7 +40,11 @@ const CarProvider = ({ children }: { children: any }) => {
   const [endDate, setEndDate] = useState<Dayjs | null>(null);
   const [open, setOpen] = useState<boolean>(false);
   const [scrolling, setScrolling] = useState<boolean>(false);
-  const [singUpFields, setSingUpFields] = useState<SignUpType>({});
+  const [signUpFields, setSignUpFields] = useState<SignUpType>({
+    email: ``,
+    firstName: ``,
+    lastName: ``,
+  });
 
   return (
     <CarContext.Provider
@@ -61,8 +65,8 @@ const CarProvider = ({ children }: { children: any }) => {
         setOpen,
         scrolling,
         setScrolling,
-        singUpFields,
-        setSingUpFields,
+        signUpFields,
+        setSignUpFields,
       }}
     >
       {children}

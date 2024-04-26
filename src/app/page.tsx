@@ -1,5 +1,5 @@
 import Carousel from "@/components/CarouselComp";
-import { FeaturedCars } from "@/components/FeaturedCars";
+import { FeaturedCars } from "@/components/FeaturedCard/FeaturedCars";
 import { PopMakes } from "@/components/PopMakes";
 import { PopSearches } from "@/components/PopSearches";
 import { Stack } from "@mui/material";

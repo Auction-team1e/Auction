@@ -31,6 +31,7 @@ export const Login = ({
         .required("Enter your password"),
     }),
     onSubmit: (values) => {
+      // alert(JSON.stringify(values, null, 2));
       fetch("http://localhost:4000/api/food", {
         method: "POST",
         body: JSON.stringify(values),
