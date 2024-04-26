@@ -2,14 +2,13 @@
 import { BreadCrumbArrow, Camera, Heart, UpRightArrow } from "@/svgs";
 import { ButtonBase, CardMedia, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-
 type imgType = {
   img: string[];
 };
-
 export const CarDetail = () => {
   const [dataAr, setDataAr] = useState<Array<imgType>>();
-
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [mainImageHovered, setMainImageHovered] = useState<boolean>(false);
   useEffect(() => {
     async function carImg() {
       try {
@@ -23,7 +22,6 @@ export const CarDetail = () => {
     }
     carImg();
   }, []);
-
   return (
     <Stack width={"1720px"}>
       <Stack
@@ -46,16 +44,34 @@ export const CarDetail = () => {
         </Typography>
       </Stack>
       <Stack gap={"4px"} direction={"row"} width={"100%"} height={"500px"}>
-        <Stack width={"865px"} height={"100%"} position="relative">
-          <CardMedia
-            component={"img"}
-            src={dataAr && dataAr[0].img[0]}
+        <Stack
+          overflow="hidden"
+          width={"865px"}
+          height={"100%"}
+          position="relative"
+          borderRadius={"8px"}
+        >
+          <Stack
             style={{
+              position: "relative",
               width: "100%",
               height: "100%",
-              borderRadius: "8px",
+              transform: mainImageHovered ? "scale(1.02)" : "scale(1)",
+              transition: "transform 0.5s",
             }}
-          />
+            onMouseEnter={() => setMainImageHovered(true)}
+            onMouseLeave={() => setMainImageHovered(false)}
+          >
+            <CardMedia
+              component={"img"}
+              src={dataAr && dataAr[0].img[0]}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+          </Stack>
           <Stack
             direction={"row"}
             gap={"8px"}
@@ -90,17 +106,33 @@ export const CarDetail = () => {
         <Stack width={"870px"} height={"500px"} flexWrap={"wrap"} gap={"4px"}>
           {dataAr &&
             dataAr[0].img.map((e: string, index: number) => (
-              <Stack width={"428px"} height={"248px"} key={index}>
-                <CardMedia
-                  component={"img"}
+              <Stack
+                key={index}
+                sx={{ overflow: "hidden", borderRadius: "5px" }}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
+                <div
                   style={{
-                    borderRadius: "5px",
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "fill",
+                    width: "428px",
+                    height: "248px",
+                    position: "relative",
+                    transform:
+                      hoveredIndex === index ? "scale(1.02)" : "scale(1)",
+                    transition: "transform 0.5s",
                   }}
-                  src={e}
-                />
+                >
+                  <CardMedia
+                    component={"img"}
+                    style={{
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                    src={e}
+                  />
+                </div>
               </Stack>
             ))}
           <Stack position={"absolute"} bottom={"24px"} right={"94px"}>
@@ -121,7 +153,7 @@ export const CarDetail = () => {
                   color: "white",
                 }}
               >
-                19 Photos
+                {dataAr?.length + "Photos"}
               </Typography>
             </ButtonBase>
           </Stack>
