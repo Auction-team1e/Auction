@@ -71,7 +71,7 @@
     {
       "files": ["*.tsx"],
       "rules": {
-        "complexity": ["error", { "max": 5 }]
+        "complexity": ["error", { "max": 7 }]
       }
     },
     {

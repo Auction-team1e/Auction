@@ -4,6 +4,7 @@ import { SignUp } from "../SignUp/SignUp";
 import { useCarData, ContextType } from "@/context/DataContext";
 import { Login } from "../Login/Login";
 import { useState } from "react";
+import { SignUpNextStep } from "../SignUp/SignUpNextStep";
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -16,7 +17,7 @@ const style = {
 
 export const LoginModal = () => {
   const { open, setOpen, scrolling } = useCarData() as ContextType;
-  const [handle, setHandle] = useState(true);
+  const [handle, setHandle] = useState<string>("login");
 
   return (
     <Stack
@@ -43,10 +44,12 @@ export const LoginModal = () => {
       </Stack>
       <Modal open={open}>
         <Box sx={style}>
-          {handle == true ? (
+          {handle == "login" ? (
             <Login setHandle={setHandle} />
-          ) : (
+          ) : handle == "signup" ? (
             <SignUp setHandle={setHandle} />
+          ) : (
+            <SignUpNextStep setHandle={setHandle} />
           )}
         </Box>
       </Modal>

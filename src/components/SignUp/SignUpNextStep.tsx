@@ -1,9 +1,14 @@
 "use client";
 import { Box, Button, Divider, Link, Stack, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { SignUpNextStepInputs } from "@/utils/dummyData";
+import { SignUpNextStepInputs } from "@/utils/DummyData";
+import { Dispatch } from "react";
 
-export const SignUpNextStep = () => {
+export const SignUpNextStep = ({
+  setHandle,
+}: {
+  setHandle: Dispatch<React.SetStateAction<string>>;
+}) => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const passwords = {
@@ -13,14 +18,7 @@ export const SignUpNextStep = () => {
     console.log("🚀 ~ handleSubmit ~ passwords:", passwords);
   };
   return (
-    <Stack
-      alignItems={`center`}
-      width={424}
-      border={`1px solid black`}
-      height={610}
-      py={1.6}
-      m={2}
-    >
+    <Stack alignItems={`center`} width={424} height={610} py={1.6}>
       <CloseIcon sx={{ position: `relative`, left: 170, fontSize: 30 }} />
       <Typography mb={`32px`} fontSize={24} fontWeight={500}>
         Sign up
@@ -73,7 +71,7 @@ export const SignUpNextStep = () => {
           fontSize={14}
           fontWeight={400}
         >
-          By joining, you agree to JamesEdition's{" "}
+          By joining, you agree to JamesEdition&apos;s{" "}
           <Link color={`#717171`}>Terms of Service</Link> and{" "}
           <Link color={`#717171`}>Privacy Policy</Link>, as well as to receive
           occasional emails from us.
@@ -85,7 +83,9 @@ export const SignUpNextStep = () => {
           Already a member?
         </Typography>
         <Link
+          onClick={() => setHandle("login")}
           sx={{
+            cursor: `pointer`,
             color: `black`,
             textUnderlineOffset: `4.3px`,
             textDecorationColor: "rgba(120, 120, 120, 0.4)",

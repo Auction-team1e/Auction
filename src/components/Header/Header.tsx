@@ -45,7 +45,7 @@ export const Header = () => {
     >
       <Stack
         height={66}
-        width={1723}
+        width={`100%`}
         direction={`row`}
         alignItems={`center`}
         px={7}

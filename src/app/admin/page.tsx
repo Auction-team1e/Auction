@@ -1,7 +1,7 @@
 import { BrandAddModal } from "@/components/BrandAddModal";
 import { Stack } from "@mui/material";
 
-export default function Page() {
+const Page = () => {
   return (
     <Stack alignItems={`center`}>
       <Stack width={1720}>
@@ -9,4 +9,5 @@ export default function Page() {
       </Stack>
     </Stack>
   );
-}
+};
+export default Page;

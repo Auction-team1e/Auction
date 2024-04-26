@@ -1,4 +1,4 @@
-import { signUpBtn } from "@/utils/dummyData";
+import { signUpBtn } from "@/utils/DummyData";
 import { Button, Stack, Typography } from "@mui/material";
 
 export const ContinueWith = () => {

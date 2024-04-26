@@ -6,7 +6,6 @@ import { Footer } from "@/components/Footer/Footer";
 import CarProvider from "@/context/DataContext";
 import { Header } from "@/components/Header/Header";
 import "react-toastify/dist/ReactToastify.css";
-import { Carousel } from "@/components/CarouselComp";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,11 +13,11 @@ export const metadata: Metadata = {
   title: "Luxury Car Auction",
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
   return (
     <CarProvider>
       <html lang="en">
@@ -30,4 +29,5 @@ export default function RootLayout({
       </html>
     </CarProvider>
   );
-}
+};
+export default RootLayout;

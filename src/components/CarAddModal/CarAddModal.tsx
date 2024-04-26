@@ -1,5 +1,5 @@
 "use client";
-import { modalStyle } from "@/utils/dummyData";
+import { modalStyle } from "@/utils/DummyData";
 import { Button, Modal, Stack } from "@mui/material";
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";

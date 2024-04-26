@@ -8,7 +8,7 @@ interface Car {
   img: string[];
 }
 
-export function Carousel() {
+const Carousel = () => {
   const [cars, setCars] = useState<Car[]>([]);
   const [curr, setCurr] = useState(0);
   const [currentTitle, setCurrentTitle] = useState("");
@@ -92,8 +92,7 @@ export function Carousel() {
               lineHeight={"68px"}
               color={"white"}
             >
-              The World's
-              <br /> Luxury Marketplace
+              The World&apos;s <br /> Luxury Marketplace
             </Typography>
             <Typography
               marginTop={"20px"}
@@ -153,4 +152,5 @@ export function Carousel() {
       </Stack>
     </Stack>
   );
-}
+};
+export default Carousel;

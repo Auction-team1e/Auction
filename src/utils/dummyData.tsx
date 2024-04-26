@@ -1,5 +1,5 @@
-import { Google } from "@/svgs/google";
-import { FaceBook } from "@/svgs/facebook";
+import { FaceBook } from "@/svgs/Facebook";
+import { Google } from "@/svgs/Google";
 
 export const fields = [
   { pl: "First name", name: "firstName" },
@@ -48,107 +48,6 @@ export const footer = [
   {
     title: "For Business",
     subTitles: ["Sell With Us", "Partner", "Linking"],
-  },
-];
-
-export const CarData = [
-  {
-    imgPath: [
-      "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
-    ],
-    carName: "Lamborghini Aventador",
-    listings: "40 Listings ",
-  },
-  {
-    imgPath: [
-      "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
-    ],
-    carName: "Bugatti Chiron",
-    listings: "10 Listings ",
-  },
-  {
-    imgPath: [
-      "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
-    ],
-    carName: "Lamborghini Aventador",
-    listings: "40 Listings ",
-  },
-  {
-    imgPath: [
-      "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
-    ],
-    carName: "Bugatti Chiron",
-    listings: "10 Listings",
-  },
-  {
-    imgPath: [
-      "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
-    ],
-    carName: "Lamborghini Aventador",
-    listings: "40 Listings",
-  },
-  {
-    imgPath: [
-      "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
-    ],
-    carName: "Bugatti Chiron",
-    listings: "10 Listings",
-  },
-  {
-    imgPath: [
-      "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
-    ],
-    carName: "Lamborghini Aventador",
-    listings: "40 Listings",
-  },
-  {
-    imgPath: [
-      "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
-    ],
-    carName: "Bugatti Chiron",
-    listings: "10 Listings",
-  },
-  {
-    imgPath: [
-      "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
-    ],
-    carName: "Lamborghini Aventador",
-    listings: "40 Listings",
-  },
-  {
-    imgPath: [
-      "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
-    ],
-    carName: "Bugatti Chiron",
-    listings: "10 Listings",
-  },
-  {
-    imgPath: [
-      "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
-    ],
-    carName: "Lamborghini Aventador",
-    listings: "40 Listings",
-  },
-  {
-    imgPath: [
-      "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
-    ],
-    carName: "Bugatti Chiron",
-    listings: "17 Listings",
-  },
-  {
-    imgPath: [
-      "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755550/q5h6wuukxqutg0zstloh.webp",
-    ],
-    carName: "Lamborghini Aventador",
-    listings: "40 Listings",
-  },
-  {
-    imgPath: [
-      "http://res.cloudinary.com/dlfnavahp/image/upload/v1713755556/r5yzosycz4j8wlfshsi0.webp",
-    ],
-    carName: "Bugatti Chiron",
-    listings: "17 Listings",
   },
 ];
 

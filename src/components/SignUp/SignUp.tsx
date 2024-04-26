@@ -1,7 +1,7 @@
 "use client";
 import { Button, Divider, Input, Link, Stack, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { fields, signUpBtn } from "@/utils/dummyData";
+import { fields, signUpBtn } from "@/utils/DummyData";
 import { useCarData, ContextType } from "@/context/DataContext";
 import { useFormik } from "formik";
 import { ToastContainer, toast } from "react-toastify";
@@ -11,9 +11,9 @@ import { Dispatch } from "react";
 export const SignUp = ({
   setHandle,
 }: {
-  setHandle: Dispatch<React.SetStateAction<boolean>>;
+  setHandle: Dispatch<React.SetStateAction<string>>;
 }) => {
-  const { setOpen, open } = useCarData() as ContextType;
+  const { setOpen, open, singUpFields } = useCarData() as ContextType;
   const notify = () => toast("Wow so easy!");
 
   const formik = useFormik({
@@ -34,7 +34,8 @@ export const SignUp = ({
         .required("Enter your email address"),
     }),
     onSubmit: (values) => {
-      // alert(JSON.stringify(values, null, 2));
+      setHandle("createPass");
+      // singUpFields(values);
     },
   });
   return (
@@ -145,7 +146,7 @@ export const SignUp = ({
             }}
             fontSize={14}
             fontWeight={400}
-            onClick={() => setHandle(true)}
+            onClick={() => setHandle("login")}
           >
             Log in
           </Link>

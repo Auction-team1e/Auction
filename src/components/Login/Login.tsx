@@ -1,7 +1,7 @@
 "use client";
 import { Box, Button, Divider, Link, Stack, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { loginFields } from "@/utils/dummyData";
+import { loginFields } from "@/utils/DummyData";
 import { useCarData, ContextType } from "@/context/DataContext";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -12,7 +12,7 @@ import { Dispatch } from "react";
 export const Login = ({
   setHandle,
 }: {
-  setHandle: Dispatch<React.SetStateAction<boolean>>;
+  setHandle: Dispatch<React.SetStateAction<string>>;
 }) => {
   const { setOpen, open } = useCarData() as ContextType;
   const notify = () => toast("Wow so easy!");
@@ -31,7 +31,11 @@ export const Login = ({
         .required("Enter your password"),
     }),
     onSubmit: (values) => {
-      // alert(JSON.stringify(values, null, 2));
+      fetch("http://localhost:4000/api/food", {
+        method: "POST",
+        body: JSON.stringify(values),
+        headers: { "Content-Type": "application/json" },
+      });
     },
   });
   return (
@@ -133,7 +137,7 @@ export const Login = ({
               }}
               fontSize={14}
               fontWeight={400}
-              onClick={() => setHandle(false)}
+              onClick={() => setHandle("signup")}
             >
               Sign up
             </Link>
