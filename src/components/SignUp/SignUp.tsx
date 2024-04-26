@@ -133,6 +133,7 @@ export const SignUp = ({
           </Typography>
           <Link
             sx={{
+              cursor: `pointer`,
               color: `black`,
               textUnderlineOffset: `4.3px`,
               textDecorationColor: "rgba(120, 120, 120, 0.4)",

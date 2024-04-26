@@ -56,19 +56,25 @@ export function Carousel() {
       <Stack direction={"row"}>
         {cars.map((car, index) => (
           <Stack
+            bgcolor={`gray`}
             key={index}
             sx={{
               display: "flex",
-              width: "100%",
               transition: "transform 1s ease",
-              // transform: `translateX(-${curr * 100}%)`,
+              transform: `translateX(-${curr * 100}%)`,
             }}
+            width={`100vw`}
           >
-            <img
-              src={car.img[0]}
-              alt={car.carModel}
-              style={{ width: "100vw", height: "920px" }}
-            />
+            <Stack
+              sx={{
+                backgroundImage: `url('${car.img[0]}')`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: `center`,
+                backgroundSize: "cover",
+                width: "100vw",
+                height: "920px",
+              }}
+            ></Stack>
           </Stack>
         ))}
       </Stack>

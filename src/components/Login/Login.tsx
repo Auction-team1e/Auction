@@ -119,8 +119,9 @@ export const Login = ({
             <Typography color={`#717171`} fontSize={14} fontWeight={400}>
               Not a member yet?
             </Typography>
-            <Stack
+            <Link
               sx={{
+                cursor: `pointer`,
                 color: `black`,
                 textUnderlineOffset: `4.3px`,
                 textDecorationColor: "rgba(120, 120, 120, 0.4)",
@@ -135,7 +136,7 @@ export const Login = ({
               onClick={() => setHandle(false)}
             >
               Sign up
-            </Stack>
+            </Link>
           </Stack>
         </Stack>
       </Stack>

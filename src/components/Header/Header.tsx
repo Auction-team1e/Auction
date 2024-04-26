@@ -50,11 +50,6 @@ export const Header = () => {
         alignItems={`center`}
         px={7}
         justifyContent={`space-between`}
-        sx={{
-          ":before": {
-            bgcolor: `white`,
-          },
-        }}
         bgcolor={`transparent`}
       >
         <Stack direction={`row`} alignItems={`center`}>
@@ -72,12 +67,21 @@ export const Header = () => {
           <Stack
             height={`100%`}
             color={scrolling ? "black" : `white`}
-            sx={{
-              cursor: `pointer`,
-              ":hover": {
-                borderBottom: `1px solid white`,
-              },
-            }}
+            sx={
+              scrolling
+                ? {
+                    cursor: `pointer`,
+                    ":hover": {
+                      borderBottom: `1px solid black`,
+                    },
+                  }
+                : {
+                    cursor: `pointer`,
+                    ":hover": {
+                      borderBottom: `1px solid white`,
+                    },
+                  }
+            }
             justifyContent={`center`}
             fontSize={14}
           >
