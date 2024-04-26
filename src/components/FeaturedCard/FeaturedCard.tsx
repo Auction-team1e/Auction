@@ -6,10 +6,12 @@ export const FeaturedCard = ({
   carModel,
   startPrice,
   img,
+  carDetail,
 }: {
   carModel: string;
   startPrice: number;
   img: string[];
+  carDetail: string[];
 }) => {
   return (
     <Stack border={"1px solid #e0e0e0"}>
@@ -20,9 +22,7 @@ export const FeaturedCard = ({
             <Typography fontSize={"16px"} fontWeight={700}>
               {carModel}
             </Typography>
-            <Typography color={"#606060"}>
-              Las Vegas, NV, United States
-            </Typography>
+            <Typography color={"#606060"}>{carDetail[1]}</Typography>
           </Stack>
           <Stack gap={"3px"} justifyContent={"center"} direction={"row"}>
             <Input

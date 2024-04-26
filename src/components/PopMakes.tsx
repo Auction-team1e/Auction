@@ -1,6 +1,7 @@
 "use client";
-import { Stack, Typography, ButtonBase } from "@mui/material";
+import { Stack, Typography, ButtonBase, CardMedia } from "@mui/material";
 import { useEffect, useState } from "react";
+
 type ObjType = {
   name: string;
   img: string;
@@ -74,7 +75,7 @@ export const PopMakes = () => {
               },
             }}
           >
-            <img src={e.img} alt={`Car ${index}`} />
+            <CardMedia image={e.img} alt={`Car ${index}`} component={"img"} />
           </Stack>
         ))}
       </Stack>

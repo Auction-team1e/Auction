@@ -35,11 +35,13 @@ export const FeaturedCars = () => {
         sx={{ gridGap: "30px 23px" }}
         gridAutoRows={"auto"}
       >
-        {data?.map((a) => (
+        {data?.map((a, index) => (
           <FeaturedCard
             carModel={a.carModel}
             startPrice={a.startPrice}
             img={a.img}
+            carDetail={a.carDetails}
+            key={index}
           />
         ))}
       </Stack>

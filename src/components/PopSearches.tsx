@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { ArrowSmall, ShortArrow, ShortArrowRight } from "@/svgs";
-import { ButtonBase, Stack, Typography } from "@mui/material";
+import { ButtonBase, CardMedia, Stack, Typography } from "@mui/material";
 
 type ObjType = {
   brandTitle: string;
@@ -105,7 +105,11 @@ export const PopSearches = () => {
                 width={"128px"}
                 height={"126px"}
               >
-                <img src={car.img} alt={car.brandTitle} />
+                <CardMedia
+                  image={car.img}
+                  alt={`Car ${index}`}
+                  component={"img"}
+                />
               </Stack>
               <Stack direction={"column"} gap={"50px"} p={"15px"}>
                 <Typography>{car.brandTitle}</Typography>
