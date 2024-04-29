@@ -2,7 +2,7 @@
 
 import { Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { FeaturedCard } from "./FeaturedCard/FeaturedCard";
+import { FeaturedCard } from "./FeaturedCard";
 
 type dataType = {
   carModel: string;

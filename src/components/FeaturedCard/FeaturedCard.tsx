@@ -61,6 +61,7 @@ export const FeaturedCard = ({
                 fontWeight: "600",
                 fontSize: "16px",
                 color: "black",
+                width: `90px`,
               }}
             />
           </Stack>

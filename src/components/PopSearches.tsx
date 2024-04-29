@@ -25,8 +25,6 @@ export const PopSearches = () => {
     }
     fetchCarData();
   }, []);
-  console.log(brand.length);
-  console.log(startIdx);
 
   const prev = () => {
     setStartIdx((prevStartIdx) =>

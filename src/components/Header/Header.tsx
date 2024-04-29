@@ -45,7 +45,7 @@ export const Header = () => {
     >
       <Stack
         height={66}
-        width={`100%`}
+        width={1}
         direction={`row`}
         alignItems={`center`}
         px={7}
@@ -58,6 +58,7 @@ export const Header = () => {
             color={scrolling ? "black" : `white`}
             fontSize={24}
             width={140}
+            sx={{ cursor: `pointer` }}
           >
             JamesEdition
           </Typography>

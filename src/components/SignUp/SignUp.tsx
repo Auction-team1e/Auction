@@ -4,7 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { fields, signUpBtn } from "@/utils/DummyData";
 import { useCarData, ContextType } from "@/context/DataContext";
 import { useFormik } from "formik";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import * as Yup from "yup";
 import { Dispatch } from "react";
 
@@ -13,8 +13,7 @@ export const SignUp = ({
 }: {
   setHandle: Dispatch<React.SetStateAction<string>>;
 }) => {
-  const { setOpen, open, singUpFields } = useCarData() as ContextType;
-  const notify = () => toast("Wow so easy!");
+  const { setOpen, open, setSignUpFields } = useCarData() as ContextType;
 
   const formik = useFormik({
     initialValues: {
@@ -34,8 +33,8 @@ export const SignUp = ({
         .required("Enter your email address"),
     }),
     onSubmit: (values) => {
+      setSignUpFields(values);
       setHandle("createPass");
-      // singUpFields(values);
     },
   });
   return (
@@ -114,7 +113,6 @@ export const SignUp = ({
             </Stack>
           </Stack>
           <Button
-            onClick={notify}
             type="submit"
             sx={{
               bgcolor: `#151515`,
