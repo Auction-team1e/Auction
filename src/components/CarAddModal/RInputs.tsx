@@ -1,5 +1,5 @@
 import { useCarData, ContextType } from "@/context/DataContext";
-import { Brands, carDetails, carDetailsSecod } from "@/utils/DummyData";
+import { carDetails, carDetailsSecod } from "@/utils/DummyData";
 import {
   Box,
   Button,
@@ -10,10 +10,22 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { useEffect, useState } from "react";
 const fields = [carDetails, carDetailsSecod];
+type dataType = { brandTitle: string; img: string };
 
 export const RInputs = () => {
   const { selected, setSelected } = useCarData() as ContextType;
+  const [data, setData] = useState<dataType[]>();
+
+  useEffect(() => {
+    async function getData() {
+      const res = await fetch("http://localhost:4000/api/brand");
+      const brands = await res.json();
+      setData(brands);
+    }
+    getData();
+  }, []);
 
   return (
     <Stack width={`573px`} gap={`24px`}>
@@ -24,14 +36,14 @@ export const RInputs = () => {
         <FormControl sx={{ mb: 3 }}>
           <InputLabel>Brands</InputLabel>
           <Select sx={{ bgcolor: `#F4F4F4` }} required value={selected ?? ``}>
-            {Brands.map((val) => {
+            {data?.map((val) => {
               return (
                 <MenuItem
-                  key={val}
-                  value={val ?? ``}
-                  onClick={() => setSelected(val)}
+                  key={val.img}
+                  value={val.brandTitle}
+                  onClick={() => setSelected(val.brandTitle)}
                 >
-                  {val}
+                  {val.brandTitle}
                 </MenuItem>
               );
             })}
