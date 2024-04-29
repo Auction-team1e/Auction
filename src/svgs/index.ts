@@ -7,3 +7,4 @@ export * from "./BreadCrumbArrow";
 export * from "./Heart";
 export * from "./UpRightArrow";
 export * from "./Camera";
+export * from "./Telephone";

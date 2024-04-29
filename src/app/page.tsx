@@ -1,3 +1,4 @@
+import { CarInfo } from "@/components/CarDetailPage/CarInfo";
 import Carousel from "@/components/CarouselComp";
 import { FeaturedCars } from "@/components/FeaturedCard/FeaturedCars";
 import { PopMakes } from "@/components/PopMakes";
@@ -17,3 +18,4 @@ const Home = () => {
   );
 };
 export default Home;
+//ads
