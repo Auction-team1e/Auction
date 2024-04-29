@@ -1,21 +1,29 @@
 "use client";
-import { Box, Button, Divider, Link, Stack, Typography } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  Divider,
+  Link,
+  Stack,
+  Typography,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { loginFields } from "@/utils/DummyData";
 import { useCarData, ContextType } from "@/context/DataContext";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ContinueWith } from "./ContinueWith";
 import { ToastContainer, toast } from "react-toastify";
-import { Dispatch } from "react";
-
+import { Dispatch, useState } from "react";
+import { LoginFields } from "./LoginFields";
 export const Login = ({
   setHandle,
 }: {
   setHandle: Dispatch<React.SetStateAction<string>>;
 }) => {
   const { setOpen, open } = useCarData() as ContextType;
-  const notify = () => toast("Wow so easy!");
+  const logged = () => toast.success("Succesfully logged");
+  const failed = () => toast.error("Invalid email or password");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const formik = useFormik({
     initialValues: {
@@ -30,13 +38,25 @@ export const Login = ({
         .max(15, "Must be 15 characters or less")
         .required("Enter your password"),
     }),
-    onSubmit: (values) => {
-      // alert(JSON.stringify(values, null, 2));
-      fetch("http://localhost:4000/api/food", {
+    onSubmit: async (values) => {
+      setLoading(true);
+      const res = await fetch("http://localhost:4000/api/login", {
         method: "POST",
         body: JSON.stringify(values),
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          Accept: "application.json",
+          "Content-Type": "application/json",
+        },
       });
+      const data = await res.json();
+      setLoading(false);
+      if (data.token) {
+        localStorage.setItem("userToken", data.token);
+        logged();
+        setTimeout(() => setOpen(!open), 5000);
+      } else {
+        failed();
+      }
     },
   });
   return (
@@ -58,52 +78,26 @@ export const Login = ({
         <ContinueWith />
         <Divider style={{ width: 376 }}>OR</Divider>
         <form onSubmit={formik.handleSubmit}>
-          <Stack mt={"27.5px"} mb={`40px`} gap={`16px`}>
-            {loginFields.map((val) => {
-              return (
-                <Stack key={val.name}>
-                  <Box
-                    type={val.name == "email" ? "email" : "text"}
-                    fontSize={17}
-                    component={`input`}
-                    height={48}
-                    width={376}
-                    border={
-                      formik.touched.email && formik.errors.email
-                        ? `1px solid #F74040`
-                        : `1px solid #E0E0E0`
-                    }
-                    px={`17px`}
-                    placeholder={val.pl}
-                    id={`${val.name}`}
-                    {...formik.getFieldProps(`${val.name}`)}
-                  ></Box>
-                </Stack>
-              );
-            })}
-            <Stack fontSize={13} color={`#F74040`}>
-              {formik.touched.email && formik.errors.email ? (
-                <div>{formik.errors.email}</div>
-              ) : null}
-              {formik.touched.password && formik.errors.password ? (
-                <div>{formik.errors.password}</div>
-              ) : null}
-            </Stack>
+          <LoginFields formik={formik} />
+          <Stack alignItems={`center`}>
+            {loading == false ? (
+              <Button
+                type="submit"
+                sx={{
+                  bgcolor: `#151515`,
+                  color: `white`,
+                  textTransform: `none`,
+                  width: 376,
+                  height: 53.5,
+                  fontSize: 16,
+                }}
+              >
+                Continue
+              </Button>
+            ) : (
+              <CircularProgress sx={{ color: `black` }} />
+            )}
           </Stack>
-          <Button
-            onClick={notify}
-            type="submit"
-            sx={{
-              bgcolor: `#151515`,
-              color: `white`,
-              textTransform: `none`,
-              width: 376,
-              height: 53.5,
-              fontSize: 16,
-            }}
-          >
-            Continue
-          </Button>
         </form>
         <Stack mt={`16px`} alignItems={`center`}>
           <Typography

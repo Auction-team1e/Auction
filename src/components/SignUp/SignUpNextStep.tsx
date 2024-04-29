@@ -26,7 +26,7 @@ export const SignUpNextStep = ({
         .max(15, "Must be 15 characters or less")
         .required("Enter your password"),
       confirmPass: Yup.string()
-        .max(15, "Must be 15 characters or less")
+        .oneOf([Yup.ref("enterPass")], "Passwords must match")
         .required("Enter your confirmation password"),
     }),
     onSubmit: (values) => {
@@ -39,15 +39,15 @@ export const SignUpNextStep = ({
       console.log("🚀 ~ userData:", userData);
       setHandle("createPass");
       notify();
-      // fetch("http://localhost:4000/api/food", {
-      //   method: "POST",
-      //   body: JSON.stringify(userData),
-      //   headers: { "Content-Type": "application/json" },
-      // });
+      fetch("http://localhost:4000/api/signup", {
+        method: "POST",
+        body: JSON.stringify(userData),
+        headers: { "Content-Type": "application/json" },
+      });
     },
   });
   return (
-    <Stack alignItems={`center`} width={424} height={610} pt={1.6} pb={5}>
+    <Stack alignItems={`center`} width={425} height={610} pt={1.6} pb={5}>
       <CloseIcon
         onClick={() => setOpen(!open)}
         sx={{ position: `relative`, left: 170, fontSize: 30 }}
