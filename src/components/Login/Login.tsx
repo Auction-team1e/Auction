@@ -52,6 +52,7 @@ export const Login = ({
       setLoading(false);
       if (data.token) {
         localStorage.setItem("userToken", data.token);
+        localStorage.setItem("userEmail", data.userEmail);
         logged();
         setTimeout(() => setOpen(!open), 5000);
       } else {
@@ -59,6 +60,7 @@ export const Login = ({
       }
     },
   });
+
   return (
     <>
       <Stack
