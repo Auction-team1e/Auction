@@ -49,7 +49,10 @@ export const SignUpNextStep = ({
   return (
     <Stack alignItems={`center`} width={425} height={610} pt={1.6} pb={5}>
       <CloseIcon
-        onClick={() => setOpen(!open)}
+        onClick={() => {
+          setOpen(!open);
+          setHandle("login");
+        }}
         sx={{ position: `relative`, left: 170, fontSize: 30 }}
       />
       <Typography mb={`9px`} fontSize={24} fontWeight={500}>

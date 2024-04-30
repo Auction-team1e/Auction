@@ -15,6 +15,7 @@ export const CarAddModal = () => {
     imageUrlFour,
     endDate,
   } = useCarData() as ContextType;
+
   const [open, setOpen] = useState(false);
 
   const handleSubmit = (e: any) => {
@@ -34,7 +35,7 @@ export const CarAddModal = () => {
       description: e.target.desc.value,
       information: e.target.info.value,
       startPrice: e.target.price.value,
-      endTime: endDate,
+      endTime: endDate?.format("MM/DD/YYYY, hh:mm:ss"),
       createdAt: mongoliaTime,
       brand: selected,
       img: [imageUrlOne, imageUrlTwo, imageUrlThree, imageUrlFour],

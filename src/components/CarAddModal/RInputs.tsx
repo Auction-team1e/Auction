@@ -40,7 +40,7 @@ export const RInputs = () => {
               return (
                 <MenuItem
                   key={val.img}
-                  value={val.brandTitle}
+                  value={val.brandTitle ?? ``}
                   onClick={() => setSelected(val.brandTitle)}
                 >
                   {val.brandTitle}
