@@ -128,7 +128,7 @@ export const CarDetail = () => {
                 </div>
               </Stack>
             ))}
-          <Stack position={"absolute"} bottom={"24px"} right={"94px"}>
+          <Stack position={"absolute"} bottom={"504px"} right={"540px"}>
             <ButtonBase
               sx={{
                 borderRadius: "100px",
