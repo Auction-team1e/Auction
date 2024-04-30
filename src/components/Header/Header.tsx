@@ -13,11 +13,6 @@ export const Header = () => {
   const [data, setData] = useState<Array<dataType>>();
   const { scrolling, setScrolling } = useCarData() as ContextType;
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const handleScroll = () => {
     if (window.scrollY > 20) {
       setScrolling(true);
@@ -25,6 +20,11 @@ export const Header = () => {
       setScrolling(false);
     }
   };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  });
 
   useEffect(() => {
     async function getData() {

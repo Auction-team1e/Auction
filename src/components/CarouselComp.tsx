@@ -49,7 +49,7 @@ const Carousel = () => {
       );
     }, 5000);
     return () => clearInterval(interval);
-  }, [cars]);
+  });
 
   return (
     <Stack width={"full"} overflow={"hidden"} position={"relative"}>
