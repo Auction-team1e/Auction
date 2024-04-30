@@ -5,6 +5,13 @@ import { useEffect, useState } from "react";
 type imgType = {
   img: string[];
 };
+
+const style = {
+  borderRadius: "100px",
+  p: "9px 24px",
+  gap: "10px",
+  bgcolor: "white",
+};
 export const CarDetail = () => {
   const [dataAr, setDataAr] = useState<Array<imgType>>();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -79,25 +86,11 @@ export const CarDetail = () => {
             bottom={"24px"}
             left={"24px"}
           >
-            <ButtonBase
-              sx={{
-                borderRadius: "100px",
-                p: "9px 24px",
-                gap: "10px",
-                bgcolor: "white",
-              }}
-            >
+            <ButtonBase sx={style}>
               <Heart />
               <Typography>Save</Typography>
             </ButtonBase>
-            <ButtonBase
-              sx={{
-                borderRadius: "100px",
-                p: "9px 24px",
-                gap: "10px",
-                bgcolor: "white",
-              }}
-            >
+            <ButtonBase sx={style}>
               <UpRightArrow />
               <Typography>Share</Typography>
             </ButtonBase>
