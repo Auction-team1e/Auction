@@ -20,6 +20,7 @@ export const LoginModal = () => {
   const { open, setOpen, scrolling, item } = useCarData() as ContextType;
   const [handle, setHandle] = useState<string>("login");
 
+  const loggedUserToken = localStorage.getItem("userToken");
   return (
     <>
       {item ? (
