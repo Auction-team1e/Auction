@@ -5,6 +5,7 @@ import { useCarData, ContextType } from "@/context/DataContext";
 import { Login } from "../Login/Login";
 import { useState } from "react";
 import { SignUpNextStep } from "../SignUp/SignUpNextStep";
+import { Logged } from "../Login/Logged";
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -19,40 +20,47 @@ export const LoginModal = () => {
   const { open, setOpen, scrolling } = useCarData() as ContextType;
   const [handle, setHandle] = useState<string>("login");
 
+  const loggedUserToken = localStorage.getItem("userToken");
   return (
-    <Stack
-      width={94.21}
-      height={38}
-      border={scrolling ? `1px solid #006C75` : `1px solid white`}
-      justifyContent={`center`}
-      borderRadius={`100px`}
-      sx={{ cursor: `pointer` }}
-    >
-      <Stack
-        width={"100%"}
-        height={"100%"}
-        onClick={() => setOpen(true)}
-        direction={`row`}
-        gap={1}
-        alignItems={`center`}
-        justifyContent={`center`}
-        color={scrolling ? "black" : `white`}
-        fontSize={14}
-      >
-        <UserSvg />
-        Log in
-      </Stack>
-      <Modal open={open}>
-        <Box sx={style}>
-          {handle == "login" ? (
-            <Login setHandle={setHandle} />
-          ) : handle == "signup" ? (
-            <SignUp setHandle={setHandle} />
-          ) : (
-            <SignUpNextStep setHandle={setHandle} />
-          )}
-        </Box>
-      </Modal>
-    </Stack>
+    <>
+      {loggedUserToken && loggedUserToken == `` ? (
+        <Stack
+          width={94.21}
+          height={38}
+          border={scrolling ? `1px solid #006C75` : `1px solid white`}
+          justifyContent={`center`}
+          borderRadius={`100px`}
+          sx={{ cursor: `pointer` }}
+        >
+          <Stack
+            width={"100%"}
+            height={"100%"}
+            onClick={() => setOpen(true)}
+            direction={`row`}
+            gap={1}
+            alignItems={`center`}
+            justifyContent={`center`}
+            color={scrolling ? "black" : `white`}
+            fontSize={14}
+          >
+            <UserSvg />
+            Log in
+          </Stack>
+          <Modal open={open}>
+            <Box sx={style}>
+              {handle == "login" ? (
+                <Login setHandle={setHandle} />
+              ) : handle == "signup" ? (
+                <SignUp setHandle={setHandle} />
+              ) : (
+                <SignUpNextStep setHandle={setHandle} />
+              )}
+            </Box>
+          </Modal>
+        </Stack>
+      ) : (
+        <Logged />
+      )}
+    </>
   );
 };
