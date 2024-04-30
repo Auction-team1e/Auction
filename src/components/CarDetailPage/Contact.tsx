@@ -55,11 +55,7 @@ export const Contact = () => {
               >
                 Contact Agent
               </Typography>
-              <TextareaAutosize
-                color="neutral"
-                minRows={6.5}
-                variant="oulined"
-              />
+              <TextareaAutosize color="neutral" minRows={6.5} />
             </Stack>
             <ButtonBase
               sx={{

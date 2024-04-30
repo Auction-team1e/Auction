@@ -5,10 +5,12 @@ import { Stack } from "@mui/material";
 
 const Page = () => {
   return (
-    <Stack pt={"115px"} width={"1720px"} justifyContent={"center"}>
-      <CarDetail />
-      <CarInfo />
-      <Contact />
+    <Stack pt={"115px"} width={"100%"} alignItems={"center"}>
+      <Stack>
+        <CarDetail />
+        <CarInfo />
+        <Contact />
+      </Stack>
     </Stack>
   );
 };

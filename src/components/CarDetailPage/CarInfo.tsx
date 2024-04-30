@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
-import { Stack, Typography, ButtonBase, colors } from "@mui/material";
+import { Stack, Typography, ButtonBase } from "@mui/material";
 
 const customStyle = {
   fontSize: "26px",
@@ -8,21 +8,18 @@ const customStyle = {
   fontWeight: 400,
   lineHeight: "44px",
 };
-
 const custStySec = {
   fontSize: "16px",
   color: "#151515",
   fontWeight: 400,
   lineHeight: "24px",
 };
-
 const moreOrLess = {
   WebkitLineClamp: 2,
   WebkitBoxOrient: "vertical",
   overflow: "hidden",
   display: "-webkit-box",
 };
-
 interface carInfo {
   brand: string;
   carModel: string;
@@ -30,13 +27,11 @@ interface carInfo {
   description: string;
   startPrice: number;
 }
-
 export const CarInfo = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showReadMore, setShowReadMore] = useState(false);
   const [info, setInfo] = useState<carInfo[]>([]);
   const ref = useRef<HTMLDivElement | null>(null);
-
   useEffect(() => {
     async function fetchData() {
       try {
@@ -56,7 +51,6 @@ export const CarInfo = () => {
       setShowReadMore(ref.current.scrollHeight > ref.current.clientHeight);
     }
   }, [info]);
-
   return (
     <Stack width={"1720px"}>
       {info.length > 0 && (
