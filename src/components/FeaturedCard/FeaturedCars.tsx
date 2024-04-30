@@ -11,6 +11,7 @@ type dataType = {
   description: string;
   carDetails: string[];
   img: string[];
+  endTime: string;
 };
 
 export const FeaturedCars = () => {
@@ -42,6 +43,7 @@ export const FeaturedCars = () => {
             img={a.img}
             carDetail={a.carDetails}
             key={index}
+            endDate={a.endTime}
           />
         ))}
       </Stack>
