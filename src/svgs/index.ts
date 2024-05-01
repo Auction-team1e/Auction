@@ -8,6 +8,8 @@ export * from "./Heart";
 export * from "./UpRightArrow";
 export * from "./Camera";
 export * from "./Telephone";
-export * from "./Pinecone";
-export * from "./Bell";
-export * from "./Profile";
+export * from "./Products";
+export * from "./Income";
+export * from "./Order";
+export * from "./Panel";
+
