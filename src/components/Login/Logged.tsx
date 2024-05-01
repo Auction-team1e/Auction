@@ -3,6 +3,7 @@ import { Menu, MenuItem, Stack } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 type dataType = {
   email: string;
   firstName: string;
@@ -16,6 +17,7 @@ export const Logged = () => {
   const [item, setItem] = useState<string | null>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const router = useRouter();
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -64,7 +66,7 @@ export const Logged = () => {
         justifyContent={`center`}
         fontSize={14}
       >
-        {filteredUser && filteredUser[0].firstName}
+        {filteredUser && filteredUser[0]?.firstName}
         {open == false ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
       </Stack>
       <Menu
@@ -92,7 +94,10 @@ export const Logged = () => {
         <MenuItem sx={{ fontSize: 15, marginTop: 0.7 }} onClick={handleClose}>
           Saved Searches
         </MenuItem>
-        <MenuItem sx={{ fontSize: 15, marginTop: 0.7 }} onClick={handleClose}>
+        <MenuItem
+          sx={{ fontSize: 15, marginTop: 0.7 }}
+          onClick={() => router.push(`/account`)}
+        >
           Account
         </MenuItem>
         <MenuItem
