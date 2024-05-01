@@ -32,7 +32,7 @@ export const EndTimeCounter = ({ endDate }: { endDate: string }) => {
     if (second < 0) {
       clearInterval(counting);
     }
-  }, []);
+  });
 
   return (
     <Stack direction={"row"} gap={"5px"}>
