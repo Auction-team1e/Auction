@@ -1,7 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, ButtonBase } from "@mui/material";
 
 const customStyle = {
   fontSize: "26px",
@@ -15,12 +15,12 @@ const custStySec = {
   fontWeight: 400,
   lineHeight: "24px",
 };
-// const moreOrLess = {
-//   WebkitLineClamp: 2,
-//   WebkitBoxOrient: "vertical",
-//   overflow: "hidden",
-//   display: "-webkit-box",
-// };
+const moreOrLess = {
+  WebkitLineClamp: 2,
+  WebkitBoxOrient: "vertical",
+  overflow: "hidden",
+  display: "-webkit-box",
+};
 type carInfo = {
   brand: string;
   carModel: string;
@@ -30,7 +30,10 @@ type carInfo = {
 };
 
 export const CarInfo = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [showReadMore, setShowReadMore] = useState(false);
   const [info, setInfo] = useState<carInfo[]>([]);
+  const ref = useRef<HTMLDivElement | null>(null);
   console.log(info);
   useEffect(() => {
     async function fetchData() {
@@ -41,6 +44,11 @@ export const CarInfo = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (ref.current) {
+      setShowReadMore(ref.current.scrollHeight > ref.current.clientHeight);
+    }
+  }, [info]);
   return (
     <Stack width={"1720px"}>
       {info.length > 0 && (
@@ -65,7 +73,22 @@ export const CarInfo = () => {
           About This Car
         </Typography>
         <Stack alignItems={"center"} borderBottom={"1px solid #E0E0E0"}>
-          <Stack>{info[0]?.description}</Stack>
+          <Stack
+            sx={{ ...custStySec, ...(isOpen ? null : moreOrLess) }}
+            ref={ref}
+          >
+            {info[0]?.description}
+          </Stack>
+          <Stack width={"100px"} mb={"25px"}>
+            {showReadMore && (
+              <ButtonBase
+                sx={{ height: "30px", borderRadius: "50px" }}
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                {isOpen ? "Read Less" : "Read More ..."}
+              </ButtonBase>
+            )}
+          </Stack>
         </Stack>
       </Stack>
       <Stack borderBottom={"1px solid #E0E0E0"} gap={"16px"} mt={"25px"}>
