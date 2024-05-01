@@ -35,7 +35,6 @@ export const MenuDrawer = () => {
           fontSize: "14px",
         }}
       >
-        {" "}
         Good morning,
       </Typography>
       <Divider />
