@@ -3,7 +3,7 @@ import { Box, Modal, Stack } from "@mui/material";
 import { SignUp } from "../SignUp/SignUp";
 import { useCarData, ContextType } from "@/context/DataContext";
 import { Login } from "../Login/Login";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SignUpNextStep } from "../SignUp/SignUpNextStep";
 import { Logged } from "../Login/Logged";
 const style = {
@@ -19,11 +19,18 @@ const style = {
 export const LoginModal = () => {
   const { open, setOpen, scrolling } = useCarData() as ContextType;
   const [handle, setHandle] = useState<string>("login");
+  const [item, setItem] = useState<string | null>(null);
 
-  const loggedUserToken = localStorage.getItem("userToken");
+  useEffect(() => {
+    async function getData() {
+      const loggedUserToken = localStorage.getItem("userToken");
+      setItem(loggedUserToken);
+    }
+    getData();
+  }, []);
   return (
     <>
-      {loggedUserToken && loggedUserToken == `` ? (
+      {item == null ? (
         <Stack
           width={94.21}
           height={38}
