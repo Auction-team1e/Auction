@@ -1,3 +1,5 @@
+"use client";
+
 import { Telephone } from "@/svgs";
 import { ButtonBase, Stack, TextareaAutosize, Typography } from "@mui/material";
 
