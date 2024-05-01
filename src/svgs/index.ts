@@ -8,3 +8,4 @@ export * from "./Heart";
 export * from "./UpRightArrow";
 export * from "./Camera";
 export * from "./Telephone";
+export * from "./Dollar";
