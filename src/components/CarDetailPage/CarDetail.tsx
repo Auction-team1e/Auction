@@ -1,10 +1,16 @@
 "use client";
 import { BreadCrumbArrow, Camera, Heart, UpRightArrow } from "@/svgs";
 import { ButtonBase, CardMedia, Stack, Typography } from "@mui/material";
-
-import { useEffect, useState } from "react";
+import { useState } from "react";
 type imgType = {
+  _id: string;
+  carModel: string;
+  brand: string;
+  startPrice: number;
+  description: string;
+  carDetails: string[];
   img: string[];
+  endTime: string;
 };
 const style = {
   borderRadius: "100px",
@@ -12,22 +18,9 @@ const style = {
   gap: "10px",
   bgcolor: "white",
 };
-export const CarDetail = () => {
-  const [dataAr, setDataAr] = useState<Array<imgType>>();
+export const CarDetail = ({ dataAr }: { dataAr: imgType[] | undefined }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [mainImageHovered, setMainImageHovered] = useState<boolean>(false);
-  useEffect(() => {
-    async function carImg() {
-      try {
-        const res = await fetch(`http://localhost:4000/api/car`);
-        const data = await res.json();
-        setDataAr(data);
-      } catch (error) {
-        console.error("error fetching car data:", error);
-      }
-    }
-    carImg();
-  }, []);
   return (
     <Stack width={"1720px"}>
       <Stack

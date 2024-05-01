@@ -1,10 +1,11 @@
 "use client";
 
-import { Stack, Typography } from "@mui/material";
+import { Link, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { FeaturedCard } from "./FeaturedCard";
 
 type dataType = {
+  _id: number;
   carModel: string;
   brand: string;
   startPrice: number;
@@ -37,14 +38,15 @@ export const FeaturedCars = () => {
         gridAutoRows={"auto"}
       >
         {data?.map((a, index) => (
-          <FeaturedCard
-            carModel={a.carModel}
-            startPrice={a.startPrice}
-            img={a.img}
-            carDetail={a.carDetails}
-            key={index}
-            endDate={a.endTime}
-          />
+          <Link href={`${a?._id}`} key={index}>
+            <FeaturedCard
+              carModel={a.carModel}
+              startPrice={a.startPrice}
+              img={a.img}
+              carDetail={a.carDetails}
+              endDate={a.endTime}
+            />
+          </Link>
         ))}
       </Stack>
     </Stack>

@@ -22,27 +22,22 @@ const moreOrLess = {
   display: "-webkit-box",
 };
 type carInfo = {
-  brand: string;
+  _id: string;
   carModel: string;
-  carDetails: string[];
-  description: string;
+  brand: string;
   startPrice: number;
+  description: string;
+  carDetails: string[];
+  img: string[];
+  endTime: string;
 };
 
-export const CarInfo = () => {
+export const CarInfo = ({ info }: { info: carInfo | undefined }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showReadMore, setShowReadMore] = useState(false);
-  const [info, setInfo] = useState<carInfo[]>([]);
+  console.log("info", info);
+
   const ref = useRef<HTMLDivElement | null>(null);
-  console.log(info);
-  useEffect(() => {
-    async function fetchData() {
-      const res = await fetch(`http://localhost:4000/api/car`);
-      const data = await res.json();
-      setInfo(data);
-    }
-    fetchData();
-  }, []);
 
   useEffect(() => {
     if (ref.current) {
@@ -51,23 +46,18 @@ export const CarInfo = () => {
   }, [info]);
   return (
     <Stack width={"1720px"}>
-      {info.length > 0 && (
-        <Stack borderBottom={"1px solid #E0E0E0"} gap={"8px"}>
-          <Stack direction={"row"} justifyContent={"space-between"}>
-            <Typography sx={customStyle}>{info[0].brand}</Typography>
-            <Typography sx={customStyle}>{"$" + info[0].startPrice}</Typography>
-          </Stack>
-          <Stack mb={"24px"}>
-            <Typography
-              fontSize={"14px"}
-              fontWeight={"400"}
-              lineHeight={"22px"}
-            >
-              {info[0].carDetails[1]}
-            </Typography>
-          </Stack>
+      <Stack borderBottom={"1px solid #E0E0E0"} gap={"8px"}>
+        <Stack direction={"row"} justifyContent={"space-between"}>
+          <Typography sx={customStyle}>{info?.brand}</Typography>
+          <Typography sx={customStyle}>{"$" + info?.startPrice}</Typography>
         </Stack>
-      )}
+        <Stack mb={"24px"}>
+          <Typography fontSize={"14px"} fontWeight={"400"} lineHeight={"22px"}>
+            {info?.carDetails}
+          </Typography>
+        </Stack>
+      </Stack>
+
       <Stack mt={"25px"}>
         <Typography fontSize={"20px"} fontWeight={"400"} lineHeight={"32px"}>
           About This Car
@@ -77,7 +67,7 @@ export const CarInfo = () => {
             sx={{ ...custStySec, ...(isOpen ? null : moreOrLess) }}
             ref={ref}
           >
-            {info[0]?.description}
+            {info?.description}
           </Stack>
           <Stack width={"100px"} mb={"25px"}>
             {showReadMore && (
@@ -95,7 +85,7 @@ export const CarInfo = () => {
         <Typography sx={customStyle}>Car Details</Typography>
         <Stack mb={"25px"} gap={"16px"}>
           <Typography style={{ color: "#717171" }} sx={custStySec}>
-            Year {info[0]?.carDetails[0]}
+            Year {info?.carDetails}
           </Typography>
           <Typography style={{ color: "#717171" }} sx={custStySec}>
             Location
