@@ -36,14 +36,10 @@ export const CarInfo = () => {
   const ref = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     async function fetchData() {
-      try {
-        const res = await fetch(`http://localhost:4000/api/car`);
-        const data = await res.json();
-        console.log(data);
-        setInfo(data);
-      } catch (error) {
-        console.error("Error fetching car data:", error);
-      }
+      const res = await fetch(`http://localhost:4000/api/car`);
+      const data = await res.json();
+      console.log(data);
+      setInfo(data);
     }
     fetchData();
   }, []);
