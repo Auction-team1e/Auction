@@ -2,7 +2,6 @@ import { Dollar } from "@/svgs";
 import { Stack, Typography } from "@mui/material";
 
 const style = {
-  mt: "115px",
   bgcolor: "white",
   width: "575px",
   height: "135px",
@@ -26,7 +25,7 @@ const textStyleSec = {
 
 export const IncOrdCard = () => {
   return (
-    <Stack justifyContent={"center"} direction={"row"} gap={"24px"}>
+    <Stack direction={"row"} gap={"24px"}>
       <Stack sx={style}>
         <Stack gap={"4px"} direction={"row"}>
           <Dollar />
