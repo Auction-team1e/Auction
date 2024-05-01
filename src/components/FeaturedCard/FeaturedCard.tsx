@@ -1,17 +1,20 @@
 import { Button, Input, Stack, Typography } from "@mui/material";
 import { CarouselSlider } from "./CarouselSlider";
 import { NumericFormat } from "react-number-format";
+import { EndTimeCounter } from "./EndTimeCounter";
 
 export const FeaturedCard = ({
   carModel,
   startPrice,
   img,
   carDetail,
+  endDate,
 }: {
   carModel: string;
   startPrice: number;
   img: string[];
   carDetail: string[];
+  endDate: string;
 }) => {
   return (
     <Stack border={"1px solid #e0e0e0"}>
@@ -65,10 +68,7 @@ export const FeaturedCard = ({
               }}
             />
           </Stack>
-          <Stack direction={"row"} gap={"5px"}>
-            <Typography>Auction Ends</Typography>
-            <Typography fontWeight={600}>8h 59m</Typography>
-          </Stack>
+          <EndTimeCounter endDate={endDate} />
         </Stack>
       </Stack>
     </Stack>
