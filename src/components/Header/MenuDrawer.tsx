@@ -8,9 +8,9 @@ import {
   ListItemIcon,
   ListItemText,
   Stack,
+  Typography,
 } from "@mui/material";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+
 import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useCarData, ContextType } from "@/context/DataContext";
@@ -24,14 +24,41 @@ export const MenuDrawer = () => {
   };
 
   const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+    <Box sx={{ width: 315 }} role="presentation" onClick={toggleDrawer(false)}>
+      <Typography
+        sx={{
+          color: "#717171",
+          px: "20px",
+          height: "42px",
+          alignItems: "center",
+          display: "flex",
+          fontSize: "14px",
+        }}
+      >
+        {" "}
+        Good morning,
+      </Typography>
+      <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding>
+        {[
+          "Bugatti",
+          "Pagani",
+          "Koenigsegg",
+          "Ferrari",
+          "Lamborghini",
+          "Mercedes",
+          "Rolls-Royce",
+          "Mclaren",
+          "Brabus",
+          "Porsche",
+          "Aston Martin",
+          "Bentley",
+          "Maybach",
+          "BMW",
+        ].map((text, index) => (
+          <ListItem key={index} disablePadding>
             <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
+              <ListItemIcon></ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
@@ -39,12 +66,17 @@ export const MenuDrawer = () => {
       </List>
       <Divider />
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
+        {[
+          "Journal",
+          "Sell with us",
+          "Help & FAQ",
+          "About",
+          "Contact",
+          "Sign Out",
+        ].map((text, index) => (
+          <ListItem key={index} disablePadding>
             <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
+              <ListItemIcon></ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>

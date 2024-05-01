@@ -1,3 +1,4 @@
+import { SideMenu } from "@/components/AdminPage/SideMenu";
 import { CarAddModal } from "@/components/CarAddModal/CarAddModal";
 import { IncOrdCard } from "@/components/IncOrdCard";
 import { Stack } from "@mui/material";

@@ -21,28 +21,25 @@ const moreOrLess = {
   overflow: "hidden",
   display: "-webkit-box",
 };
-interface carInfo {
+type carInfo = {
   brand: string;
   carModel: string;
   carDetails: string[];
   description: string;
   startPrice: number;
-}
+};
+
 export const CarInfo = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showReadMore, setShowReadMore] = useState(false);
   const [info, setInfo] = useState<carInfo[]>([]);
   const ref = useRef<HTMLDivElement | null>(null);
+  console.log(info);
   useEffect(() => {
     async function fetchData() {
-      try {
-        const res = await fetch(`http://localhost:4000/api/car`);
-        const data = await res.json();
-        console.log(data);
-        setInfo(data);
-      } catch (error) {
-        console.error("Error fetching car data:", error);
-      }
+      const res = await fetch(`http://localhost:4000/api/car`);
+      const data = await res.json();
+      setInfo(data);
     }
     fetchData();
   }, []);

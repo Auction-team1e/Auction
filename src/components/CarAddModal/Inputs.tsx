@@ -1,4 +1,4 @@
-import { inputs } from "@/utils/DummyData";
+import { inputs } from "../../utils/DummyData";
 import { Box, Input, Stack, Typography } from "@mui/material";
 import { AddImg } from "./AddImg";
 import { RInputs } from "./RInputs";

@@ -21,7 +21,6 @@ export const CarDetail = () => {
       try {
         const res = await fetch(`http://localhost:4000/api/car`);
         const data = await res.json();
-        console.log(data);
         setDataAr(data);
       } catch (error) {
         console.error("error fetching car data:", error);
