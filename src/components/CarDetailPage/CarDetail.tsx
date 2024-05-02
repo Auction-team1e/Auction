@@ -1,6 +1,7 @@
 "use client";
 import { BreadCrumbArrow, Camera, Heart, UpRightArrow } from "@/svgs";
 import { ButtonBase, CardMedia, Stack, Typography } from "@mui/material";
+
 import { useEffect, useState } from "react";
 type imgType = {
   img: string[];

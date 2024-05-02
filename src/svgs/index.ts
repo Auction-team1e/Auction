@@ -9,3 +9,7 @@ export * from "./UpRightArrow";
 export * from "./Camera";
 export * from "./Telephone";
 export * from "./Dollar";
+export * from "./Panel";
+export * from "./Income";
+export * from "./Order";
+export * from "./Products";
