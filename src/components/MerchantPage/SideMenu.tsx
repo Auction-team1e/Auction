@@ -32,7 +32,7 @@ export const SideMenu = () => {
         </ButtonBase>
         <ButtonBase sx={style.buttonBase}>
           <Order />
-          <Typography>Order</Typography>
+          <Typography>Auction</Typography>
         </ButtonBase>
         <ButtonBase sx={style.buttonBase}>
           <Income />

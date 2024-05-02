@@ -13,3 +13,4 @@ export * from "./Panel";
 export * from "./Income";
 export * from "./Order";
 export * from "./Products";
+export * from "./ArrowBlack";
