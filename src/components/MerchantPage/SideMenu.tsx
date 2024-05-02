@@ -25,7 +25,7 @@ const textStyle = {
 export const SideMenu = () => {
   return (
     <Stack mt={"115px"}>
-      <Stack pt={"30px"} bgcolor={"white"} height={"100vh"} width={"267px"}>
+      <Stack pt={"30px"} bgcolor={"white"} height={"100%"} width={"267px"}>
         <ButtonBase sx={style.buttonBase}>
           <Panel />
           <Typography sx={textStyle}>Control Panel</Typography>
