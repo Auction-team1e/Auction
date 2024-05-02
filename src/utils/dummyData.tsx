@@ -88,3 +88,11 @@ export const LinkStyle = {
     transitionDuration: "0.22s",
   },
 };
+
+export const accParts = [
+  "JUST FOR YOU",
+  "SAVED LISTINGS",
+  "SAVED SEARCHES",
+  "SENT INQUIRIES",
+  "ACCOUNT",
+];

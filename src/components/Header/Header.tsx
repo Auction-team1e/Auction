@@ -6,12 +6,14 @@ import { SearchModal } from "./SearchModal";
 import { LoginModal } from "./LoginModal";
 import { useEffect, useState } from "react";
 import { useCarData, ContextType } from "@/context/DataContext";
+import { useRouter } from "next/navigation";
 
 type dataType = { brandTitle: string; img: string };
 
 export const Header = () => {
   const [data, setData] = useState<Array<dataType>>();
   const { scrolling, setScrolling } = useCarData() as ContextType;
+  const router = useRouter();
 
   const handleScroll = () => {
     if (window.scrollY > 20) {
@@ -34,6 +36,7 @@ export const Header = () => {
     }
     getData();
   }, []);
+
   return (
     <Stack
       className={scrolling ? "navbar-scroll" : ""}
@@ -54,14 +57,15 @@ export const Header = () => {
       >
         <Stack direction={`row`} alignItems={`center`}>
           <MenuDrawer />
-          <Typography
+          <Stack
             color={scrolling ? "black" : `white`}
             fontSize={24}
             width={140}
             sx={{ cursor: `pointer` }}
+            onClick={() => router.push("/")}
           >
             JamesEdition
-          </Typography>
+          </Stack>
         </Stack>
         <SearchModal />
         <Stack height={`100%`} direction={`row`} alignItems={`center`} gap={3}>
@@ -98,7 +102,7 @@ export const Header = () => {
       <Stack
         direction={`row`}
         alignItems={`center`}
-        width={1723}
+        width={1}
         height={46}
         gap={2.7}
         px={7}
