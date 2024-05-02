@@ -1,4 +1,3 @@
-import { useCarData, ContextType } from "@/context/DataContext";
 import { Menu, MenuItem, Stack } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -11,8 +10,7 @@ type dataType = {
   password: string;
 };
 
-export const Logged = () => {
-  const { scrolling } = useCarData() as ContextType;
+export const LoggedForDiff = () => {
   const [data, setData] = useState<Array<dataType>>();
   const [item, setItem] = useState<string | null>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -45,24 +43,15 @@ export const Logged = () => {
     >
       <Stack
         height={`100%`}
-        color={scrolling ? "black" : `white`}
+        color={"black"}
         direction={`row`}
         alignItems={`center`}
-        sx={
-          scrolling
-            ? {
-                cursor: `pointer`,
-                ":hover": {
-                  borderBottom: `1px solid black`,
-                },
-              }
-            : {
-                cursor: `pointer`,
-                ":hover": {
-                  borderBottom: `1px solid white`,
-                },
-              }
-        }
+        sx={{
+          cursor: `pointer`,
+          ":hover": {
+            borderBottom: `1px solid black`,
+          },
+        }}
         justifyContent={`center`}
         fontSize={14}
       >
@@ -102,10 +91,7 @@ export const Logged = () => {
         </MenuItem>
         <MenuItem
           sx={{ fontSize: 15, marginTop: 0.7 }}
-          onClick={() => {
-            localStorage.clear();
-            router.push(`/`);
-          }}
+          onClick={() => localStorage.clear()}
         >
           Sign Out
         </MenuItem>

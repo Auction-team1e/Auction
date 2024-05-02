@@ -5,7 +5,7 @@ import { Stack } from "@mui/material";
 
 const Page = () => {
   return (
-    <Stack pt={"115px"} width={"100%"} alignItems={"center"}>
+    <Stack width={"100%"} alignItems={"center"}>
       <Stack>
         {/* <CarDetail />
         <CarInfo />
