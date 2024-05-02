@@ -15,14 +15,20 @@ import { ContinueWith } from "./ContinueWith";
 import { ToastContainer, toast } from "react-toastify";
 import { Dispatch, useState } from "react";
 import { LoginFields } from "./LoginFields";
+import { useRouter } from "next/navigation";
 export const Login = ({
   setHandle,
 }: {
   setHandle: Dispatch<React.SetStateAction<string>>;
 }) => {
+<<<<<<< HEAD
   const { setOpen, open, setItem } = useCarData() as ContextType;
+=======
+  const { setOpen, open } = useCarData() as ContextType;
+>>>>>>> ee7490e (from class 5/2)
   const failed = () => toast.error("Invalid email or password");
   const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -60,6 +66,7 @@ export const Login = ({
       }
     },
   });
+  setTimeout(() => router.push("/"), 2000);
 
   return (
     <>
