@@ -45,6 +45,7 @@ export const FeaturedCars = () => {
               img={a.img}
               carDetail={a.carDetails}
               endDate={a.endTime}
+              _id={a._id}
             />
           </Link>
         ))}

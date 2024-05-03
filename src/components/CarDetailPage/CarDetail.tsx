@@ -2,15 +2,15 @@
 import { BreadCrumbArrow, Camera, Heart, UpRightArrow } from "@/svgs";
 import { ButtonBase, CardMedia, Stack, Typography } from "@mui/material";
 import { useState } from "react";
-type imgType = {
-  _id: string;
-  carModel: string;
+type dataType = {
   brand: string;
+  carModel: string;
   startPrice: number;
   description: string;
   carDetails: string[];
   img: string[];
   endTime: string;
+  _id: string;
 };
 const style = {
   borderRadius: "100px",
@@ -18,9 +18,10 @@ const style = {
   gap: "10px",
   bgcolor: "white",
 };
-export const CarDetail = ({ dataAr }: { dataAr: imgType[] | undefined }) => {
+export const CarDetail = ({ data }: { data: dataType | undefined }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [mainImageHovered, setMainImageHovered] = useState<boolean>(false);
+
   return (
     <Stack width={"1720px"}>
       <Stack
@@ -31,15 +32,11 @@ export const CarDetail = ({ dataAr }: { dataAr: imgType[] | undefined }) => {
         marginBottom={"15px"}
       >
         <Typography fontSize={"14px"} fontWeight={"400"} color={"#717171"}>
-          Cars
+          {data?.brand}
         </Typography>
         <BreadCrumbArrow />
         <Typography fontSize={"14px"} fontWeight={"400"} color={"#717171"}>
-          Bugatti
-        </Typography>
-        <BreadCrumbArrow />
-        <Typography fontSize={"14px"} fontWeight={"400"} color={"#717171"}>
-          Chiron
+          {data?.carModel}
         </Typography>
       </Stack>
       <Stack
@@ -69,7 +66,7 @@ export const CarDetail = ({ dataAr }: { dataAr: imgType[] | undefined }) => {
           >
             <CardMedia
               component={"img"}
-              src={dataAr && dataAr[0].img[0]}
+              src={data?.img[0]}
               style={{
                 width: "100%",
                 height: "100%",
@@ -95,57 +92,58 @@ export const CarDetail = ({ dataAr }: { dataAr: imgType[] | undefined }) => {
           </Stack>
         </Stack>
         <Stack width={"870px"} height={"500px"} flexWrap={"wrap"} gap={"4px"}>
-          {dataAr &&
-            dataAr[0].img.map((e: string, index: number) => (
-              <Stack
-                key={index}
-                sx={{ overflow: "hidden", borderRadius: "5px" }}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
+          {data?.img.map((e: string, index: number) => (
+            <Stack
+              key={index}
+              sx={{ overflow: "hidden", borderRadius: "5px" }}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              <div
+                style={{
+                  width: "428px",
+                  height: "248px",
+                  position: "relative",
+                  transform:
+                    hoveredIndex === index ? "scale(1.02)" : "scale(1)",
+                  transition: "transform 0.5s",
+                }}
               >
-                <Stack
+                <CardMedia
+                  component={"img"}
                   style={{
-                    width: "428px",
-                    height: "248px",
-                    transform:
-                      hoveredIndex === index ? "scale(1.02)" : "scale(1)",
-                    transition: "transform 0.5s",
+                    position: "absolute",
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
                   }}
-                >
-                  <CardMedia
-                    component={"img"}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                    src={e}
-                  />
-                </Stack>
-              </Stack>
-            ))}
-        </Stack>
-        <Stack position={"absolute"} right={"20px"} bottom={"20px"}>
-          <ButtonBase
-            sx={{
-              borderRadius: "100px",
-              padding: "9px 23px",
-              gap: "8px",
-              bgcolor: "rgba(21, 21, 21, 0.5)",
-              "&:hover": {
-                bgcolor: "rgba(21, 21, 21, 0.8)",
-              },
-            }}
-          >
-            <Camera />
-            <Typography
+                  src={e}
+                />
+              </div>
+            </Stack>
+          ))}
+          <Stack position={"absolute"} bottom={"504px"} right={"540px"}>
+            <ButtonBase
               sx={{
-                color: "white",
+                borderRadius: "100px",
+                p: "9px 24px",
+                gap: "8px",
+                bgcolor: "rgba(21, 21, 21, 0.5)",
+                "&:hover": {
+                  bgcolor: "rgba(21, 21, 21, 0.8)",
+                },
               }}
             >
-              {dataAr?.length + " Photos"}
-            </Typography>
-          </ButtonBase>
+              <Camera />
+              <Typography
+                sx={{
+                  color: "white",
+                }}
+              >
+                {data?.img.length + "Photos"}
+              </Typography>
+            </ButtonBase>
+          </Stack>
         </Stack>
       </Stack>
     </Stack>

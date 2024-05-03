@@ -1,6 +1,7 @@
 "use client";
 
 import { CarDetail } from "@/components/CarDetailPage/CarDetail";
+import { CarInfo } from "@/components/CarDetailPage/CarInfo";
 // import { CarInfo } from "@/components/CarDetailPage/CarInfo";
 import { Contact } from "@/components/CarDetailPage/Contact";
 import { Stack } from "@mui/material";
@@ -18,26 +19,26 @@ type dataType = {
 };
 
 const Page = ({ params }: { params: { slug: string } }) => {
-  const [data, setData] = useState<Array<dataType>>();
+  const [data, setData] = useState<dataType>();
   useEffect(() => {
     async function getData() {
-      const res = await fetch("http://localhost:4000/api/car");
-      const cars = await res.json();
-      setData(cars);
+      const res = await fetch(
+        `http://localhost:4000/api/findthiscar?slug=${params.slug}`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      const car = await res.json();
+      setData(car.result);
     }
     getData();
-  }, []);
-
-  const filteredData = data?.filter((e) => {
-    return e._id == params.slug;
-  });
-  console.log("filtered", filteredData);
-
+  }, [params.slug]);
   return (
     <Stack pt={"115px"} width={"100%"} alignItems={"center"}>
       <Stack>
-        <CarDetail dataAr={filteredData} />
-        {/* <CarInfo data={filteredData} /> */}
+        <CarDetail data={data} />
+        <CarInfo data={data} />
         <Contact />
       </Stack>
     </Stack>
