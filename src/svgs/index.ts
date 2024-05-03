@@ -14,3 +14,5 @@ export * from "./Income";
 export * from "./Order";
 export * from "./Products";
 export * from "./ArrowBlack";
+export * from "./Search";
+export * from "./ArrowBlackLeft";
