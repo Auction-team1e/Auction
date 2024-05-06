@@ -15,7 +15,6 @@ import { ContinueWith } from "./ContinueWith";
 import { ToastContainer, toast } from "react-toastify";
 import { Dispatch, useState } from "react";
 import { LoginFields } from "./LoginFields";
-import { useRouter } from "next/navigation";
 export const Login = ({
   setHandle,
 }: {
@@ -24,7 +23,6 @@ export const Login = ({
   const { setOpen, open, setItem } = useCarData() as ContextType;
   const failed = () => toast.error("Invalid email or password");
   const [loading, setLoading] = useState<boolean>(false);
-  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -62,7 +60,6 @@ export const Login = ({
       }
     },
   });
-  setTimeout(() => router.push("/"), 2000);
 
   return (
     <>
