@@ -4,8 +4,16 @@ import { Box, Stack } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import { useRouter } from "next/navigation";
 
-export const CarouselSlider = ({ img }: { img: string[] }) => {
+export const CarouselSlider = ({
+  img,
+  _id,
+}: {
+  img: string[];
+  _id: number;
+}) => {
+  const router = useRouter();
   return (
     <Box>
       <Carousel
@@ -31,6 +39,7 @@ export const CarouselSlider = ({ img }: { img: string[] }) => {
               backgroundPosition: "center",
             }}
             key={index}
+            onClick={() => router.push(`cars/${_id}`)}
           ></Stack>
         ))}
       </Carousel>

@@ -1,5 +1,9 @@
 "use client";
-import { Income, Order, Panel, Products } from "@/svgs";
+
+import { Income } from "@/svgs/Income";
+import { Order } from "@/svgs/Order";
+import { Panel } from "@/svgs/Panel";
+import { Products } from "@/svgs/Products";
 import { ButtonBase, Stack, Typography } from "@mui/material";
 
 const style = {

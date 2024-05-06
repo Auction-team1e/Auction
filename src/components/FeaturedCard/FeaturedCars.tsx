@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { FeaturedCard } from "./FeaturedCard";
 
 type dataType = {
+  _id: number;
   carModel: string;
   brand: string;
   startPrice: number;
@@ -42,8 +43,9 @@ export const FeaturedCars = () => {
             startPrice={a.startPrice}
             img={a.img}
             carDetail={a.carDetails}
-            key={index}
             endDate={a.endTime}
+            _id={a._id}
+            key={index}
           />
         ))}
       </Stack>

@@ -4,12 +4,14 @@ import { NumericFormat } from "react-number-format";
 import { EndTimeCounter } from "./EndTimeCounter";
 
 export const FeaturedCard = ({
+  _id,
   carModel,
   startPrice,
   img,
   carDetail,
   endDate,
 }: {
+  _id: number;
   carModel: string;
   startPrice: number;
   img: string[];
@@ -18,7 +20,7 @@ export const FeaturedCard = ({
 }) => {
   return (
     <Stack border={"1px solid #e0e0e0"}>
-      <CarouselSlider img={img} />
+      <CarouselSlider img={img} _id={_id} />
       <Stack px={3} py={3} gap={"10px"}>
         <Stack direction={"row"} justifyContent={"space-between"} mt={"10px"}>
           <Stack justifyContent={"center"}>
