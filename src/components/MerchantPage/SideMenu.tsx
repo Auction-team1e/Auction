@@ -28,7 +28,7 @@ const textStyle = {
 
 export const SideMenu = () => {
   return (
-    <Stack mt={"115px"}>
+    <Stack>
       <Stack pt={"30px"} bgcolor={"white"} height={"100%"} width={"267px"}>
         <ButtonBase sx={style.buttonBase}>
           <Panel />

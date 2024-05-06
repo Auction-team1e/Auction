@@ -24,7 +24,7 @@ const textStyleSec = {
 
 export const IncOrdCard = () => {
   return (
-    <Stack mt={"115px"} bgcolor={"white"}>
+    <Stack bgcolor={"white"}>
       <Stack bgcolor={"#F7F7F8"}>
         <Typography
           p={"16px"}
