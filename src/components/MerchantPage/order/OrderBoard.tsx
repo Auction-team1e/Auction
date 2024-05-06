@@ -59,10 +59,6 @@ export const OrderBoard = () => {
     setSelectedOrder(order);
   };
 
-  // const handleCloseOrderInfo = () => {
-  //   setSelectedOrder(null);
-  // };
-
   return (
     <Stack mb={"30px"}>
       {!selectedOrder && (

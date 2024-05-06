@@ -1,5 +1,5 @@
 "use client";
-import { ArrowBlackLeft } from "@/svgs"; // Correct import path
+import { ArrowBlackLeft } from "@/svgs";
 import { Stack, Typography } from "@mui/material";
 
 interface infoType {

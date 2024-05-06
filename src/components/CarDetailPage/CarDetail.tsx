@@ -50,7 +50,6 @@ export const CarDetail = ({ data }: { data: dataType | undefined }) => {
           overflow="hidden"
           width={"865px"}
           height={"100%"}
-          position="relative"
           borderRadius={"8px"}
         >
           <Stack
@@ -74,13 +73,7 @@ export const CarDetail = ({ data }: { data: dataType | undefined }) => {
               }}
             />
           </Stack>
-          <Stack
-            direction={"row"}
-            gap={"8px"}
-            position="absolute"
-            bottom={"24px"}
-            left={"24px"}
-          >
+          <Stack direction={"row"} gap={"8px"} bottom={"24px"} left={"24px"}>
             <ButtonBase sx={style}>
               <Heart />
               <Typography>Save</Typography>
@@ -112,7 +105,6 @@ export const CarDetail = ({ data }: { data: dataType | undefined }) => {
                 <CardMedia
                   component={"img"}
                   style={{
-                    position: "absolute",
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
@@ -122,7 +114,7 @@ export const CarDetail = ({ data }: { data: dataType | undefined }) => {
               </div>
             </Stack>
           ))}
-          <Stack position={"absolute"} bottom={"504px"} right={"540px"}>
+          <Stack position={"absolute"} bottom={"20px"} right={"20px"}>
             <ButtonBase
               sx={{
                 borderRadius: "100px",
