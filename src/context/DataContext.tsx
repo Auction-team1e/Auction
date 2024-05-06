@@ -26,6 +26,8 @@ export type ContextType = {
   setScrolling: Dispatch<React.SetStateAction<boolean>>;
   signUpFields: SignUpType;
   setSignUpFields: Dispatch<React.SetStateAction<SignUpType>>;
+  item: boolean;
+  setItem: Dispatch<React.SetStateAction<boolean>>;
 };
 
 const CarContext = createContext<ContextType | null>(null);
@@ -45,6 +47,7 @@ const CarProvider = ({ children }: { children: any }) => {
     firstName: ``,
     lastName: ``,
   });
+  const [item, setItem] = useState<boolean>(false);
 
   return (
     <CarContext.Provider
@@ -67,6 +70,8 @@ const CarProvider = ({ children }: { children: any }) => {
         setScrolling,
         signUpFields,
         setSignUpFields,
+        item,
+        setItem,
       }}
     >
       {children}

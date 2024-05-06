@@ -3,6 +3,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useCarData, ContextType } from "@/context/DataContext";
 type dataType = {
   email: string;
   firstName: string;
@@ -12,8 +13,9 @@ type dataType = {
 
 export const LoggedForDiff = () => {
   const [data, setData] = useState<Array<dataType>>();
-  const [item, setItem] = useState<string | null>(null);
+  const [localItem, setLocalItem] = useState<string | null>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const { setItem } = useCarData() as ContextType;
   const open = Boolean(anchorEl);
   const router = useRouter();
 
@@ -27,13 +29,13 @@ export const LoggedForDiff = () => {
       const users = await res.json();
       setData(users);
       const loggedUserEmail = localStorage.getItem("userEmail");
-      setItem(loggedUserEmail);
+      setLocalItem(loggedUserEmail);
     }
     getData();
   }, []);
 
   const filteredUser = data?.filter((val) => {
-    return val.email == item;
+    return val.email == localItem;
   });
   return (
     <Stack
@@ -91,7 +93,11 @@ export const LoggedForDiff = () => {
         </MenuItem>
         <MenuItem
           sx={{ fontSize: 15, marginTop: 0.7 }}
-          onClick={() => localStorage.clear()}
+          onClick={() => {
+            localStorage.clear();
+            router.push(`/`);
+            setItem(false);
+          }}
         >
           Sign Out
         </MenuItem>

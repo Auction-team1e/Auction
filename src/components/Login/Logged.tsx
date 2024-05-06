@@ -12,9 +12,9 @@ type dataType = {
 };
 
 export const Logged = () => {
-  const { scrolling } = useCarData() as ContextType;
+  const { scrolling, setItem } = useCarData() as ContextType;
   const [data, setData] = useState<Array<dataType>>();
-  const [item, setItem] = useState<string | null>(null);
+  const [localItem, setLocalItem] = useState<string | null>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const router = useRouter();
@@ -29,13 +29,13 @@ export const Logged = () => {
       const users = await res.json();
       setData(users);
       const loggedUserEmail = localStorage.getItem("userEmail");
-      setItem(loggedUserEmail);
+      setLocalItem(loggedUserEmail);
     }
     getData();
   }, []);
 
   const filteredUser = data?.filter((val) => {
-    return val.email == item;
+    return val.email == localItem;
   });
   return (
     <Stack
@@ -105,6 +105,7 @@ export const Logged = () => {
           onClick={() => {
             localStorage.clear();
             router.push(`/`);
+            setItem(false);
           }}
         >
           Sign Out
