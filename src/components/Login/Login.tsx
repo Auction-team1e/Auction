@@ -20,8 +20,7 @@ export const Login = ({
 }: {
   setHandle: Dispatch<React.SetStateAction<string>>;
 }) => {
-  const { setOpen, open } = useCarData() as ContextType;
-  const logged = () => toast.success("Succesfully logged");
+  const { setOpen, open, setItem } = useCarData() as ContextType;
   const failed = () => toast.error("Invalid email or password");
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -52,13 +51,16 @@ export const Login = ({
       setLoading(false);
       if (data.token) {
         localStorage.setItem("userToken", data.token);
-        logged();
-        setTimeout(() => setOpen(!open), 5000);
+        localStorage.setItem("userEmail", data.userEmail);
+        setOpen(!open);
+        setItem(true);
       } else {
         failed();
+        setItem(false);
       }
     },
   });
+
   return (
     <>
       <Stack
