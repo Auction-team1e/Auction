@@ -1,4 +1,6 @@
-import { Bell, Pinecone, Profile } from "@/svgs";
+import { Bell } from "@/svgs/Bell";
+import { Pinecone } from "@/svgs/Pinecone";
+import { Profile } from "@/svgs/Profile";
 import { ButtonBase, Stack, Typography } from "@mui/material";
 
 export const AdminHeader = () => {
