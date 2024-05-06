@@ -39,7 +39,7 @@ export const CarouselSlider = ({
               backgroundPosition: "center",
             }}
             key={index}
-            onClick={() => router.push(`${_id}`)}
+            onClick={() => router.push(`cars/${_id}`)}
           ></Stack>
         ))}
       </Carousel>
