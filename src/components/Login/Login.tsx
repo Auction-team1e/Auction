@@ -21,11 +21,7 @@ export const Login = ({
 }: {
   setHandle: Dispatch<React.SetStateAction<string>>;
 }) => {
-<<<<<<< HEAD
   const { setOpen, open, setItem } = useCarData() as ContextType;
-=======
-  const { setOpen, open } = useCarData() as ContextType;
->>>>>>> ee7490e (from class 5/2)
   const failed = () => toast.error("Invalid email or password");
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
