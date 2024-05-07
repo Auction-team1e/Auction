@@ -16,3 +16,5 @@ export * from "./Products";
 export * from "./ArrowBlack";
 export * from "./Search";
 export * from "./ArrowBlackLeft";
+export * from "./Trash";
+export * from "./Edith";

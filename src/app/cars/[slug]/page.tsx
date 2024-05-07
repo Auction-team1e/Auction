@@ -1,8 +1,5 @@
-"use client";
-
 import { CarDetail } from "@/components/CarDetailPage/CarDetail";
 import { CarInfo } from "@/components/CarDetailPage/CarInfo";
-// import { CarInfo } from "@/components/CarDetailPage/CarInfo";
 import { Contact } from "@/components/CarDetailPage/Contact";
 import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";

@@ -3,8 +3,8 @@
 import { Income } from "@/svgs/Income";
 import { Order } from "@/svgs/Order";
 import { Panel } from "@/svgs/Panel";
-import { Products } from "@/svgs/Products";
 import { ButtonBase, Stack, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 const style = {
   buttonBase: {
@@ -27,25 +27,36 @@ const textStyle = {
 };
 
 export const SideMenu = () => {
+  const router = useRouter();
+
   return (
     <Stack>
-      <Stack pt={"30px"} bgcolor={"white"} height={"100%"} width={"267px"}>
-        <ButtonBase sx={style.buttonBase}>
+      <Stack pt={"30px"} bgcolor={"white"} height={"100vh"} width={"267px"}>
+        <ButtonBase
+          onClick={() => router.push("/merchant")}
+          sx={style.buttonBase}
+        >
           <Panel />
           <Typography sx={textStyle}>Control Panel</Typography>
         </ButtonBase>
-        <ButtonBase sx={style.buttonBase}>
+        <ButtonBase
+          onClick={() => router.push("/merchant/auction")}
+          sx={style.buttonBase}
+        >
           <Order />
           <Typography>Auction</Typography>
         </ButtonBase>
-        <ButtonBase sx={style.buttonBase}>
+        <ButtonBase
+          onClick={() => router.push("/merchant/cars")}
+          sx={style.buttonBase}
+        >
           <Income />
-          <Typography>Income</Typography>
-        </ButtonBase>
-        <ButtonBase sx={style.buttonBase}>
-          <Products />
           <Typography>Cars</Typography>
         </ButtonBase>
+        {/* <ButtonBase sx={style.buttonBase}>
+          <Products />
+          <Typography>Cars</Typography>
+        </ButtonBase> */}
       </Stack>
     </Stack>
   );

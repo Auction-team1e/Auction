@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { ArrowBlack } from "@/svgs/ArrowBlack";
 import { ButtonBase, Stack, Typography } from "@mui/material";
 import { OrderTabs } from "./OrderTabs";
-import { OrderInfo } from "./OrderInfo";
+import { useRouter } from "next/navigation";
+import { CarAddModal } from "@/components/CarAddModal/CarAddModal";
 
 interface infoType {
   brandTitle: string;
@@ -39,7 +40,8 @@ const style = {
 
 export const OrderBoard = () => {
   const [info, setInfo] = useState<infoType[]>([]);
-  const [selectedOrder, setSelectedOrder] = useState<infoType | null>(null);
+
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchData() {
@@ -55,80 +57,75 @@ export const OrderBoard = () => {
     fetchData();
   }, []);
 
-  const handleArrowClick = (order: infoType) => {
-    setSelectedOrder(order);
-  };
-
   return (
-    <Stack mb={"30px"}>
-      {!selectedOrder && (
-        <Stack>
-          <OrderTabs />
-          <Stack
-            borderRadius={"12px"}
-            p={"16px 20px"}
-            bgcolor={"white"}
-            width={"1175px"}
-            border={"1px solid #ECEDF0"}
-          >
-            <Stack justifyContent={"center"} mb={"20px"} height={"60px"}>
-              <Typography sx={textStyle}>Order</Typography>
-            </Stack>
-            <Stack bgcolor={"#ECEDF0"} height={"44px"} sx={style}>
-              <Typography width={"300px"}>Order ID number</Typography>
-              <Typography width={"300px"}>Costumer</Typography>
-              <Typography width={"150px"}>Time</Typography>
-              <Typography width={"150px"}>Price</Typography>
-              <Typography width={"300px"}>Status</Typography>
-              <Typography width={"100px"}>More</Typography>
-            </Stack>
-            <Stack>
-              {info.map((e, index) => (
-                <Stack key={index} height={"72px"} sx={style}>
-                  <Typography width={"300px"} sx={textStyleSec}>
-                    {index + 1}
-                  </Typography>
-                  <Stack width={"300px"}>
-                    <Typography sx={cusStyle}>{e.firstName}</Typography>
-                    <Typography sx={textStyleSec}>{e.email}</Typography>
-                  </Stack>
+    <Stack ml={"40px"} mb={"30px"}>
+      <Stack>
+        <OrderTabs />
+        <CarAddModal />
+        <Stack
+          borderRadius={"12px"}
+          p={"16px 20px"}
+          bgcolor={"white"}
+          width={"1175px"}
+          border={"1px solid #ECEDF0"}
+        >
+          <Stack justifyContent={"center"} mb={"20px"} height={"60px"}>
+            <Typography sx={textStyle}>Auction</Typography>
+          </Stack>
+          <Stack bgcolor={"#ECEDF0"} height={"44px"} sx={style}>
+            <Typography width={"300px"}>Order ID number</Typography>
+            <Typography width={"300px"}>Costumer</Typography>
+            <Typography width={"150px"}>Time</Typography>
+            <Typography width={"150px"}>Price</Typography>
+            <Typography width={"300px"}>Status</Typography>
+            <Typography width={"100px"}>More</Typography>
+          </Stack>
+          <Stack>
+            {info.map((e, index) => (
+              <Stack
+                key={index}
+                height={"72px"}
+                sx={style}
+                onClick={() => router.push(`details/${e.email}`)}
+              >
+                <Typography width={"300px"} sx={textStyleSec}>
+                  {index + 1}
+                </Typography>
+                <Stack width={"300px"}>
+                  <Typography sx={cusStyle}>{e.firstName}</Typography>
+                  <Typography sx={textStyleSec}>{e.email}</Typography>
+                </Stack>
 
-                  <Typography width={"150px"} sx={textStyleSec}>
-                    {"$"}
-                  </Typography>
-                  <Typography width={"150px"} sx={textStyleSec}>
-                    {"$"}
-                  </Typography>
-                  <Stack alignItems={"start"} width={"300px"}>
-                    <Stack>
-                      <Typography
-                        sx={{
-                          padding: "4px 10px",
-                          alignSelf: "center",
-                          borderRadius: "50px",
-                          bgcolor: "#C1E6CF",
-                        }}
-                      >
-                        Sell
-                      </Typography>
-                    </Stack>
-                  </Stack>
-
-                  <Stack alignItems={"start"} width={"100px"}>
-                    <ButtonBase
-                      sx={{ borderRadius: "30px" }}
-                      onClick={() => handleArrowClick(e)}
+                <Typography width={"150px"} sx={textStyleSec}>
+                  {"$"}
+                </Typography>
+                <Typography width={"150px"} sx={textStyleSec}>
+                  {"$"}
+                </Typography>
+                <Stack alignItems={"start"} width={"300px"}>
+                  <Stack>
+                    <Typography
+                      sx={{
+                        padding: "4px 10px",
+                        alignSelf: "center",
+                        borderRadius: "50px",
+                        bgcolor: "#C1E6CF",
+                      }}
                     >
-                      <ArrowBlack />
-                    </ButtonBase>
+                      Sell
+                    </Typography>
                   </Stack>
                 </Stack>
-              ))}
-            </Stack>
+                <Stack alignItems={"start"} width={"100px"}>
+                  <ButtonBase sx={{ borderRadius: "30px" }}>
+                    <ArrowBlack />
+                  </ButtonBase>
+                </Stack>
+              </Stack>
+            ))}
           </Stack>
         </Stack>
-      )}
-      {selectedOrder && <OrderInfo order={selectedOrder} />}
+      </Stack>
     </Stack>
   );
 };
