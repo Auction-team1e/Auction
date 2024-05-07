@@ -18,6 +18,7 @@ export const OrderTabs = () => {
       width={"1180px"}
       direction={"row"}
       justifyContent={"space-between"}
+      alignItems={"center"}
       borderBottom={"1px solid #ECEDF0"}
       mb={"35px"}
     >

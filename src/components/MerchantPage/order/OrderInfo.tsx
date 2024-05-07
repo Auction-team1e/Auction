@@ -1,12 +1,7 @@
 "use client";
-import { ArrowBlackLeft } from "@/svgs"; // Correct import path
-import { Stack, Typography } from "@mui/material";
-
-interface infoType {
-  brandTitle: string;
-  firstName: string;
-  email: string;
-}
+import { ArrowBlackLeft } from "@/svgs";
+import { ButtonBase, Stack, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 const textStyle = {
   fontSize: "16px",
@@ -21,19 +16,26 @@ const textSecStyle = {
   lineHeight: "20px",
 };
 
-export const OrderInfo = ({ order }: { order: infoType }) => {
+export const OrderInfo = () => {
+  const router = useRouter();
+
   return (
     <Stack>
       <Stack mb={"25px"} bgcolor={"white"} width={"1220px"}>
-        <Stack
-          height={"56px"}
-          gap={"30px"}
-          alignItems={"center"}
-          direction={"row"}
-          ml={"25px"}
-        >
-          <ArrowBlackLeft />
-          <Typography sx={textStyle}>Order details</Typography>
+        <Stack height={"56px"} alignItems={"center"} direction={"row"}>
+          <ButtonBase
+            onClick={() => router.push("/merchant/auction")}
+            sx={{
+              gap: "30px",
+              ml: "25px",
+              borderRadius: "10px",
+              height: "50px",
+              padding: "0px 5px",
+            }}
+          >
+            <ArrowBlackLeft />
+            <Typography sx={textStyle}>Order details</Typography>
+          </ButtonBase>
         </Stack>
       </Stack>
       <Stack p={"30px"} gap={"30px"} direction={"row"}>
@@ -42,6 +44,7 @@ export const OrderInfo = ({ order }: { order: infoType }) => {
           p={"25px"}
           gap={"25px"}
           width={"640px"}
+          height={"900px"}
           bgcolor={"white"}
           border={"1px solid #ECEDF0"}
         >
@@ -53,17 +56,15 @@ export const OrderInfo = ({ order }: { order: infoType }) => {
           </Stack>
           <Stack>
             <Typography style={{ color: "#3F4145" }} sx={textStyle}>
-              Subscriber: {order.firstName}
+              Subscriber:
             </Typography>
             <Stack gap={"10px"} alignItems={"center"} direction={"row"}>
-              <Typography sx={textSecStyle}>{order.firstName}:</Typography>
+              <Typography sx={textSecStyle}>:</Typography>
               <Typography
                 fontSize={"14px"}
                 fontWeight={"400"}
                 lineHeight={"20px"}
-              >
-                {order.email}
-              </Typography>
+              ></Typography>
             </Stack>
           </Stack>
           <Stack
@@ -88,6 +89,7 @@ export const OrderInfo = ({ order }: { order: infoType }) => {
           border={"1px solid #ECEDF0"}
           bgcolor={"white"}
           width={"520px"}
+          height={"400px"}
           p={"25px"}
         >
           <Stack pb={"20px"} borderBottom={"1px solid #ECEDF0"}>
