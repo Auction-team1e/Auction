@@ -14,6 +14,7 @@ export const HeaderDiff = () => {
       position={`fixed`}
       zIndex={100}
       alignItems={`center`}
+      bgcolor={`white`}
     >
       <Stack
         height={66}

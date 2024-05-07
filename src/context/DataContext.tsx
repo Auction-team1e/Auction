@@ -1,6 +1,12 @@
 "use client";
 
-import { Dispatch, createContext, useContext, useState } from "react";
+import {
+  Dispatch,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { Dayjs } from "dayjs";
 type SignUpType = {
   firstName: string;
@@ -48,7 +54,12 @@ const CarProvider = ({ children }: { children: any }) => {
     lastName: ``,
   });
   const [item, setItem] = useState<boolean>(false);
-
+  useEffect(() => {
+    async function getData() {
+      setItem(localStorage.getItem("userEmail") ? true : false);
+    }
+    getData();
+  }, []);
   return (
     <CarContext.Provider
       value={{
