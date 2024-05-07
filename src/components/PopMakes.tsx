@@ -1,14 +1,16 @@
 "use client";
 import { Stack, Typography, ButtonBase, CardMedia } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type ObjType = {
-  name: string;
+  brandTitle: string;
   img: string;
 };
 
 export const PopMakes = () => {
   const [brand, setBrand] = useState<Array<ObjType>>();
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchCarData() {
@@ -56,7 +58,7 @@ export const PopMakes = () => {
         direction="row"
         flexWrap={"wrap"}
       >
-        {brand?.map((e: { img: string }, index: number) => (
+        {brand?.map((e: { img: string; brandTitle: string }, index: number) => (
           <Stack
             key={index}
             width={"195px"}
@@ -75,7 +77,9 @@ export const PopMakes = () => {
               },
             }}
           >
-            <CardMedia image={e.img} alt={`Car ${index}`} component={"img"} />
+            <Stack onClick={() => router.push(`/filtered/${e.brandTitle}`)}>
+              <CardMedia image={e.img} alt={`Car ${index}`} component={"img"} />
+            </Stack>
           </Stack>
         ))}
       </Stack>
