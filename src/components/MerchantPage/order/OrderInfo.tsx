@@ -21,7 +21,7 @@ export const OrderInfo = () => {
 
   return (
     <Stack>
-      <Stack mb={"25px"} bgcolor={"white"} width={"1220px"}>
+      <Stack mb={"25px"} bgcolor={"white"} width={"1180px"}>
         <Stack height={"56px"} alignItems={"center"} direction={"row"}>
           <ButtonBase
             onClick={() => router.push("/merchant/auction")}
@@ -38,7 +38,7 @@ export const OrderInfo = () => {
           </ButtonBase>
         </Stack>
       </Stack>
-      <Stack p={"30px"} gap={"30px"} direction={"row"}>
+      <Stack p={"40px"} gap={"30px"} direction={"row"}>
         <Stack
           borderRadius={"12px"}
           p={"25px"}
@@ -88,7 +88,7 @@ export const OrderInfo = () => {
           borderRadius={"12px"}
           border={"1px solid #ECEDF0"}
           bgcolor={"white"}
-          width={"520px"}
+          width={"470px"}
           height={"400px"}
           p={"25px"}
         >

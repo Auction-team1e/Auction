@@ -1,3 +1,4 @@
+"use client";
 import { CarDetail } from "@/components/CarDetailPage/CarDetail";
 import { CarInfo } from "@/components/CarDetailPage/CarInfo";
 import { Contact } from "@/components/CarDetailPage/Contact";
