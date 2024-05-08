@@ -4,11 +4,13 @@ import { Stack, Typography } from "@mui/material";
 
 const style = {
   bgcolor: "white",
-  width: "575px",
+  width: "620px",
   height: "135px",
   borderRadius: "12px",
   padding: "16px 24px ",
-  justifyContent: "space-between",
+  alignItems: "space-between",
+  border: "1px solid #ECEDF0",
+  gap: "12px",
 };
 
 const textStyle = {
@@ -26,17 +28,17 @@ const textStyleSec = {
 
 export const IncOrdCard = () => {
   return (
-    <Stack bgcolor={"white"}>
+    <Stack mt={"40px"} bgcolor={"white"}>
       <Stack bgcolor={"#F7F7F8"}>
         <Typography
-          p={"16px"}
+          p={"20px"}
           fontSize={"24px "}
           fontWeight={"700"}
           lineHeight={"13px"}
         >
           Overview
         </Typography>
-        <Stack gap={"24px"} direction={"row"}>
+        <Stack gap={"50px"} direction={"row"}>
           <Stack sx={style}>
             <Stack alignItems={"center"} gap={"4px"} direction={"row"}>
               <Typography sx={textStyle}>$ Income</Typography>

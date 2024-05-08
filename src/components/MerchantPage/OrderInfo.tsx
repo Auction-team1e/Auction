@@ -24,7 +24,7 @@ export const OrderInfo = () => {
       <Stack mb={"25px"} bgcolor={"white"} width={"1180px"}>
         <Stack height={"56px"} alignItems={"center"} direction={"row"}>
           <ButtonBase
-            onClick={() => router.push("/merchant/auction")}
+            onClick={() => router.push("/merchant")}
             sx={{
               gap: "30px",
               ml: "25px",

@@ -6,11 +6,11 @@ import { Stack } from "@mui/material";
 
 const Page = () => {
   return (
-    <Stack width={"100vw"} bgcolor={"#F7F7F8"}>
+    <Stack height={"100vh"} bgcolor={"#F7F7F8"}>
       <Layout>
         <Stack ml={"45px"} gap={"30px"}>
           <IncOrdCard />
-          <CarBoard />
+          <CarBoardTitle />
         </Stack>
       </Layout>
     </Stack>
