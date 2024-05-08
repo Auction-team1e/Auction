@@ -3,15 +3,17 @@
 import {
   Button,
   CircularProgress,
+  Divider,
   Input,
   Stack,
   Typography,
 } from "@mui/material";
 import { CarouselSlider } from "./CarouselSlider";
-import { NumericFormat } from "react-number-format";
 import { EndTimeCounter } from "./EndTimeCounter";
 import { io } from "socket.io-client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { BidField } from "./BidField";
+import { NumericFormat } from "react-number-format";
 
 export const FeaturedCard = ({
   _id,
@@ -33,7 +35,20 @@ export const FeaturedCard = ({
   const [bidOrder, setBidOrder] = useState<string>();
   const [newBid, setNewBid] = useState<string>(``);
   const [auctionId, setAuctionId] = useState();
+  const [userEmail, setUserEmail] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [nextBid, setNextBid] = useState<number>(
+    startPrice + (startPrice * 10) / 100
+  );
+  console.log("🚀 ~ nextBid:", nextBid);
+
+  useEffect(() => {
+    async function getData() {
+      setUserEmail(localStorage.getItem("userEmail"));
+      setNextBid;
+    }
+    getData();
+  }, []);
   const socket = io("https://socketbackend-53dj.onrender.com");
 
   socket.on("connect", () => {
@@ -41,17 +56,16 @@ export const FeaturedCard = ({
   });
 
   socket.on("chat-message", (data) => {
-    console.log("🚀 ~ socket.on ~ data:", data);
     setAuctionId(data._id);
     setNewBid(data.bidOrder);
   });
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    socket.emit("send-bid-message", { bidOrder, _id });
 
     const carInfo = {
       id: _id,
       startPrice: bidOrder,
+      email: userEmail,
     };
     setLoading(true);
     await fetch("http://localhost:4000/api/car", {
@@ -59,6 +73,7 @@ export const FeaturedCard = ({
       body: JSON.stringify(carInfo),
       headers: { "Content-Type": "application/json" },
     });
+    socket.emit("send-bid-message", { bidOrder, _id });
     setLoading(false);
     setBidOrder(``);
   };
@@ -104,24 +119,39 @@ export const FeaturedCard = ({
             )}
           </Stack>
         </Stack>
-        <Stack direction={"row"} mt={"10px"}>
-          <Stack direction={"row"} gap={"5px"} alignItems={"center"}>
-            <Typography noWrap>Current bid</Typography>
-            <NumericFormat
-              value={_id == auctionId ? newBid : startPrice}
-              thousandSeparator=","
-              suffix="$"
-              disabled
-              style={{
-                border: "none",
-                backgroundColor: "white",
-                fontWeight: "600",
-                fontSize: "16px",
-                color: "black",
-                width: `90px`,
-              }}
+        <Stack
+          direction={"row"}
+          mt={"10px"}
+          justifyContent={`space-between`}
+          alignItems={`center`}
+        >
+          <Stack gap={0.4}>
+            <BidField
+              label={"Current bid"}
+              id={_id}
+              auctionId={auctionId}
+              bid={newBid}
+              dataPrice={startPrice}
             />
+            <Stack direction={"row"} gap={"5px"} alignItems={"center"}>
+              <Typography noWrap>Next minimum bid</Typography>
+              <NumericFormat
+                value={nextBid}
+                thousandSeparator=","
+                suffix="$"
+                disabled
+                style={{
+                  border: "none",
+                  backgroundColor: "white",
+                  fontWeight: "600",
+                  fontSize: "16px",
+                  color: "black",
+                  width: `120px`,
+                }}
+              />
+            </Stack>
           </Stack>
+          <Divider sx={{ bgcolor: `gray` }} orientation="vertical" flexItem />
           <EndTimeCounter endDate={endDate} />
         </Stack>
       </Stack>
