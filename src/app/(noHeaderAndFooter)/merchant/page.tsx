@@ -11,6 +11,7 @@ const Page = () => {
         <Stack ml={"45px"} gap={"30px"}>
           <IncOrdCard />
           <CarBoard />
+          <CarAddModal />
         </Stack>
       </Layout>
     </Stack>

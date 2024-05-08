@@ -1,6 +1,12 @@
 "use client";
 
-import { Button, Input, Stack, Typography } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  Input,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { CarouselSlider } from "./CarouselSlider";
 import { NumericFormat } from "react-number-format";
 import { EndTimeCounter } from "./EndTimeCounter";
@@ -25,9 +31,10 @@ export const FeaturedCard = ({
   brand: string;
 }) => {
   const [bidOrder, setBidOrder] = useState<string>();
-  const socket = io("http://localhost:5000", {
-    transports: ["websocket"],
-  });
+  const [newBid, setNewBid] = useState<string>(``);
+  const [auctionId, setAuctionId] = useState();
+  const [loading, setLoading] = useState<boolean>(false);
+  const socket = io("https://socketbackend-53dj.onrender.com");
 
   socket.on("connect", () => {
     console.log("connected socket");
@@ -35,7 +42,26 @@ export const FeaturedCard = ({
 
   socket.on("chat-message", (data) => {
     console.log("🚀 ~ socket.on ~ data:", data);
+    setAuctionId(data._id);
+    setNewBid(data.bidOrder);
   });
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    socket.emit("send-bid-message", { bidOrder, _id });
+
+    const carInfo = {
+      id: _id,
+      startPrice: bidOrder,
+    };
+    setLoading(true);
+    await fetch("http://localhost:4000/api/car", {
+      method: "PUT",
+      body: JSON.stringify(carInfo),
+      headers: { "Content-Type": "application/json" },
+    });
+    setLoading(false);
+    setBidOrder(``);
+  };
 
   return (
     <Stack border={"1px solid #e0e0e0"}>
@@ -50,6 +76,7 @@ export const FeaturedCard = ({
           </Stack>
           <Stack gap={"3px"} justifyContent={"center"} direction={"row"}>
             <Input
+              value={bidOrder}
               onChange={(e) => setBidOrder(e.target.value)}
               type="number"
               placeholder="Max bid(usd)"
@@ -61,25 +88,27 @@ export const FeaturedCard = ({
                 height: "50px",
               }}
             ></Input>
-            <Button
-              onClick={() => {
-                socket.emit("send-bid-message", bidOrder);
-              }}
-              sx={{
-                backgroundColor: "#006C75",
-                color: "white",
-                height: "50px",
-              }}
-            >
-              Bid
-            </Button>
+            {loading ? (
+              <CircularProgress sx={{ color: `#006C75` }} />
+            ) : (
+              <Button
+                onClick={handleSubmit}
+                sx={{
+                  backgroundColor: "#006C75",
+                  color: "white",
+                  height: "50px",
+                }}
+              >
+                Bid
+              </Button>
+            )}
           </Stack>
         </Stack>
         <Stack direction={"row"} mt={"10px"}>
           <Stack direction={"row"} gap={"5px"} alignItems={"center"}>
-            <Typography noWrap>Opening bid</Typography>
+            <Typography noWrap>Current bid</Typography>
             <NumericFormat
-              value={`${startPrice}`}
+              value={_id == auctionId ? newBid : startPrice}
               thousandSeparator=","
               suffix="$"
               disabled
