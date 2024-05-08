@@ -4,7 +4,7 @@ import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 
 type dataType = {
-  _id: string;
+  _id: number;
   carModel: string;
   brand: string;
   startPrice: number;
@@ -17,7 +17,7 @@ type dataType = {
 const Page = ({ params }: { params: { slug: string } }) => {
   const title = `${params.slug} For Sale`;
   const [data, setData] = useState<Array<dataType>>();
-  console.log(params);
+  const listings = `${data?.length} listings`;
   useEffect(() => {
     async function getData() {
       const res = await fetch(
@@ -31,11 +31,13 @@ const Page = ({ params }: { params: { slug: string } }) => {
       const car = await res.json();
       setData(car.result);
     }
+
     getData();
   }, [params.slug]);
+
   return (
     <Stack>
-      <FeaturedCars data={data} title={title} />
+      <FeaturedCars data={data} title={title} listings={listings} />
     </Stack>
   );
 };

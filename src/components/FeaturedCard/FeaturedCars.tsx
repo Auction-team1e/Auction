@@ -17,15 +17,21 @@ type dataType = {
 export const FeaturedCars = ({
   data,
   title,
+  listings,
 }: {
   data: dataType[] | undefined;
   title: string;
+  listings: String | undefined;
 }) => {
   return (
     <Stack margin={"50px auto 100px"} maxWidth={1920} padding={"0 5vw"}>
-      <Typography fontSize={"27px"} fontWeight={400} lineHeight={"38px"}>
-        {title}
-      </Typography>
+      <Stack marginBottom={"28px"}>
+        {" "}
+        <Typography fontSize={"27px"} fontWeight={400} lineHeight={"38px"}>
+          {title}
+        </Typography>
+        <Typography marginTop={"8px"}>{listings}</Typography>
+      </Stack>
       <Stack
         display={"grid"}
         gridTemplateColumns={"minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)"}
