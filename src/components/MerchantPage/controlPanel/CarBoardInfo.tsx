@@ -1,24 +1,28 @@
-"use client";
 import { ButtonBase, Stack, Typography } from "@mui/material";
 import * as React from "react";
-import { ArrowBlack, Edith, Trash } from "@/svgs";
+import { ArrowBlack, Trash } from "@/svgs";
 import { useRouter } from "next/navigation";
+import { CarEditModal } from "@/components/CarEditModal/CarEditModal";
+
 interface infoType {
   _id: string;
   carModel: string;
   brand: string;
   startPrice: string;
 }
+
 const fontStyle = {
   fontSize: "14px",
   fontWeight: "400",
   lineHeight: "20px",
   color: "#3F4145",
 };
+
 export const CarBoardInfo = () => {
-  const [info, setInfo] = React.useState<infoType[]>([]);
+  const [infos, setInfo] = React.useState<infoType[]>([]);
   const [auctionID, setAuctionID] = React.useState<string>("");
   const router = useRouter();
+
   React.useEffect(() => {
     async function fetchData() {
       try {
@@ -31,20 +35,22 @@ export const CarBoardInfo = () => {
     }
     fetchData();
   }, []);
+
   const handleDelete = async (e: any) => {
     e.preventDefault();
-    const carInfo = {
+    const carInfos = {
       id: auctionID,
     };
     fetch("http://localhost:4000/api/car", {
       method: "DELETE",
-      body: JSON.stringify(carInfo),
+      body: JSON.stringify(carInfos),
       headers: { "Content-Type": "application/json" },
     });
   };
+
   return (
     <Stack>
-      {info.map((e, index) => (
+      {infos.map((info, index) => (
         <Stack
           key={index}
           borderBottom={"1px solid #ECEDF0"}
@@ -59,13 +65,13 @@ export const CarBoardInfo = () => {
             <Typography sx={fontStyle}>{index + 1}</Typography>
           </Stack>
           <Stack p={"0px 20px"} justifyContent={"center"} width={"200px"}>
-            <Typography sx={fontStyle}>{e.brand}</Typography>
+            <Typography sx={fontStyle}>{info.brand}</Typography>
           </Stack>
           <Stack justifyContent={"center"} width={"250px"}>
-            <Typography sx={fontStyle}>{e.carModel}</Typography>
+            <Typography sx={fontStyle}>{info.carModel}</Typography>
           </Stack>
           <Stack p={"0px 20px"} justifyContent={"center"} width={"200px"}>
-            <Typography sx={fontStyle}>{"$" + e.startPrice}</Typography>
+            <Typography sx={fontStyle}>{"$" + info.startPrice}</Typography>
           </Stack>
           <Stack p={"0px 20px"} justifyContent={"center"} width={"200px"}>
             <Typography sx={fontStyle}>2024-01-10</Typography>
@@ -88,19 +94,17 @@ export const CarBoardInfo = () => {
           </Stack>
           <Stack gap={"12px"} alignItems={"center"} direction={"row"}>
             <ButtonBase
-              onMouseEnter={() => setAuctionID(e._id)}
+              onMouseEnter={() => setAuctionID(info._id)}
               onClick={handleDelete}
               sx={{ borderRadius: "7px", p: "7px" }}
             >
               <Trash />
             </ButtonBase>
-            <ButtonBase sx={{ borderRadius: "7px", p: "7px" }}>
-              <Edith />
-            </ButtonBase>
+            <CarEditModal carInfos={info} />
           </Stack>
           <Stack justifyContent={"center"} width={"140px"}>
             <ButtonBase
-              onClick={() => router.push(`/merchant/details/${e._id}`)}
+              onClick={() => router.push(`/merchant/details/${info._id}`)}
               sx={{ borderRadius: "30px" }}
             >
               <ArrowBlack />
