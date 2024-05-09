@@ -12,23 +12,7 @@
   "parser": "@typescript-eslint/parser",
   "overrides": [
     {
-      "files": ["*.jsx", "*.tsx"], // for JSX component
-      "rules": {
-        "unicorn/prefer-module": "off",
-        "unicorn/filename-case": [
-          "error",
-          {
-            "case": "pascalCase"
-          }
-        ],
-        "react/function-component-definition": [
-          "error",
-          {
-            "namedComponents": "arrow-function",
-            "unnamedComponents": "arrow-function"
-          }
-        ]
-      }
+      "files": ["*.jsx", "*.tsx"] // for JSX component
     },
     {
       "files": [
