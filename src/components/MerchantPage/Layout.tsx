@@ -15,4 +15,3 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     </Stack>
   );
 };
-export default Layout;

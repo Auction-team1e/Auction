@@ -8,7 +8,7 @@ interface Car {
   img: string[];
 }
 
-const Carousel = () => {
+export const Carousel = () => {
   const [cars, setCars] = useState<Car[]>([]);
   const [curr, setCurr] = useState(0);
   const [currentTitle, setCurrentTitle] = useState("");
@@ -153,4 +153,3 @@ const Carousel = () => {
     </Stack>
   );
 };
-export default Carousel;

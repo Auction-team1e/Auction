@@ -1,4 +1,4 @@
-import Layout from "@/components/MerchantPage/Layout";
+import { Layout } from "@/components/MerchantPage/Layout";
 import { CarBoard } from "@/components/MerchantPage/controlPanel/CarBoard";
 // import { CarAddModal } from "@/components/CarAddModal/CarAddModal";
 import { IncOrdCard } from "@/components/MerchantPage/controlPanel/IncOrdCard";
