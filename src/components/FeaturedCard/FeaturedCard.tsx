@@ -1,5 +1,4 @@
 "use client";
-
 import {
   Button,
   CircularProgress,
@@ -14,7 +13,7 @@ import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 import { BidField } from "./BidField";
 import { NumericFormat } from "react-number-format";
-
+import { Bids } from "./Bids";
 export const FeaturedCard = ({
   _id,
   carModel,
@@ -37,35 +36,38 @@ export const FeaturedCard = ({
   const [auctionId, setAuctionId] = useState();
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [nextBid, setNextBid] = useState<number>(
-    startPrice + (startPrice * 10) / 100
-  );
-  console.log("🚀 ~ nextBid:", nextBid);
-
+  const [nextBid, setNextBid] = useState<number>();
   useEffect(() => {
     async function getData() {
       setUserEmail(localStorage.getItem("userEmail"));
-      setNextBid;
     }
     getData();
   }, []);
-  const socket = io("https://socketbackend-53dj.onrender.com");
-
+  const socket = io("http://localhost:5000", {
+    transports: ["websocket"],
+  });
   socket.on("connect", () => {
     console.log("connected socket");
   });
-
   socket.on("chat-message", (data) => {
     setAuctionId(data._id);
     setNewBid(data.bidOrder);
+    setNextBid(Number(data.bidOrder) + (Number(data.bidOrder) * 10) / 100);
   });
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
+    var today = new Date();
+    today.setSeconds(0, 0);
+    const options = {
+      timeZone: "Asia/Ulaanbaatar",
+      hour12: false,
+    };
+    const presentTime = today.toLocaleString("en-US", options);
     const carInfo = {
       id: _id,
       startPrice: bidOrder,
       email: userEmail,
+      bidCreatedAt: presentTime,
     };
     setLoading(true);
     await fetch("http://localhost:4000/api/car", {
@@ -76,22 +78,22 @@ export const FeaturedCard = ({
     socket.emit("send-bid-message", { bidOrder, _id });
     setLoading(false);
     setBidOrder(``);
+    const loggedUserEmail = localStorage.getItem("userEmail");
+    setUserEmail(loggedUserEmail);
   };
-
+  let other = startPrice + (startPrice * 10) / 100;
   return (
     <Stack border={"1px solid #e0e0e0"}>
       <CarouselSlider img={img} _id={_id} brand={brand} />
       <Stack px={3} py={3} gap={"10px"}>
         <Stack direction={"row"} justifyContent={"space-between"} mt={"10px"}>
           <Stack justifyContent={"center"}>
-            <Typography fontSize={"16px"} fontWeight={700}>
-              {carModel}
-            </Typography>
+            <Typography fontWeight={700}>{carModel}</Typography>
             <Typography color={"#606060"}>{carDetail[1]}</Typography>
           </Stack>
           <Stack gap={"3px"} justifyContent={"center"} direction={"row"}>
             <Input
-              value={bidOrder}
+              value={bidOrder || ``}
               onChange={(e) => setBidOrder(e.target.value)}
               type="number"
               placeholder="Max bid(usd)"
@@ -100,7 +102,7 @@ export const FeaturedCard = ({
                 border: "0.1px solid grey",
                 borderRadius: "5px",
                 px: "10px",
-                height: "50px",
+                height: "40px",
               }}
             ></Input>
             {loading ? (
@@ -111,20 +113,17 @@ export const FeaturedCard = ({
                 sx={{
                   backgroundColor: "#006C75",
                   color: "white",
-                  height: "50px",
+                  height: "40px",
+                  width: 90,
+                  fontSize: 12,
                 }}
               >
-                Bid
+                Place Bid
               </Button>
             )}
           </Stack>
         </Stack>
-        <Stack
-          direction={"row"}
-          mt={"10px"}
-          justifyContent={`space-between`}
-          alignItems={`center`}
-        >
+        <Stack direction={"row"} mt={"10px"} justifyContent={`space-between`}>
           <Stack gap={0.4}>
             <BidField
               label={"Current bid"}
@@ -136,7 +135,7 @@ export const FeaturedCard = ({
             <Stack direction={"row"} gap={"5px"} alignItems={"center"}>
               <Typography noWrap>Next minimum bid</Typography>
               <NumericFormat
-                value={nextBid}
+                value={_id == auctionId ? nextBid : other}
                 thousandSeparator=","
                 suffix="$"
                 disabled
@@ -152,7 +151,10 @@ export const FeaturedCard = ({
             </Stack>
           </Stack>
           <Divider sx={{ bgcolor: `gray` }} orientation="vertical" flexItem />
-          <EndTimeCounter endDate={endDate} />
+          <Stack gap={0.4}>
+            <EndTimeCounter endDate={endDate} />
+            <Bids id={_id} />
+          </Stack>
         </Stack>
       </Stack>
     </Stack>

@@ -55,12 +55,7 @@ export const CarAddModal = () => {
         e.target.color.value,
         e.target.intColor.value,
       ],
-      bidContestants: [
-        {
-          userEmail: "testEmail",
-          bidPrice: `testPrice`,
-        },
-      ],
+      bidContestants: [],
     };
     fetch("http://localhost:4000/api/car", {
       method: "POST",

@@ -25,7 +25,7 @@ export const CarouselSlider = ({
           style: {
             position: "absolute",
             bottom: 10,
-            zIndex: 100,
+            zIndex: 10,
           },
         }}
       >
