@@ -1,4 +1,4 @@
-import { FaceBook } from "@/svgs/Facebook";
+import { FBook } from "@/svgs/Fbook";
 import { Button, Stack, Typography } from "@mui/material";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 
@@ -26,7 +26,7 @@ export const ContinueWith = () => {
         }}
       >
         <Stack position={`relative`} right={75}>
-          <FaceBook />
+          <FBook />
         </Stack>
         <Typography fontSize={16} fontWeight={500}>
           Continue with Facebook

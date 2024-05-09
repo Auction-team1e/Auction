@@ -1,5 +1,5 @@
-import { FaceBook } from "@/svgs/Facebook";
 import { Google } from "@/svgs/Google";
+import { FBook } from "@/svgs/Fbook";
 
 export const fields = [
   { pl: "First name", name: "firstName" },
@@ -9,7 +9,7 @@ export const fields = [
 
 export const signUpBtn = [
   { text: "Continue with Google", svg: <Google /> },
-  { text: "Continue with Facebook", svg: <FaceBook /> },
+  { text: "Continue with Facebook", svg: <FBook /> },
 ];
 
 export const SignUpNextStepInputs = [
