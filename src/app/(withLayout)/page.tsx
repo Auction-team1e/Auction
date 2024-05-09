@@ -19,7 +19,7 @@ type dataType = {
 };
 
 const Home = () => {
-  const [data, setData] = useState<Array<dataType>>();
+  const [data, setData] = useState<dataType[]>([]);
 
   useEffect(() => {
     async function getData() {
@@ -29,6 +29,7 @@ const Home = () => {
     }
     getData();
   }, []);
+  console.log(data);
 
   return (
     <Stack width={`100%`} gap={8} position={`relative`}>
@@ -36,7 +37,7 @@ const Home = () => {
       <Stack alignItems={`center`} gap={8}>
         <PopMakes />
         <PopSearches />
-        <FeaturedCars data={data} title="Featured" />
+        <FeaturedCars data={data} title={""} listings={undefined} />
       </Stack>
     </Stack>
   );

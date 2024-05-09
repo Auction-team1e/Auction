@@ -1,5 +1,6 @@
 "use client";
 import { FeaturedCars } from "@/components/FeaturedCard/FeaturedCars";
+import FilterBar from "@/components/FilterBar";
 import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 
@@ -16,7 +17,7 @@ type dataType = {
 
 const Page = ({ params }: { params: { slug: string } }) => {
   const title = `${params.slug} For Sale`;
-  const [data, setData] = useState<Array<dataType>>();
+  const [data, setData] = useState<Array<dataType>>([]);
   const listings = `${data?.length} listings`;
   useEffect(() => {
     async function getData() {
@@ -37,6 +38,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
 
   return (
     <Stack>
+      <FilterBar />
       <FeaturedCars data={data} title={title} listings={listings} />
     </Stack>
   );

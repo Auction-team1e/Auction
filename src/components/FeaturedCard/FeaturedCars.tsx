@@ -19,7 +19,7 @@ export const FeaturedCars = ({
   title,
   listings,
 }: {
-  data: dataType[] | undefined;
+  data: dataType[];
   title: string;
   listings: String | undefined;
 }) => {
@@ -30,7 +30,7 @@ export const FeaturedCars = ({
         <Typography fontSize={"27px"} fontWeight={400} lineHeight={"38px"}>
           {title}
         </Typography>
-        <Typography marginTop={"8px"}>{listings}</Typography>
+        {listings ? <Typography marginTop={"8px"}>{listings}</Typography> : ""}
       </Stack>
       <Stack
         display={"grid"}
@@ -47,6 +47,7 @@ export const FeaturedCars = ({
             endDate={a.endTime}
             _id={a._id}
             key={index}
+            brand={a.brand}
           />
         ))}
       </Stack>
