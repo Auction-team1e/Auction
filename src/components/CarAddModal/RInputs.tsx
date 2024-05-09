@@ -1,5 +1,5 @@
 import { useCarData, ContextType } from "@/context/DataContext";
-import { carDetails, carDetailsSecod } from "../../utils/DummyData";
+import { carDetails, carDetailsSecod } from "../../utils/dumData";
 import {
   Box,
   Button,

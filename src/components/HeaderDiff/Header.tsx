@@ -4,7 +4,7 @@ import { Divider, Stack, Typography } from "@mui/material";
 import { MenuDrawer } from "./MenuDrawer";
 import { SearchModal } from "./SearchModal";
 import { LoginModal } from "./LoginModal";
-import { accParts } from "@/utils/DummyData";
+import { accParts } from "@/utils/dumData";
 
 export const HeaderDiff = () => {
   return (

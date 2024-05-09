@@ -7,7 +7,7 @@ import {
   footerSubtitles,
   footerTitles,
   language,
-} from "@/utils/DummyData";
+} from "@/utils/dumData";
 import { useEffect, useState } from "react";
 
 type dataType = { brandTitle: string; img: string };

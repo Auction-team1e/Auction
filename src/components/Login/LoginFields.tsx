@@ -1,4 +1,4 @@
-import { loginFields } from "@/utils/DummyData";
+import { loginFields } from "@/utils/dumData";
 import { Box, Stack } from "@mui/material";
 
 export const LoginFields = ({ formik }: { formik: any }) => {

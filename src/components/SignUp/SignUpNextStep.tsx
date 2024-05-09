@@ -1,7 +1,7 @@
 "use client";
 import { Box, Button, Divider, Link, Stack, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { SignUpNextStepInputs } from "@/utils/DummyData";
+import { SignUpNextStepInputs } from "@/utils/dumData";
 import { Dispatch } from "react";
 import { useCarData, ContextType } from "@/context/DataContext";
 import { useFormik } from "formik";

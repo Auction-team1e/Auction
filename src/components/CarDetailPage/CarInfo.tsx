@@ -3,7 +3,7 @@ import { useRef, useEffect, useState } from "react";
 
 import { Stack, Typography, ButtonBase } from "@mui/material";
 
-import { carDetailsSecod } from "../../utils/DummyData";
+import { carDetailsSecod } from "../../utils/dumData";
 
 const customStyle = {
   fontSize: "26px",

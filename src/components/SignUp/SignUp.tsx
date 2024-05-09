@@ -1,7 +1,7 @@
 "use client";
 import { Button, Divider, Input, Link, Stack, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { fields, signUpBtn } from "@/utils/DummyData";
+import { fields, signUpBtn } from "@/utils/dumData";
 import { useCarData, ContextType } from "@/context/DataContext";
 import { useFormik } from "formik";
 import { ToastContainer } from "react-toastify";
