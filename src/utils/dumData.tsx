@@ -1,4 +1,3 @@
-import { Google } from "@/svgs/Google";
 import { FBook } from "@/svgs/Fbook";
 
 export const fields = [
@@ -7,10 +6,7 @@ export const fields = [
   { pl: "Email", name: "email" },
 ];
 
-export const signUpBtn = [
-  { text: "Continue with Google", svg: <Google /> },
-  { text: "Continue with Facebook", svg: <FBook /> },
-];
+export const signUpBtn = [{ text: "Continue with Facebook", svg: <FBook /> }];
 
 export const SignUpNextStepInputs = [
   { pl: "Enter password", name: "enterPass" },
