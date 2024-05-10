@@ -1,3 +1,5 @@
+"use client";
+
 import { Search } from "@/svgs";
 import { ButtonBase, Stack, TextField } from "@mui/material";
 import { Typography } from "@mui/material";
