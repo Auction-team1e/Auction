@@ -36,7 +36,7 @@ export const EndTimeCounter = ({ endDate }: { endDate: string }) => {
 
   return (
     <Stack direction={"row"} gap={"5px"}>
-      <Typography>Auction Ends</Typography>
+      <Typography>Timed auction :</Typography>
       <Typography fontWeight={600}>
         {end == true
           ? day > 0

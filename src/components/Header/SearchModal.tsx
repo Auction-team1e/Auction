@@ -1,10 +1,12 @@
+"use client";
 import { Box, Input, Modal, Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import Link from "next/link";
 const style = {
   position: "absolute" as "absolute",
-  top: "10%",
-  left: "50%",
+  top: "15%",
+  left: "50.6%",
   transform: "translate(-50%, -50%)",
   width: 545,
   bgcolor: "background.paper",
@@ -12,9 +14,40 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+type dataType = {
+  _id: number;
+  carModel: string;
+  brand: string;
+  startPrice: number;
+  description: string;
+  carDetails: string[];
+  img: string[];
+  endTime: string;
+};
 
 export const SearchModal = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const [data, setData] = useState<dataType[] | undefined>();
+  const [activeSearch, setActiveSearch] = useState<dataType[] | undefined>([]);
+
+  useEffect(() => {
+    async function getData() {
+      const res = await fetch("http://localhost:4000/api/car");
+      const cars = await res.json();
+      setData(cars);
+    }
+    getData();
+  }, []);
+
+  const handleSearch = (e: any) => {
+    if (e.target.value == ``) {
+      setActiveSearch([]);
+      return false;
+    }
+    setActiveSearch(
+      data?.filter((w) => w.carModel.includes(e.target.value)).slice(0, 8)
+    );
+  };
 
   return (
     <Stack>
@@ -36,10 +69,39 @@ export const SearchModal = () => {
       </Stack>
       <Modal open={open} onClose={() => setOpen(false)}>
         <Box sx={style}>
-          <Input placeholder="Search Cars" sx={{ width: 475 }}></Input>
-          <Typography sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <Input
+            onChange={(e) => handleSearch(e)}
+            placeholder="Search Cars"
+            sx={{ width: 475, borderBottom: `1px solid black`, pb: 1 }}
+            disableUnderline
+          ></Input>
+          {activeSearch && activeSearch?.length > 0 && (
+            <Stack sx={{ mt: 2 }} gap={1}>
+              {activeSearch.map((s, index) => {
+                return (
+                  <Link
+                    style={{ textDecoration: "none" }}
+                    key={index}
+                    href={`cars/${s._id}`}
+                  >
+                    <Stack
+                      direction={`row`}
+                      alignItems={`center`}
+                      color={`black`}
+                      sx={{
+                        cursor: `pointer`,
+                        ":hover": { bgcolor: `#F1F1F1` },
+                      }}
+                      height={40}
+                    >
+                      <SearchIcon sx={{ color: `gray`, mr: 2 }} />
+                      <Typography fontSize={17}>{s.carModel}</Typography>
+                    </Stack>
+                  </Link>
+                );
+              })}
+            </Stack>
+          )}
         </Box>
       </Modal>
     </Stack>

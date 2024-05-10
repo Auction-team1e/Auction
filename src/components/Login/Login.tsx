@@ -12,7 +12,7 @@ import { useCarData, ContextType } from "@/context/DataContext";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ContinueWith } from "./ContinueWith";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { Dispatch, useState } from "react";
 import { LoginFields } from "./LoginFields";
 export const Login = ({
@@ -144,7 +144,6 @@ export const Login = ({
           </Stack>
         </Stack>
       </Stack>
-      <ToastContainer />
     </>
   );
 };
