@@ -11,10 +11,21 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
+
+interface infoType {
+  _id: string;
+  carModel: string;
+  brand: string;
+  startPrice: number;
+  description: string;
+  carDetails: [string];
+  img: [string];
+  userId: string;
+}
 const fields = [carDetails, carDetailsSecod];
 type dataType = { brandTitle: string; img: string };
 
-export const RInputs = () => {
+export const RInputs = ({ carInfo }: { carInfo: infoType }) => {
   const { selected, setSelected } = useCarData() as ContextType;
   const [data, setData] = useState<dataType[]>();
 
@@ -69,6 +80,21 @@ export const RInputs = () => {
                         {val.label}:
                       </Typography>
                       <Box
+                        defaultValue={
+                          val.label === "Year"
+                            ? carInfo.carDetails[0]
+                            : val.label === "Location"
+                            ? carInfo.carDetails[1]
+                            : val.label === "Address"
+                            ? carInfo.carDetails[2]
+                            : val.label === "Mileage"
+                            ? carInfo.carDetails[3]
+                            : val.label === "Engine"
+                            ? carInfo.carDetails[4]
+                            : val.label === "Gearbox"
+                            ? carInfo.carDetails[5]
+                            : val.label === "Car type"
+                        }
                         component={"input"}
                         width={190}
                         bgcolor={`#F7F7F8`}

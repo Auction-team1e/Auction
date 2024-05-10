@@ -10,7 +10,11 @@ interface infoType {
   _id: string;
   carModel: string;
   brand: string;
-  startPrice: string;
+  startPrice: number;
+  description: string;
+  carDetails: [string];
+  img: [string];
+  userId: string;
 }
 
 export const CarEditModal = ({ carInfos }: { carInfos: infoType }) => {
@@ -63,11 +67,12 @@ export const CarEditModal = ({ carInfos }: { carInfos: infoType }) => {
         e.target.intColor.value,
       ],
     };
-    fetch("http://localhost:4000/api/car", {
-      method: "PUT",
-      body: JSON.stringify(carInfo),
-      headers: { "Content-Type": "application/json" },
-    });
+    console.log(carInfo);
+    // fetch("http://localhost:4000/api/car", {
+    //   method: "PUT",
+    //   body: JSON.stringify(carInfo),
+    //   headers: { "Content-Type": "application/json" },
+    // });
   };
 
   return (

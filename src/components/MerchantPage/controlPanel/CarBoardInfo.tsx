@@ -8,7 +8,11 @@ interface infoType {
   _id: string;
   carModel: string;
   brand: string;
-  startPrice: string;
+  startPrice: number;
+  description: string;
+  carDetails: [string];
+  img: [string];
+  userId: string;
 }
 
 const fontStyle = {

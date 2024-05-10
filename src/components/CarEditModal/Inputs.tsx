@@ -12,11 +12,14 @@ interface infoType {
   _id: string;
   carModel: string;
   brand: string;
-  startPrice: string;
+  startPrice: number;
+  description: string;
+  carDetails: [string];
+  img: [string];
+  userId: string;
 }
 
 export const Inputs = ({ carInfo }: { carInfo: infoType }) => {
-  console.log("infos", carInfo);
   const { setEndDate, endDate } = useCarData() as ContextType;
   return (
     <>
@@ -29,16 +32,23 @@ export const Inputs = ({ carInfo }: { carInfo: infoType }) => {
                   {val.label}
                 </Typography>
                 <Box
-                  component={`textarea`}
-                  bgcolor={`#F7F7F8`}
-                  border={`1px solid #D6D8DB`}
-                  borderRadius={`8px`}
-                  px={`12px`}
-                  py={`10px`}
+                  defaultValue={
+                    val.label === "Car Model"
+                      ? carInfo.carModel
+                      : val.label === "About This Car"
+                      ? carInfo.description
+                      : carInfo._id
+                  }
+                  component="textarea"
+                  bgcolor="#F7F7F8"
+                  border="1px solid #D6D8DB"
+                  borderRadius="8px"
+                  px="12px"
+                  py="10px"
                   fontSize={18}
-                  height={val.label == "About This Car" ? 128 : 44}
+                  height={val.label === "About This Car" ? 128 : 44}
                   name={val.name}
-                  sx={{ resize: `none`, outline: `none` }}
+                  sx={{ resize: "none", outline: "none" }}
                 ></Box>
               </Stack>
             );
@@ -56,6 +66,7 @@ export const Inputs = ({ carInfo }: { carInfo: infoType }) => {
               Starting Bid Price
             </Typography>
             <Input
+              defaultValue={carInfo.startPrice}
               disableUnderline
               name="price"
               type="number"
@@ -91,7 +102,7 @@ export const Inputs = ({ carInfo }: { carInfo: infoType }) => {
           </Stack>
         </Stack>
       </Stack>
-      <RInputs />
+      <RInputs carInfo={carInfo} />
     </>
   );
 };

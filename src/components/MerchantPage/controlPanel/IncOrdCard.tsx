@@ -1,7 +1,6 @@
 "use client";
 import { Stack, Typography } from "@mui/material";
-import { useState } from "react";
-import React from "react";
+import { useEffect, useState } from "react";
 
 const style = {
   bgcolor: "white",
@@ -27,29 +26,31 @@ const textStyleSec = {
   lineHeight: "40px",
 };
 
-interface price {
-  startPrice: number;
-}
-
 export const IncOrdCard = () => {
-  const [price, setPrice] = useState<price>();
-  React.useEffect(() => {
+  const [totalPrice, setTotalPrice] = useState(0);
+  useEffect(() => {
     async function fetchData() {
       try {
         const res = await fetch(`http://localhost:4000/api/car`);
         const data = await res.json();
-        setPrice(data);
-        let sum = 0;
-        price?.map((e) => {
-          sum += e?.startPrice;
-        });
+        console.log("Data from API:", data);
+
+        let sumPrice = data.reduce(
+          (accumulator: number, car: { startPrice: number }) => {
+            return accumulator + car.startPrice;
+          },
+          0
+        );
+
+        setTotalPrice(sumPrice);
+        console.log("Total price:", sumPrice);
       } catch (error) {
         console.error("Error fetching car data:", error);
       }
     }
     fetchData();
   }, []);
-  console.log(price);
+
   return (
     <Stack mt={"40px"} bgcolor={"white"}>
       <Stack bgcolor={"#F7F7F8"}>
@@ -66,7 +67,7 @@ export const IncOrdCard = () => {
             <Stack alignItems={"center"} gap={"4px"} direction={"row"}>
               <Typography sx={textStyle}>$ Income</Typography>
             </Stack>
-            <Typography sx={textStyleSec}>{price?.startPrice}₮</Typography>
+            <Typography sx={textStyleSec}>{totalPrice}₮</Typography>
             <Typography color={"#5E6166"}>Today</Typography>
           </Stack>
           <Stack sx={style}>
