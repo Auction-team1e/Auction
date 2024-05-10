@@ -77,7 +77,7 @@ export const PopMakes = () => {
               },
             }}
           >
-            <Stack onClick={() => router.push(`/filtered/${e.brandTitle}`)}>
+            <Stack onClick={() => router.push(`/cars/${e.brandTitle}`)}>
               <CardMedia image={e.img} alt={`Car ${index}`} component={"img"} />
             </Stack>
           </Stack>

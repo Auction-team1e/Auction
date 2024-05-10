@@ -1,6 +1,5 @@
 "use client";
 import { FeaturedCars } from "@/components/FeaturedCard/FeaturedCars";
-import FilterBar from "@/components/FilterBar";
 import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 
@@ -15,14 +14,14 @@ type dataType = {
   endTime: string;
 };
 
-const Page = ({ params }: { params: { slug: string } }) => {
-  const title = `${params.slug} For Sale`;
+const Page = ({ params }: { params: { brandSlug: string } }) => {
+  const title = `${params.brandSlug} For Sale`;
   const [data, setData] = useState<Array<dataType>>([]);
   const listings = `${data?.length} listings`;
   useEffect(() => {
     async function getData() {
       const res = await fetch(
-        `http://localhost:4000/api/findBrand?slug=${params.slug}`,
+        `http://localhost:4000/api/findBrand?slug=${params.brandSlug}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
@@ -34,12 +33,13 @@ const Page = ({ params }: { params: { slug: string } }) => {
     }
 
     getData();
-  }, [params.slug]);
+  }, [params.brandSlug]);
 
   return (
-    <Stack>
-      <FilterBar />
-      <FeaturedCars data={data} title={title} listings={listings} />
+    <Stack width={"1720px"}>
+      <Stack mt={15} mb={15}>
+        <FeaturedCars data={data} title={title} listings={listings} />
+      </Stack>
     </Stack>
   );
 };

@@ -30,7 +30,7 @@ export const CarouselSlider = ({
         }}
       >
         {img.map((a, index) => (
-          <Link key={index} href={{ pathname: `cars/${brand}/${_id}` }}>
+          <Link key={index} href={{ pathname: `${brand}/${_id}` }}>
             <Stack
               width={"560px"}
               height={"344px"}

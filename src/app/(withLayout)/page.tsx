@@ -1,6 +1,6 @@
 "use client";
 
-import Carousel from "@/components/CarouselComp";
+import { Carousel } from "@/components/CarouselComp";
 import { FeaturedCars } from "@/components/FeaturedCard/FeaturedCars";
 import { PopMakes } from "@/components/PopMakes";
 import { PopSearches } from "@/components/PopSearches";
