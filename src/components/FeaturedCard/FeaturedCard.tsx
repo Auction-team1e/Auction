@@ -1,12 +1,5 @@
 "use client";
-import {
-  Button,
-  CircularProgress,
-  Divider,
-  Input,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Divider, Stack, Typography } from "@mui/material";
 import { CarouselSlider } from "./CarouselSlider";
 import { EndTimeCounter } from "./EndTimeCounter";
 import { io } from "socket.io-client";
@@ -14,6 +7,9 @@ import { useEffect, useState } from "react";
 import { BidField } from "./BidField";
 import { NumericFormat } from "react-number-format";
 import { Bids } from "./Bids";
+import { useCarData, ContextType } from "@/context/DataContext";
+import { BidInput } from "./BidInput";
+import { toast } from "react-toastify";
 export const FeaturedCard = ({
   _id,
   carModel,
@@ -37,13 +33,18 @@ export const FeaturedCard = ({
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [nextBid, setNextBid] = useState<number>();
+  const { item } = useCarData() as ContextType;
+  const failed = () =>
+    toast.error("Your order must be greater than next minimum");
+  const mustLogged = () => toast.error("You must be logged");
+  const succesfully = () => toast.success("Your order succesfully placed");
   useEffect(() => {
     async function getData() {
       setUserEmail(localStorage.getItem("userEmail"));
     }
     getData();
   }, []);
-  const socket = io("http://localhost:5000", {
+  const socket = io("https://socketbackend-53dj.onrender.com", {
     transports: ["websocket"],
   });
   socket.on("connect", () => {
@@ -69,17 +70,22 @@ export const FeaturedCard = ({
       email: userEmail,
       bidCreatedAt: presentTime,
     };
-    setLoading(true);
-    await fetch("http://localhost:4000/api/car", {
-      method: "PUT",
-      body: JSON.stringify(carInfo),
-      headers: { "Content-Type": "application/json" },
-    });
-    socket.emit("send-bid-message", { bidOrder, _id });
-    setLoading(false);
-    setBidOrder(``);
-    const loggedUserEmail = localStorage.getItem("userEmail");
-    setUserEmail(loggedUserEmail);
+    if ((bidOrder && Number(bidOrder) >= startPrice) || newBid) {
+      setLoading(true);
+      await fetch("http://localhost:4000/api/car", {
+        method: "PUT",
+        body: JSON.stringify(carInfo),
+        headers: { "Content-Type": "application/json" },
+      });
+      socket.emit("send-bid-message", { bidOrder, _id });
+      setLoading(false);
+      succesfully();
+      setBidOrder(``);
+    } else if (!item) {
+      mustLogged();
+    } else {
+      failed();
+    }
   };
   let other = startPrice + (startPrice * 10) / 100;
   return (
@@ -91,37 +97,13 @@ export const FeaturedCard = ({
             <Typography fontWeight={700}>{carModel}</Typography>
             <Typography color={"#606060"}>{carDetail[1]}</Typography>
           </Stack>
-          <Stack gap={"3px"} justifyContent={"center"} direction={"row"}>
-            <Input
-              value={bidOrder || ``}
-              onChange={(e) => setBidOrder(e.target.value)}
-              type="number"
-              placeholder="Max bid(usd)"
-              disableUnderline
-              sx={{
-                border: "0.1px solid grey",
-                borderRadius: "5px",
-                px: "10px",
-                height: "40px",
-              }}
-            ></Input>
-            {loading ? (
-              <CircularProgress sx={{ color: `#006C75` }} />
-            ) : (
-              <Button
-                onClick={handleSubmit}
-                sx={{
-                  backgroundColor: "#006C75",
-                  color: "white",
-                  height: "40px",
-                  width: 90,
-                  fontSize: 12,
-                }}
-              >
-                Place Bid
-              </Button>
-            )}
-          </Stack>
+          <form onSubmit={handleSubmit}>
+            <BidInput
+              bidOrder={bidOrder}
+              setBidOrder={setBidOrder}
+              loading={loading}
+            />
+          </form>
         </Stack>
         <Stack direction={"row"} mt={"10px"} justifyContent={`space-between`}>
           <Stack gap={0.4}>

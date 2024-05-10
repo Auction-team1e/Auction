@@ -2,10 +2,11 @@
 import { Box, Input, Modal, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import Link from "next/link";
 const style = {
   position: "absolute" as "absolute",
-  top: "20%",
-  left: "50%",
+  top: "15%",
+  left: "50.6%",
   transform: "translate(-50%, -50%)",
   width: 545,
   bgcolor: "background.paper",
@@ -26,11 +27,8 @@ type dataType = {
 
 export const SearchModal = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const [data, setData] = useState<Array<dataType> | undefined>();
-  const [activeSearch, setActiveSearch] = useState<Array<dataType> | undefined>(
-    []
-  );
-  console.log("🚀 ~ SearchModal ~ activeSearch:", activeSearch);
+  const [data, setData] = useState<dataType[] | undefined>();
+  const [activeSearch, setActiveSearch] = useState<dataType[] | undefined>([]);
 
   useEffect(() => {
     async function getData() {
@@ -81,17 +79,25 @@ export const SearchModal = () => {
             <Stack sx={{ mt: 2 }} gap={1}>
               {activeSearch.map((s, index) => {
                 return (
-                  <Stack
+                  <Link
+                    style={{ textDecoration: "none" }}
                     key={index}
-                    direction={`row`}
-                    alignItems={`center`}
-                    bgcolor={index == 0 ? `gray` : `white`}
-                    sx={{ cursor: `pointer`, ":hover": { bgcolor: `gray` } }}
-                    height={40}
+                    href={`cars/${s._id}`}
                   >
-                    <SearchIcon sx={{ color: `gray`, mr: 2 }} />
-                    <Typography fontSize={17}>{s.carModel}</Typography>
-                  </Stack>
+                    <Stack
+                      direction={`row`}
+                      alignItems={`center`}
+                      color={`black`}
+                      sx={{
+                        cursor: `pointer`,
+                        ":hover": { bgcolor: `#F1F1F1` },
+                      }}
+                      height={40}
+                    >
+                      <SearchIcon sx={{ color: `gray`, mr: 2 }} />
+                      <Typography fontSize={17}>{s.carModel}</Typography>
+                    </Stack>
+                  </Link>
                 );
               })}
             </Stack>

@@ -17,6 +17,7 @@ type dataType = {
   img: string[];
   endTime: string;
 };
+import { ToastContainer } from "react-toastify";
 
 const Home = () => {
   const [data, setData] = useState<dataType[]>([]);
@@ -33,6 +34,7 @@ const Home = () => {
 
   return (
     <Stack width={`100%`} gap={8} position={`relative`}>
+      <ToastContainer />
       <Carousel />
       <Stack alignItems={`center`} gap={8}>
         <PopMakes />

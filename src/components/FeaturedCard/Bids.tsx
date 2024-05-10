@@ -26,7 +26,7 @@ export const Bids = ({ id }: { id: number }) => {
       setData(cars?.result?.bidContestants);
     }
     getData();
-  });
+  }, [id]);
   return (
     <Stack color={`#4183c4`} overflow={`hidden`}>
       <Stack onClick={(e) => setAnchorEl(e.currentTarget)}>
