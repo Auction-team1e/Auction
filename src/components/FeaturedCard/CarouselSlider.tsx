@@ -4,16 +4,17 @@ import { Box, Stack } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export const CarouselSlider = ({
   img,
   _id,
+  brand,
 }: {
   img: string[];
   _id: number;
+  brand: string;
 }) => {
-  const router = useRouter();
   return (
     <Box>
       <Carousel
@@ -29,18 +30,18 @@ export const CarouselSlider = ({
         }}
       >
         {img.map((a, index) => (
-          <Stack
-            width={"560px"}
-            height={"344px"}
-            sx={{
-              backgroundImage: `url(${a})`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-            key={index}
-            onClick={() => router.push(`cars/${_id}`)}
-          ></Stack>
+          <Link key={index} href={{ pathname: `${brand}/${_id}` }}>
+            <Stack
+              width={"560px"}
+              height={"344px"}
+              sx={{
+                backgroundImage: `url(${a})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            ></Stack>
+          </Link>
         ))}
       </Carousel>
     </Box>

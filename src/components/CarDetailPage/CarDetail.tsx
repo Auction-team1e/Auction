@@ -1,6 +1,7 @@
 "use client";
 import { BreadCrumbArrow, Camera, Heart, UpRightArrow } from "@/svgs";
-import { ButtonBase, CardMedia, Stack, Typography } from "@mui/material";
+import { Box, ButtonBase, CardMedia, Stack, Typography } from "@mui/material";
+import Link from "next/link";
 import { useState } from "react";
 type dataType = {
   brand: string;
@@ -31,9 +32,11 @@ export const CarDetail = ({ data }: { data: dataType | undefined }) => {
         gap={"10px"}
         marginBottom={"15px"}
       >
-        <Typography fontSize={"14px"} fontWeight={"400"} color={"#717171"}>
-          {data?.brand}
-        </Typography>
+        <Link href={`/cars/${data?.brand}`} style={{ textDecoration: "none" }}>
+          <Box fontSize={"14px"} fontWeight={"400"} color={"#717171"}>
+            {data?.brand}
+          </Box>
+        </Link>
         <BreadCrumbArrow />
         <Typography fontSize={"14px"} fontWeight={"400"} color={"#717171"}>
           {data?.carModel}

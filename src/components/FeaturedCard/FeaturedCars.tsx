@@ -1,7 +1,6 @@
 "use client";
 
 import { Stack, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
 import { FeaturedCard } from "./FeaturedCard";
 
 type dataType = {
@@ -15,22 +14,24 @@ type dataType = {
   endTime: string;
 };
 
-export const FeaturedCars = () => {
-  const [data, setData] = useState<Array<dataType>>();
-
-  useEffect(() => {
-    async function getData() {
-      const res = await fetch("http://localhost:4000/api/car");
-      const cars = await res.json();
-      setData(cars);
-    }
-    getData();
-  }, []);
+export const FeaturedCars = ({
+  data,
+  title,
+  listings,
+}: {
+  data: dataType[];
+  title: string;
+  listings: String | undefined;
+}) => {
   return (
     <Stack margin={"50px auto 100px"} maxWidth={1920} padding={"0 5vw"}>
-      <Typography fontSize={"27px"} fontWeight={400} lineHeight={"38px"}>
-        Featured
-      </Typography>
+      <Stack marginBottom={"28px"}>
+        {" "}
+        <Typography fontSize={"27px"} fontWeight={400} lineHeight={"38px"}>
+          {title}
+        </Typography>
+        {listings ? <Typography marginTop={"8px"}>{listings}</Typography> : ""}
+      </Stack>
       <Stack
         display={"grid"}
         gridTemplateColumns={"minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)"}
@@ -46,6 +47,7 @@ export const FeaturedCars = () => {
             endDate={a.endTime}
             _id={a._id}
             key={index}
+            brand={a.brand}
           />
         ))}
       </Stack>

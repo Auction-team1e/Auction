@@ -10,6 +10,7 @@ export const FeaturedCard = ({
   img,
   carDetail,
   endDate,
+  brand,
 }: {
   _id: number;
   carModel: string;
@@ -17,10 +18,11 @@ export const FeaturedCard = ({
   img: string[];
   carDetail: string[];
   endDate: string;
+  brand: string;
 }) => {
   return (
     <Stack border={"1px solid #e0e0e0"}>
-      <CarouselSlider img={img} _id={_id} />
+      <CarouselSlider img={img} _id={_id} brand={brand} />
       <Stack px={3} py={3} gap={"10px"}>
         <Stack direction={"row"} justifyContent={"space-between"} mt={"10px"}>
           <Stack justifyContent={"center"}>
