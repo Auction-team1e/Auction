@@ -30,7 +30,6 @@ const Home = () => {
     }
     getData();
   }, []);
-  console.log(data);
 
   return (
     <Stack width={`100%`} gap={8} position={`relative`}>

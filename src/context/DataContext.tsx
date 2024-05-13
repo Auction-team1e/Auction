@@ -39,7 +39,7 @@ export type ContextType = {
 const CarContext = createContext<ContextType | null>(null);
 export const useCarData = () => useContext(CarContext);
 
-const CarProvider = ({ children }: { children: any }) => {
+const CarProvider = ({ children }: { children: React.ReactNode }) => {
   const [selected, setSelected] = useState<string>("");
   const [imageUrlOne, setImageUrlOne] = useState<string>("");
   const [imageUrlTwo, setImageUrlTwo] = useState<string>("");

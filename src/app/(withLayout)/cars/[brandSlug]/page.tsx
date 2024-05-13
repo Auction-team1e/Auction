@@ -27,7 +27,6 @@ const Page = ({ params }: { params: { brandSlug: string } }) => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log({ res });
       const car = await res.json();
       setData(car.result);
     }

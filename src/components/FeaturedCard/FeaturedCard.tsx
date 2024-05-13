@@ -37,6 +37,7 @@ export const FeaturedCard = ({
   const failed = () => toast.error("Your order must be next minimum or more");
   const mustLogged = () => toast.error("You must be logged");
   const succesfully = () => toast.success("Your order succesfully placed");
+
   useEffect(() => {
     async function getData() {
       setUserEmail(localStorage.getItem("userEmail"));
@@ -46,14 +47,14 @@ export const FeaturedCard = ({
   const socket = io("https://socketbackend-53dj.onrender.com", {
     transports: ["websocket"],
   });
-  socket.on("connect", () => {
-    console.log("connected socket");
-  });
-  socket.on("chat-message", (data) => {
-    setAuctionId(data._id);
-    setNewBid(data.bidOrder);
-    setNextBid(Number(data.bidOrder) + (Number(data.bidOrder) * 10) / 100);
-  });
+  // socket.on("connect", () => {
+  //   console.log("connected socket");
+  // });
+  // socket.on("chat-message", (data) => {
+  //   setAuctionId(data._id);
+  //   setNewBid(data.bidOrder);
+  //   setNextBid(Number(data.bidOrder) + (Number(data.bidOrder) * 10) / 100);
+  // });
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     var today = new Date();

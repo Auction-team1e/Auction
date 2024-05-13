@@ -18,11 +18,9 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <CarProvider>
-      <html lang="en">
-        <body className={inter.className}>{children}</body>
-      </html>
-    </CarProvider>
+    <div className={inter.className}>
+      <CarProvider>{children}</CarProvider>
+    </div>
   );
 };
 export default RootLayout;
