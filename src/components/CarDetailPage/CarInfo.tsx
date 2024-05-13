@@ -2,6 +2,7 @@
 import { useRef, useEffect, useState } from "react";
 
 import { Stack, Typography, ButtonBase } from "@mui/material";
+import { NumericFormat } from "react-number-format";
 
 const customStyle = {
   fontSize: "26px",
@@ -48,7 +49,23 @@ export const CarInfo = ({ data }: { data: carInfo | undefined }) => {
       <Stack borderBottom={"1px solid #E0E0E0"} gap={"8px"}>
         <Stack direction={"row"} justifyContent={"space-between"}>
           <Typography sx={customStyle}>{data?.brand}</Typography>
-          <Typography sx={customStyle}>${data?.startPrice}</Typography>
+          <Typography sx={customStyle}>
+            <NumericFormat
+              value={data?.startPrice}
+              thousandSeparator=","
+              suffix="$"
+              disabled
+              style={{
+                border: "none",
+                fontWeight: "400",
+                fontSize: "28px",
+                color: "black",
+                width: `300px`,
+                backgroundColor: `white`,
+                textAlign: "end",
+              }}
+            />
+          </Typography>
         </Stack>
         <Stack mb={"24px"}>
           <Typography fontSize={"14px"} fontWeight={"400"} lineHeight={"22px"}>
@@ -97,7 +114,7 @@ export const CarInfo = ({ data }: { data: carInfo | undefined }) => {
               sx={{ gridColumnGap: "48px", gridRowGap: "16px" }}
               alignItems={"center"}
             >
-              <Stack component={"span"} width={100}>
+              <Stack component={"span"} width={100} color={"#717171"}>
                 {a > "" && index == 0
                   ? "Year"
                   : a > "" && index == 1
