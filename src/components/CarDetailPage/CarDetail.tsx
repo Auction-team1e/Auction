@@ -13,12 +13,6 @@ type dataType = {
   endTime: string;
   _id: string;
 };
-// const style = {
-//   borderRadius: "100px",
-//   p: "9px 24px",
-//   gap: "10px",
-//   bgcolor: "white",
-// };
 export const CarDetail = ({ data }: { data: dataType | undefined }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [mainImageHovered, setMainImageHovered] = useState<boolean>(false);
@@ -76,12 +70,6 @@ export const CarDetail = ({ data }: { data: dataType | undefined }) => {
               }}
             />
           </Stack>
-          <Stack
-            direction={"row"}
-            gap={"8px"}
-            bottom={"24px"}
-            left={"24px"}
-          ></Stack>
         </Stack>
         <Stack width={"870px"} height={"500px"} flexWrap={"wrap"} gap={"4px"}>
           {data?.img.map((e: string, index: number) => (

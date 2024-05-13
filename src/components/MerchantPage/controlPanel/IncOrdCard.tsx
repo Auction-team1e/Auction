@@ -1,14 +1,16 @@
 "use client";
-
 import { Stack, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 
 const style = {
   bgcolor: "white",
-  width: "575px",
+  width: "620px",
   height: "135px",
   borderRadius: "12px",
   padding: "16px 24px ",
-  justifyContent: "space-between",
+  alignItems: "space-between",
+  border: "1px solid #ECEDF0",
+  gap: "12px",
 };
 
 const textStyle = {
@@ -25,23 +27,47 @@ const textStyleSec = {
 };
 
 export const IncOrdCard = () => {
+  const [totalPrice, setTotalPrice] = useState(0);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch(`http://localhost:4000/api/car`);
+        const data = await res.json();
+        console.log("Data from API:", data);
+
+        let sumPrice = data.reduce(
+          (accumulator: number, car: { startPrice: number }) => {
+            return accumulator + car.startPrice;
+          },
+          0
+        );
+
+        setTotalPrice(sumPrice);
+        console.log("Total price:", sumPrice);
+      } catch (error) {
+        console.error("Error fetching car data:", error);
+      }
+    }
+    fetchData();
+  }, []);
+
   return (
-    <Stack bgcolor={"white"}>
+    <Stack mt={"40px"} bgcolor={"white"}>
       <Stack bgcolor={"#F7F7F8"}>
         <Typography
-          p={"16px"}
+          p={"20px"}
           fontSize={"24px "}
           fontWeight={"700"}
           lineHeight={"13px"}
         >
           Overview
         </Typography>
-        <Stack gap={"24px"} direction={"row"}>
+        <Stack gap={"50px"} direction={"row"}>
           <Stack sx={style}>
             <Stack alignItems={"center"} gap={"4px"} direction={"row"}>
               <Typography sx={textStyle}>$ Income</Typography>
             </Stack>
-            <Typography sx={textStyleSec}>235,000₮</Typography>
+            <Typography sx={textStyleSec}>{totalPrice}₮</Typography>
             <Typography color={"#5E6166"}>Today</Typography>
           </Stack>
           <Stack sx={style}>
