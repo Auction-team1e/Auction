@@ -4,14 +4,13 @@ import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import Link from "next/link";
 const style = {
-  position: "absolute" as "absolute",
-  top: "15%",
-  left: "50.6%",
+  position: "absolute",
+  top: "20%",
+  left: "50.9%",
   transform: "translate(-50%, -50%)",
   width: 545,
   bgcolor: "background.paper",
   borderRadius: `10px`,
-  boxShadow: 24,
   p: 4,
 };
 type dataType = {

@@ -33,7 +33,9 @@ const Home = () => {
 
   return (
     <Stack width={`100%`} gap={8} position={`relative`}>
-      <ToastContainer />
+      <Stack position={`absolute`}>
+        <ToastContainer />
+      </Stack>
       <Carousel />
       <Stack alignItems={`center`} gap={8}>
         <PopMakes />

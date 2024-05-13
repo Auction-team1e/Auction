@@ -42,19 +42,20 @@ export const FeaturedCard = ({
     async function getData() {
       setUserEmail(localStorage.getItem("userEmail"));
     }
+    socket.on("connect", () => {
+      console.log("connected socket");
+    });
+    socket.on("chat-message", (data) => {
+      setAuctionId(data._id);
+      setNewBid(data.bidOrder);
+      setNextBid(Number(data.bidOrder) + (Number(data.bidOrder) * 10) / 100);
+    });
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const socket = io("https://socketbackend-53dj.onrender.com", {
     transports: ["websocket"],
   });
-  // socket.on("connect", () => {
-  //   console.log("connected socket");
-  // });
-  // socket.on("chat-message", (data) => {
-  //   setAuctionId(data._id);
-  //   setNewBid(data.bidOrder);
-  //   setNextBid(Number(data.bidOrder) + (Number(data.bidOrder) * 10) / 100);
-  // });
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     var today = new Date();
@@ -72,7 +73,7 @@ export const FeaturedCard = ({
     };
     if (item == false) {
       mustLogged();
-    } else if (Number(bidOrder) >= startPrice && Number(bidOrder) >= nextBid!) {
+    } else if ((bidOrder && Number(bidOrder) >= startPrice) || nextBid) {
       setLoading(true);
       await fetch("http://localhost:4000/api/car", {
         method: "PUT",
