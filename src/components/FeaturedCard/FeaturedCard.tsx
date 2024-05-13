@@ -34,8 +34,7 @@ export const FeaturedCard = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [nextBid, setNextBid] = useState<number>();
   const { item } = useCarData() as ContextType;
-  const failed = () =>
-    toast.error("Your order must be greater than next minimum");
+  const failed = () => toast.error("Your order must be next minimum or more");
   const mustLogged = () => toast.error("You must be logged");
   const succesfully = () => toast.success("Your order succesfully placed");
   useEffect(() => {
@@ -70,7 +69,9 @@ export const FeaturedCard = ({
       email: userEmail,
       bidCreatedAt: presentTime,
     };
-    if ((bidOrder && Number(bidOrder) >= startPrice) || newBid) {
+    if (item == false) {
+      mustLogged();
+    } else if (Number(bidOrder) >= startPrice && Number(bidOrder) >= nextBid!) {
       setLoading(true);
       await fetch("http://localhost:4000/api/car", {
         method: "PUT",
@@ -81,8 +82,6 @@ export const FeaturedCard = ({
       setLoading(false);
       succesfully();
       setBidOrder(``);
-    } else if (!item) {
-      mustLogged();
     } else {
       failed();
     }
@@ -123,11 +122,11 @@ export const FeaturedCard = ({
                 disabled
                 style={{
                   border: "none",
-                  backgroundColor: "white",
                   fontWeight: "600",
                   fontSize: "16px",
                   color: "black",
-                  width: `120px`,
+                  width: `95px`,
+                  backgroundColor: `white`,
                 }}
               />
             </Stack>

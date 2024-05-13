@@ -26,7 +26,6 @@ export const FeaturedCars = ({
   return (
     <Stack margin={"50px auto 100px"} maxWidth={1920} padding={"0 5vw"}>
       <Stack marginBottom={"28px"}>
-        {" "}
         <Typography fontSize={"27px"} fontWeight={400} lineHeight={"38px"}>
           {title}
         </Typography>

@@ -82,7 +82,7 @@ export const SearchModal = () => {
                   <Link
                     style={{ textDecoration: "none" }}
                     key={index}
-                    href={`cars/${s._id}`}
+                    href={`cars/${s.brand}/${s._id}`}
                   >
                     <Stack
                       direction={`row`}
