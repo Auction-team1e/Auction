@@ -1,5 +1,5 @@
 import { useCarData, ContextType } from "@/context/DataContext";
-import { carDetails, carDetailsSecod } from "../../utils/DummyData";
+import { carDetails, carDetailsSecod } from "@/utils/dumData";
 import {
   Box,
   Button,
@@ -18,17 +18,18 @@ interface infoType {
   brand: string;
   startPrice: number;
   description: string;
-  carDetails: [string];
-  img: [string];
+  carDetails: string[];
+  img: string[];
   userId: string;
 }
+
 const fields = [carDetails, carDetailsSecod];
+
 type dataType = { brandTitle: string; img: string };
 
 export const RInputs = ({ carInfo }: { carInfo: infoType }) => {
   const { selected, setSelected } = useCarData() as ContextType;
   const [data, setData] = useState<dataType[]>();
-
   useEffect(() => {
     async function getData() {
       const res = await fetch("http://localhost:4000/api/brand");
@@ -51,7 +52,7 @@ export const RInputs = ({ carInfo }: { carInfo: infoType }) => {
               return (
                 <MenuItem
                   key={val.img}
-                  value={val.brandTitle ?? ``}
+                  value={val.brandTitle ?? ""}
                   onClick={() => setSelected(val.brandTitle)}
                 >
                   {val.brandTitle}
@@ -81,19 +82,33 @@ export const RInputs = ({ carInfo }: { carInfo: infoType }) => {
                       </Typography>
                       <Box
                         defaultValue={
-                          val.label === "Year"
+                          val.label == "Year"
                             ? carInfo.carDetails[0]
-                            : val.label === "Location"
+                            : val.label == "Location"
                             ? carInfo.carDetails[1]
-                            : val.label === "Address"
+                            : val.label == "Address"
                             ? carInfo.carDetails[2]
-                            : val.label === "Mileage"
+                            : val.label == "Mileage"
                             ? carInfo.carDetails[3]
-                            : val.label === "Engine"
+                            : val.label == "Engine"
                             ? carInfo.carDetails[4]
-                            : val.label === "Gearbox"
+                            : val.label == "Gearbox"
                             ? carInfo.carDetails[5]
-                            : val.label === "Car type"
+                            : val.label == "Drive"
+                            ? carInfo.carDetails[6]
+                            : val.label == "Drive train"
+                            ? carInfo.carDetails[7]
+                            : val.label == "Fuel type"
+                            ? carInfo.carDetails[8]
+                            : val.label == "Power"
+                            ? carInfo.carDetails[9]
+                            : val.label == "Condition"
+                            ? carInfo.carDetails[10]
+                            : val.label == "Color"
+                            ? carInfo.carDetails[11]
+                            : val.label == "Interior color"
+                            ? carInfo.carDetails[12]
+                            : carInfo.carDetails[13]
                         }
                         component={"input"}
                         width={190}

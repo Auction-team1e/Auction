@@ -1,10 +1,11 @@
 "use client";
-import { modalStyle } from "../../utils/DummyData";
+import { modalStyle } from "@/utils/dumData";
 import { ButtonBase, Modal, Stack } from "@mui/material";
 import { useState } from "react";
 import { Inputs } from "./Inputs";
 import { useCarData, ContextType } from "@/context/DataContext";
 import { Edith } from "@/svgs";
+import { toast } from "react-toastify";
 
 interface infoType {
   _id: string;
@@ -12,12 +13,14 @@ interface infoType {
   brand: string;
   startPrice: number;
   description: string;
-  carDetails: [string];
-  img: [string];
+  carDetails: string[];
+  img: string[];
   userId: string;
+  endTime: string;
 }
 
 export const CarEditModal = ({ carInfos }: { carInfos: infoType }) => {
+  const success = () => toast.success("Invalid email or password");
   const {
     selected,
     imageUrlOne,
@@ -25,11 +28,16 @@ export const CarEditModal = ({ carInfos }: { carInfos: infoType }) => {
     imageUrlThree,
     imageUrlFour,
     endDate,
+    setImageUrlOne,
+    setImageUrlTwo,
+    setImageUrlThree,
+    setImageUrlFour,
+    setSelected,
   } = useCarData() as ContextType;
 
   const [open, setOpen] = useState(false);
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     var today = new Date();
@@ -42,6 +50,7 @@ export const CarEditModal = ({ carInfos }: { carInfos: infoType }) => {
 
     const carInfo = {
       userId: "662493855942867ee5ccfd65",
+      id: carInfos._id,
       carModel: e.target.model.value,
       description: e.target.desc.value,
       information: e.target.info.value,
@@ -68,18 +77,27 @@ export const CarEditModal = ({ carInfos }: { carInfos: infoType }) => {
       ],
     };
     console.log(carInfo);
-    // fetch("http://localhost:4000/api/car", {
-    //   method: "PUT",
-    //   body: JSON.stringify(carInfo),
-    //   headers: { "Content-Type": "application/json" },
-    // });
+    await fetch("http://localhost:4000/api/car", {
+      method: "PUT",
+      body: JSON.stringify(carInfo),
+      headers: { "Content-Type": "application/json" },
+    });
+    success();
+    setOpen(false);
   };
 
   return (
     <Stack>
       <ButtonBase
         sx={{ borderRadius: "7px", p: "7px" }}
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          setOpen(true);
+          setImageUrlOne(carInfos.img[0]);
+          setImageUrlTwo(carInfos.img[1]);
+          setImageUrlThree(carInfos.img[2]);
+          setImageUrlFour(carInfos.img[3]);
+          setSelected(`${carInfos.brand}`);
+        }}
       >
         <Edith />
       </ButtonBase>

@@ -13,6 +13,7 @@ interface infoType {
   carDetails: [string];
   img: [string];
   userId: string;
+  endTime: string;
 }
 
 const fontStyle = {

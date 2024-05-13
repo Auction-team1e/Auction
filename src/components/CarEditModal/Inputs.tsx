@@ -1,4 +1,4 @@
-import { inputs } from "../../utils/DummyData";
+import { inputs } from "@/utils/dumData";
 import { Box, Input, Stack, Typography } from "@mui/material";
 import { AddImg } from "./AddImg";
 import { RInputs } from "./RInputs";
@@ -14,9 +14,10 @@ interface infoType {
   brand: string;
   startPrice: number;
   description: string;
-  carDetails: [string];
-  img: [string];
+  carDetails: string[];
+  img: string[];
   userId: string;
+  endTime: string;
 }
 
 export const Inputs = ({ carInfo }: { carInfo: infoType }) => {

@@ -22,6 +22,15 @@ const textThirStyle = {
   lineHeight: "32px",
 };
 
+// type dataType = {
+//   _id: number;
+//   carModel: string;
+//   brand: string;
+//   startPrice: number;
+//   img: string[];
+//   endTime: string;
+// };
+
 export const AuctionInfo = () => {
   const router = useRouter();
 
@@ -37,7 +46,7 @@ export const AuctionInfo = () => {
           }}
         >
           <ArrowBlackLeft />
-          <Typography sx={textStyle}>Order details</Typography>
+          <Typography sx={textStyle}>Auction details</Typography>
         </ButtonBase>
       </Stack>
       <Stack p={"30px"} gap={"30px"} direction={"row"}>
