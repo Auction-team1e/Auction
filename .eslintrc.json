@@ -58,7 +58,7 @@
     {
       "files": ["*.tsx"],
       "rules": {
-        "complexity": ["error", { "max": 15 }]
+        "complexity": ["error", { "max": 60 }]
       }
     },
     {

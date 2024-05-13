@@ -13,7 +13,6 @@ type dataType = {
   endTime: string;
   _id: string;
 };
-
 export const CarDetail = ({ data }: { data: dataType | undefined }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [mainImageHovered, setMainImageHovered] = useState<boolean>(false);

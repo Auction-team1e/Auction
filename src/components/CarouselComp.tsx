@@ -7,7 +7,6 @@ interface Car {
   carModel: string;
   img: string[];
 }
-
 export const Carousel = () => {
   const [cars, setCars] = useState<Car[]>([]);
   const [curr, setCurr] = useState(0);
@@ -19,7 +18,6 @@ export const Carousel = () => {
       cars[curr === 0 ? cars.length - 1 : curr - 1]?.carModel || ""
     );
   };
-
   const next = () => {
     setCurr(curr === cars.length - 1 ? 0 : curr + 1);
     setCurrentTitle(
@@ -32,7 +30,7 @@ export const Carousel = () => {
       try {
         const res = await fetch(`http://localhost:4000/api/car`);
         const data = await res.json();
-        setCars(data);
+        setCars(data.slice(0, 4));
         setCurrentTitle(data[0]?.carModel || "");
       } catch (error) {
         console.error("Error fetching car data:", error);
@@ -55,25 +53,33 @@ export const Carousel = () => {
     <Stack width={"full"} overflow={"hidden"} position={"relative"}>
       <Stack direction={"row"}>
         {cars.map((car, index) => (
-          <Stack
-            bgcolor={`gray`}
-            key={index}
-            sx={{
-              display: "flex",
-              transition: "transform 1s ease",
-              transform: `translateX(-${curr * 100}%)`,
-            }}
-            width={`100vw`}
-          >
+          <Stack key={index} position={`relative`}>
             <Stack
               sx={{
-                backgroundImage: `url('${car.img[0]}')`,
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: `center`,
-                backgroundSize: "cover",
-                width: "100vw",
-                height: "920px",
+                display: "flex",
+                transition: "transform 1s ease",
+                transform: `translateX(-${curr * 100}%)`,
               }}
+              width={`100vw`}
+            >
+              <Stack
+                sx={{
+                  backgroundImage: `url('${car.img[0]}')`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: `center`,
+                  backgroundSize: "cover",
+                  width: "100vw",
+                  height: "920px",
+                }}
+              ></Stack>
+            </Stack>
+            <Stack
+              bgcolor={`black`}
+              sx={{ opacity: `30%` }}
+              width={1}
+              height={1}
+              position={`absolute`}
+              zIndex={5}
             ></Stack>
           </Stack>
         ))}
@@ -85,7 +91,7 @@ export const Carousel = () => {
           padding={"710px 96px 60px 96px"}
           direction={"row"}
         >
-          <Stack>
+          <Stack zIndex={10}>
             <Typography
               fontSize={"54px"}
               fontWeight={"400"}
@@ -117,6 +123,7 @@ export const Carousel = () => {
                 >
                   {cars.map((_, i) => (
                     <Stack
+                      zIndex={10}
                       key={i}
                       sx={{
                         transition: "all 0.3s ease stroke-dasharray",
@@ -128,7 +135,7 @@ export const Carousel = () => {
                     />
                   ))}
                 </Stack>
-                <Stack alignItems={"flex-end"} direction={"row"}>
+                <Stack alignItems={"flex-end"} direction={"row"} zIndex={10}>
                   <Button onClick={prev}>
                     <ArrowLeft />
                   </Button>

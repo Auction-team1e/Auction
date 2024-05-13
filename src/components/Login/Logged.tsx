@@ -39,7 +39,7 @@ export const Logged = () => {
   });
   return (
     <Stack
-      onMouseOver={(event) => setAnchorEl(event.currentTarget)}
+      onMouseEnter={(event) => setAnchorEl(event.currentTarget)}
       onMouseLeave={() => setAnchorEl(null)}
       position={`relative`}
     >
@@ -86,13 +86,7 @@ export const Logged = () => {
         onClose={handleClose}
       >
         <MenuItem sx={{ fontSize: 15, marginTop: 0.7 }} onClick={handleClose}>
-          Just For You
-        </MenuItem>
-        <MenuItem sx={{ fontSize: 15, marginTop: 0.7 }} onClick={handleClose}>
           Saved Listings
-        </MenuItem>
-        <MenuItem sx={{ fontSize: 15, marginTop: 0.7 }} onClick={handleClose}>
-          Saved Searches
         </MenuItem>
         <MenuItem
           sx={{ fontSize: 15, marginTop: 0.7 }}

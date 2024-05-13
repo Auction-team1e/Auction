@@ -60,11 +60,11 @@ export const Header = () => {
           <Stack
             color={scrolling ? "black" : `white`}
             fontSize={24}
-            width={140}
+            width={`fit-content`}
             sx={{ cursor: `pointer` }}
             onClick={() => router.push("/")}
           >
-            JamesEdition
+            GentleLux Auction
           </Stack>
         </Stack>
         <SearchModal />

@@ -2,8 +2,7 @@
 import { useRef, useEffect, useState } from "react";
 
 import { Stack, Typography, ButtonBase } from "@mui/material";
-
-import { carDetailsSecod } from "../../utils/dumData";
+import { NumericFormat } from "react-number-format";
 
 const customStyle = {
   fontSize: "26px",
@@ -50,25 +49,42 @@ export const CarInfo = ({ data }: { data: carInfo | undefined }) => {
       <Stack borderBottom={"1px solid #E0E0E0"} gap={"8px"}>
         <Stack direction={"row"} justifyContent={"space-between"}>
           <Typography sx={customStyle}>{data?.brand}</Typography>
-          <Typography sx={customStyle}>${data?.startPrice}</Typography>
+          <Typography sx={customStyle}>
+            <NumericFormat
+              value={data?.startPrice}
+              thousandSeparator=","
+              suffix="$"
+              disabled
+              style={{
+                border: "none",
+                fontWeight: "400",
+                fontSize: "28px",
+                color: "black",
+                width: `300px`,
+                backgroundColor: `white`,
+                textAlign: "end",
+              }}
+            />
+          </Typography>
         </Stack>
         <Stack mb={"24px"}>
           <Typography fontSize={"14px"} fontWeight={"400"} lineHeight={"22px"}>
-            {data?.carDetails}
+            {data?.carDetails[1]}
           </Typography>
         </Stack>
       </Stack>
 
-      <Stack mt={"25px"}>
+      <Stack mt={"25px"} gap={2}>
         <Typography fontSize={"20px"} fontWeight={"400"} lineHeight={"32px"}>
           About This Car
         </Typography>
-        <Stack alignItems={"center"} borderBottom={"1px solid #E0E0E0"}>
+        <Stack borderBottom={"1px solid #E0E0E0"}>
           <Stack
             sx={{ ...custStySec, ...(isOpen ? null : moreOrLess) }}
             ref={ref}
+            width={"full"}
           >
-            {data?.startPrice}
+            {data?.description}
           </Stack>
           <Stack width={"100px"} mb={"25px"}>
             {showReadMore && (
@@ -82,19 +98,57 @@ export const CarInfo = ({ data }: { data: carInfo | undefined }) => {
           </Stack>
         </Stack>
       </Stack>
-      <Stack borderBottom={"1px solid #E0E0E0"} gap={"16px"} mt={"25px"}>
+      <Stack
+        borderBottom={"1px solid #E0E0E0"}
+        gap={"16px"}
+        mt={"25px"}
+        padding={6}
+      >
         <Typography sx={customStyle}>Car Details</Typography>
-        <Stack mb={"25px"} gap={"16px"}>
-          {carDetailsSecod.map((a, index) => (
-            <Typography
-              style={{ color: "#717171" }}
-              sx={custStySec}
+        {data?.carDetails.slice(0, 15).map((a, index) => {
+          return (
+            <Stack
               key={index}
+              display={"grid"}
+              gridTemplateColumns={"min-content auto"}
+              sx={{ gridColumnGap: "48px", gridRowGap: "16px" }}
+              alignItems={"center"}
             >
-              {a.label}
-            </Typography>
-          ))}
-        </Stack>
+              <Stack component={"span"} width={100} color={"#717171"}>
+                {a > "" && index == 0
+                  ? "Year"
+                  : a > "" && index == 1
+                  ? "Location"
+                  : a > "" && index == 2
+                  ? "Adress"
+                  : a > "" && index == 3
+                  ? "Milage"
+                  : a > "" && index == 4
+                  ? "Engine"
+                  : a > "" && index == 5
+                  ? "Gearbox"
+                  : a > "" && index == 6
+                  ? "Car type"
+                  : a > "" && index == 7 && a > ""
+                  ? "Drive"
+                  : a > "" && index == 8 && a > ""
+                  ? "Drive Train"
+                  : a > "" && index == 9
+                  ? "Fuel Type"
+                  : a > "" && index == 10
+                  ? "Power"
+                  : a > "" && index == 11
+                  ? "Condition"
+                  : a > "" && index == 12
+                  ? "Exteroir Color"
+                  : a > "" && index == 13
+                  ? "Interior Color"
+                  : null}
+              </Stack>
+              <Typography>{a}</Typography>
+            </Stack>
+          );
+        })}
       </Stack>
     </Stack>
   );
