@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Footer } from "@/components/Footer/Footer";
-import { Header } from "@/components/Header/Header";
+// import { Footer } from "@/components/Footer/Footer";
+// import { Header } from "@/components/Header/Header";
 import "react-toastify/dist/ReactToastify.css";
 import CarProvider from "@/context/DataContext";
 import { MainLogo } from "@/svgs/TabLogo";
@@ -22,9 +22,9 @@ const RootLayout = ({
   return (
     <div className={inter.className}>
       <CarProvider>
-        <Header />
+        {/* <Header /> */}
         {children}
-        <Footer />
+        {/* <Footer /> */}
       </CarProvider>
     </div>
   );

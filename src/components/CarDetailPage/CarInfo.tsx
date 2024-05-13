@@ -1,9 +1,7 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
-
-import { Stack, Typography, ButtonBase } from "@mui/material";
+import { Stack, Typography, ButtonBase, useMediaQuery } from "@mui/material";
 import { NumericFormat } from "react-number-format";
-
 const customStyle = {
   fontSize: "26px",
   color: "#151515",
@@ -32,20 +30,18 @@ type carInfo = {
   img: string[];
   endTime: string;
 };
-
 export const CarInfo = ({ data }: { data: carInfo | undefined }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showReadMore, setShowReadMore] = useState(false);
-
   const ref = useRef<HTMLDivElement | null>(null);
-
   useEffect(() => {
     if (ref.current) {
       setShowReadMore(ref.current.scrollHeight > ref.current.clientHeight);
     }
   }, [data]);
+  const isMobile = useMediaQuery("(max-width:768px)");
   return (
-    <Stack width={"1720px"}>
+    <Stack width={"100%"} maxWidth={"100%"}>
       <Stack borderBottom={"1px solid #E0E0E0"} gap={"8px"}>
         <Stack direction={"row"} justifyContent={"space-between"}>
           <Typography sx={customStyle}>{data?.brand}</Typography>
@@ -67,15 +63,18 @@ export const CarInfo = ({ data }: { data: carInfo | undefined }) => {
             />
           </Typography>
         </Stack>
-        <Stack mb={"24px"}>
+        <Stack mb={isMobile ? "12px" : "24px"}>
           <Typography fontSize={"14px"} fontWeight={"400"} lineHeight={"22px"}>
             {data?.carDetails[1]}
           </Typography>
         </Stack>
       </Stack>
-
-      <Stack mt={"25px"} gap={2}>
-        <Typography fontSize={"20px"} fontWeight={"400"} lineHeight={"32px"}>
+      <Stack mt={isMobile ? "12px" : "25px"} gap={2}>
+        <Typography
+          fontSize={isMobile ? "18px" : "20px"}
+          fontWeight={"400"}
+          lineHeight={isMobile ? "28px" : "32px"}
+        >
           About This Car
         </Typography>
         <Stack borderBottom={"1px solid #E0E0E0"}>
@@ -101,8 +100,8 @@ export const CarInfo = ({ data }: { data: carInfo | undefined }) => {
       <Stack
         borderBottom={"1px solid #E0E0E0"}
         gap={"16px"}
-        mt={"25px"}
-        padding={6}
+        mt={isMobile ? "12px" : "25px"}
+        p={isMobile ? 3 : 6}
       >
         <Typography sx={customStyle}>Car Details</Typography>
         {data?.carDetails.slice(0, 15).map((a, index) => {
@@ -120,9 +119,9 @@ export const CarInfo = ({ data }: { data: carInfo | undefined }) => {
                   : a > "" && index == 1
                   ? "Location"
                   : a > "" && index == 2
-                  ? "Adress"
+                  ? "Address"
                   : a > "" && index == 3
-                  ? "Milage"
+                  ? "Mileage"
                   : a > "" && index == 4
                   ? "Engine"
                   : a > "" && index == 5
@@ -140,7 +139,7 @@ export const CarInfo = ({ data }: { data: carInfo | undefined }) => {
                   : a > "" && index == 11
                   ? "Condition"
                   : a > "" && index == 12
-                  ? "Exteroir Color"
+                  ? "Exterior Color"
                   : a > "" && index == 13
                   ? "Interior Color"
                   : null}

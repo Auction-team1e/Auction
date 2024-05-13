@@ -1,7 +1,7 @@
 "use client";
-import { CarDetail } from "@/components/CarDetailPage/CarDetail";
+// import { CarDetail } from "@/components/CarDetailPage/CarDetail";
 import { CarInfo } from "@/components/CarDetailPage/CarInfo";
-import { Contact } from "@/components/CarDetailPage/Contact";
+// import { Contact } from "@/components/CarDetailPage/Contact";
 import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 
@@ -35,9 +35,9 @@ const Page = ({ params }: { params: { slug: string } }) => {
   return (
     <Stack width={"100%"} alignItems={"center"} py={30}>
       <Stack>
-        <CarDetail data={data} />
+        {/* <CarDetail data={data} /> */}
         <CarInfo data={data} />
-        <Contact />
+        {/* <Contact /> */}
       </Stack>
     </Stack>
   );
