@@ -1,12 +1,11 @@
 "use client";
-
-import { Divider, Stack, Typography } from "@mui/material";
+import { Divider, Stack, Typography, useMediaQuery } from "@mui/material";
 import { MenuDrawer } from "./MenuDrawer";
 import { SearchModal } from "./SearchModal";
-import { LoginModal } from "./LoginModal";
 import { useEffect, useState } from "react";
 import { useCarData, ContextType } from "@/context/DataContext";
 import { useRouter } from "next/navigation";
+import { LoginModal } from "./LoginModal";
 
 type dataType = { brandTitle: string; img: string };
 
@@ -14,6 +13,7 @@ export const Header = () => {
   const [data, setData] = useState<Array<dataType>>();
   const { scrolling, setScrolling } = useCarData() as ContextType;
   const router = useRouter();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const handleScroll = () => {
     if (window.scrollY > 20) {
@@ -51,11 +51,15 @@ export const Header = () => {
         width={1}
         direction={`row`}
         alignItems={`center`}
-        px={7}
+        px={isMobile ? 2 : 7}
         justifyContent={`space-between`}
         bgcolor={`transparent`}
       >
-        <Stack direction={`row`} alignItems={`center`}>
+        <Stack
+          gap={isMobile ? "315px" : ""}
+          direction={`row`}
+          alignItems={`center`}
+        >
           <MenuDrawer />
           <Stack
             color={scrolling ? "black" : `white`}
@@ -67,60 +71,64 @@ export const Header = () => {
             GentleLux Auction
           </Stack>
         </Stack>
-        <SearchModal />
+        {!isMobile && <SearchModal />}
         <Stack height={`100%`} direction={`row`} alignItems={`center`} gap={3}>
-          <Stack
-            height={`100%`}
-            color={scrolling ? "black" : `white`}
-            sx={
-              scrolling
-                ? {
-                    cursor: `pointer`,
-                    ":hover": {
-                      borderBottom: `1px solid black`,
-                    },
-                  }
-                : {
-                    cursor: `pointer`,
-                    ":hover": {
-                      borderBottom: `1px solid white`,
-                    },
-                  }
-            }
-            justifyContent={`center`}
-            fontSize={14}
-          >
-            Sell With Us
-          </Stack>
-          <LoginModal />
+          {!isMobile && (
+            <Stack
+              height={`100%`}
+              color={scrolling ? "black" : `white`}
+              sx={
+                scrolling
+                  ? {
+                      cursor: `pointer`,
+                      ":hover": {
+                        borderBottom: `1px solid black`,
+                      },
+                    }
+                  : {
+                      cursor: `pointer`,
+                      ":hover": {
+                        borderBottom: `1px solid white`,
+                      },
+                    }
+              }
+              justifyContent={`center`}
+              fontSize={14}
+            >
+              Sell With Us
+            </Stack>
+          )}
+          {!isMobile && <LoginModal />}
         </Stack>
       </Stack>
       <Divider
         style={{ width: "100%" }}
         sx={{ bgcolor: `rgba(255, 255, 255, .2)`, height: 1.5 }}
       ></Divider>
-      <Stack
-        direction={`row`}
-        alignItems={`center`}
-        width={1}
-        height={46}
-        gap={2.7}
-        px={7}
-      >
-        {data?.map((val) => {
-          return (
-            <Typography
-              key={val.brandTitle}
-              color={scrolling ? "black" : `white`}
-              fontSize={14}
-              fontWeight={100}
-              sx={{ cursor: `pointer` }}
-            >
-              {val.brandTitle}
-            </Typography>
-          );
-        })}
-      </Stack>
+      {!isMobile && (
+        <Stack
+          direction={`row`}
+          alignItems={`center`}
+          width={1}
+          height={46}
+          gap={2.7}
+          px={7}
+        >
+          {data?.map((val) => {
+            return (
+              <Typography
+                key={val.brandTitle}
+                color={scrolling ? "black" : `white`}
+                fontSize={14}
+                fontWeight={100}
+                sx={{ cursor: `pointer` }}
+              >
+                {val.brandTitle}
+              </Typography>
+            );
+          })}
+        </Stack>
+      )}
       <Divider
         style={{ width: "100%" }}
         sx={{ bgcolor: `rgba(255, 255, 255, .2)`, height: 1.5 }}

@@ -41,8 +41,12 @@ export const CarInfo = ({ data }: { data: carInfo | undefined }) => {
   }, [data]);
   const isMobile = useMediaQuery("(max-width:768px)");
   return (
-    <Stack width={"100%"} maxWidth={"100%"}>
-      <Stack borderBottom={"1px solid #E0E0E0"} gap={"8px"}>
+    <Stack width={"100%"} maxWidth={"1720px"}>
+      <Stack
+        p={isMobile ? "24px" : "0px"}
+        borderBottom={"1px solid #E0E0E0"}
+        gap={"8px"}
+      >
         <Stack direction={"row"} justifyContent={"space-between"}>
           <Typography sx={customStyle}>{data?.brand}</Typography>
           <Typography sx={customStyle}>
@@ -63,13 +67,18 @@ export const CarInfo = ({ data }: { data: carInfo | undefined }) => {
             />
           </Typography>
         </Stack>
+
         <Stack mb={isMobile ? "12px" : "24px"}>
           <Typography fontSize={"14px"} fontWeight={"400"} lineHeight={"22px"}>
             {data?.carDetails[1]}
           </Typography>
         </Stack>
       </Stack>
-      <Stack mt={isMobile ? "12px" : "25px"} gap={2}>
+      <Stack
+        p={isMobile ? "24px" : "0px"}
+        mt={isMobile ? "12px" : "25px"}
+        gap={2}
+      >
         <Typography
           fontSize={isMobile ? "18px" : "20px"}
           fontWeight={"400"}
