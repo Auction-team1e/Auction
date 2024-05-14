@@ -19,7 +19,7 @@ export const FeaturedCard = ({
   endDate,
   brand,
 }: {
-  _id: number;
+  _id: string;
   carModel: string;
   startPrice: number;
   img: string[];
