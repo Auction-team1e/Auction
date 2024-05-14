@@ -59,36 +59,6 @@ export const HeaderDiff = () => {
         style={{ width: "100%" }}
         sx={{ bgcolor: `rgba(255, 255, 255, .2)`, height: 1.5 }}
       ></Divider>
-      <Stack
-        direction={`row`}
-        alignItems={`center`}
-        justifyContent={`flex-start`}
-        width={1}
-        height={46}
-        gap={2.7}
-        px={13}
-      >
-        {accParts.map((val) => {
-          return (
-            <Typography
-              key={val}
-              color={"#606060"}
-              fontSize={12}
-              fontWeight={500}
-              sx={{
-                cursor: `pointer`,
-                ":hover": { color: `black` },
-              }}
-            >
-              {val}
-            </Typography>
-          );
-        })}
-      </Stack>
-      <Divider
-        style={{ width: "100%" }}
-        sx={{ bgcolor: `rgba(255, 255, 255, .2)`, height: 1.5 }}
-      ></Divider>
     </Stack>
   );
 };
