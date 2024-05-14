@@ -1,43 +1,35 @@
 "use client";
-import { Divider, Stack, Typography } from "@mui/material";
-import { CarouselSlider } from "./CarouselSlider";
-import { EndTimeCounter } from "./EndTimeCounter";
-import { io } from "socket.io-client";
+
+import { Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { BidField } from "./BidField";
-import { NumericFormat } from "react-number-format";
-import { Bids } from "./Bids";
 import { useCarData, ContextType } from "@/context/DataContext";
-import { BidInput } from "./BidInput";
-import { toast } from "react-toastify";
-export const FeaturedCard = ({
+import { ToastContainer, toast } from "react-toastify";
+import { io } from "socket.io-client";
+import { EndTimeCounter } from "../FeaturedCard/EndTimeCounter";
+import { NumericFormat } from "react-number-format";
+import { BidField } from "../FeaturedCard/BidField";
+import { BidInputForDetail } from "./BidInputForDetail";
+import { BidsForDetail } from "./BidsForDetail";
+
+export const DetailPageBidBox = ({
   _id,
-  carModel,
   startPrice,
-  img,
-  carDetail,
   endDate,
-  brand,
 }: {
-  _id: number;
-  carModel: string;
-  startPrice: number;
-  img: string[];
-  carDetail: string[];
-  endDate: string;
-  brand: string;
+  _id: string | undefined;
+  startPrice: number | undefined;
+  endDate: string | undefined;
 }) => {
-  const [bidOrder, setBidOrder] = useState<string>();
-  const [newBid, setNewBid] = useState<string | undefined>(undefined);
-  const [auctionId, setAuctionId] = useState();
+  const { item } = useCarData() as ContextType;
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [nextBid, setNextBid] = useState<number>();
-  const { item } = useCarData() as ContextType;
+  const [newBid, setNewBid] = useState<string | undefined>(undefined);
+  const [auctionId, setAuctionId] = useState();
+  const [bidOrder, setBidOrder] = useState<string>();
   const failed = () => toast.error("Your order must be next minimum or more");
   const mustLogged = () => toast.error("You must be logged");
   const succesfully = () => toast.success("Your order succesfully placed");
-
   useEffect(() => {
     async function getData() {
       setUserEmail(localStorage.getItem("userEmail"));
@@ -57,6 +49,7 @@ export const FeaturedCard = ({
   const socket = io("https://socketbackend-53dj.onrender.com", {
     transports: ["websocket"],
   });
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     var today = new Date();
@@ -75,7 +68,7 @@ export const FeaturedCard = ({
     if (item == false) {
       mustLogged();
     } else if (
-      (bidOrder && Number(bidOrder) >= startPrice) ||
+      (bidOrder && Number(bidOrder) >= startPrice!) ||
       (nextBid && bidOrder !== ``)
     ) {
       setLoading(true);
@@ -94,25 +87,18 @@ export const FeaturedCard = ({
       failed();
     }
   };
-  let other = startPrice + (startPrice * 10) / 100;
+  let other = startPrice! + (startPrice! * 10) / 100;
   return (
-    <Stack border={"1px solid #e0e0e0"}>
-      <CarouselSlider img={img} _id={_id} brand={brand} />
-      <Stack px={3} py={3} gap={"10px"}>
-        <Stack direction={"row"} justifyContent={"space-between"} mt={"10px"}>
-          <Stack justifyContent={"center"}>
-            <Typography fontWeight={700}>{carModel}</Typography>
-            <Typography color={"#606060"}>{carDetail[1]}</Typography>
-          </Stack>
-          <form onSubmit={handleSubmit}>
-            <BidInput
-              bidOrder={bidOrder}
-              setBidOrder={setBidOrder}
-              loading={loading}
-            />
-          </form>
-        </Stack>
-        <Stack direction={"row"} mt={"10px"} justifyContent={`space-between`}>
+    <Stack
+      width={751}
+      height={`fit-content`}
+      justifyContent={`space-between`}
+      gap={1.7}
+    >
+      <ToastContainer />
+      <Stack border={`1px solid #d4d4d5`} borderRadius={1} p={`14px`} gap={2}>
+        <BidsForDetail id={_id} />
+        <Stack mt={"10px"} justifyContent={`space-between`}>
           <Stack gap={0.4}>
             <BidField
               label={"Current bid"}
@@ -139,12 +125,17 @@ export const FeaturedCard = ({
               />
             </Stack>
           </Stack>
-          <Divider sx={{ bgcolor: `gray` }} orientation="vertical" flexItem />
-          <Stack gap={0.4}>
-            <EndTimeCounter endDate={endDate} />
-            <Bids id={_id} />
-          </Stack>
         </Stack>
+        <form onSubmit={handleSubmit}>
+          <BidInputForDetail
+            bidOrder={bidOrder}
+            setBidOrder={setBidOrder}
+            loading={loading}
+          />
+        </form>
+      </Stack>
+      <Stack gap={0.4} borderRadius={1} border={`1px solid #d4d4d5`} p={`14px`}>
+        <EndTimeCounter endDate={endDate} />
       </Stack>
     </Stack>
   );

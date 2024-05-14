@@ -10,7 +10,7 @@ type dataType = {
   bidCreatedAt: string;
 };
 
-export const Bids = ({ id }: { id: number }) => {
+export const Bids = ({ id }: { id: string | undefined }) => {
   const [data, setData] = useState<Array<dataType>>();
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
 
