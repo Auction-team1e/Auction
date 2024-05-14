@@ -3,7 +3,7 @@
 import { Button, CircularProgress, Input, Stack } from "@mui/material";
 import { Dispatch } from "react";
 
-export const BidInput = ({
+export const BidInputForDetail = ({
   bidOrder,
   setBidOrder,
   loading,
@@ -13,7 +13,7 @@ export const BidInput = ({
   loading: boolean;
 }) => {
   return (
-    <Stack gap={"3px"} justifyContent={"center"} direction={"row"}>
+    <Stack gap={"18px"} justifyContent={"center"} direction={"row"}>
       <Input
         id="bidNum"
         value={bidOrder || ``}
@@ -26,6 +26,7 @@ export const BidInput = ({
           borderRadius: "5px",
           px: "10px",
           height: "40px",
+          width: 1,
         }}
       ></Input>
       <Stack>
@@ -38,7 +39,7 @@ export const BidInput = ({
               backgroundColor: "#006C75",
               color: "white",
               height: "40px",
-              width: 90,
+              width: 190,
               fontSize: 12,
               ":hover": {
                 backgroundColor: `#006C75b3`,

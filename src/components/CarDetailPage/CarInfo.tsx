@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from "react";
 
 import { Stack, Typography, ButtonBase } from "@mui/material";
 import { NumericFormat } from "react-number-format";
+import { DetailPageBidBox } from "./DetailPageBidBox";
 
 const customStyle = {
   fontSize: "26px",
@@ -22,7 +23,7 @@ const moreOrLess = {
   overflow: "hidden",
   display: "-webkit-box",
 };
-type carInfo = {
+type dataType = {
   _id: string;
   carModel: string;
   brand: string;
@@ -33,7 +34,7 @@ type carInfo = {
   endTime: string;
 };
 
-export const CarInfo = ({ data }: { data: carInfo | undefined }) => {
+export const CarInfo = ({ data }: { data: dataType | undefined }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showReadMore, setShowReadMore] = useState(false);
 
@@ -98,57 +99,64 @@ export const CarInfo = ({ data }: { data: carInfo | undefined }) => {
           </Stack>
         </Stack>
       </Stack>
-      <Stack
-        borderBottom={"1px solid #E0E0E0"}
-        gap={"16px"}
-        mt={"25px"}
-        padding={6}
-      >
-        <Typography sx={customStyle}>Car Details</Typography>
-        {data?.carDetails.slice(0, 15).map((a, index) => {
-          return (
-            <Stack
-              key={index}
-              display={"grid"}
-              gridTemplateColumns={"min-content auto"}
-              sx={{ gridColumnGap: "48px", gridRowGap: "16px" }}
-              alignItems={"center"}
-            >
-              <Stack component={"span"} width={100} color={"#717171"}>
-                {a > "" && index == 0
-                  ? "Year"
-                  : a > "" && index == 1
-                  ? "Location"
-                  : a > "" && index == 2
-                  ? "Adress"
-                  : a > "" && index == 3
-                  ? "Milage"
-                  : a > "" && index == 4
-                  ? "Engine"
-                  : a > "" && index == 5
-                  ? "Gearbox"
-                  : a > "" && index == 6
-                  ? "Car type"
-                  : a > "" && index == 7 && a > ""
-                  ? "Drive"
-                  : a > "" && index == 8 && a > ""
-                  ? "Drive Train"
-                  : a > "" && index == 9
-                  ? "Fuel Type"
-                  : a > "" && index == 10
-                  ? "Power"
-                  : a > "" && index == 11
-                  ? "Condition"
-                  : a > "" && index == 12
-                  ? "Exteroir Color"
-                  : a > "" && index == 13
-                  ? "Interior Color"
-                  : null}
+      <Stack direction={`row`} mt={"25px"}>
+        <Stack
+          borderBottom={"1px solid #E0E0E0"}
+          gap={"16px"}
+          padding={6}
+          width={1}
+        >
+          <Typography sx={customStyle}>Car Details</Typography>
+          {data?.carDetails.slice(0, 15).map((a, index) => {
+            return (
+              <Stack
+                key={index}
+                display={"grid"}
+                gridTemplateColumns={"min-content auto"}
+                sx={{ gridColumnGap: "48px", gridRowGap: "16px" }}
+                alignItems={"center"}
+              >
+                <Stack component={"span"} width={100} color={"#717171"}>
+                  {a > "" && index == 0
+                    ? "Year"
+                    : a > "" && index == 1
+                    ? "Location"
+                    : a > "" && index == 2
+                    ? "Adress"
+                    : a > "" && index == 3
+                    ? "Milage"
+                    : a > "" && index == 4
+                    ? "Engine"
+                    : a > "" && index == 5
+                    ? "Gearbox"
+                    : a > "" && index == 6
+                    ? "Car type"
+                    : a > "" && index == 7 && a > ""
+                    ? "Drive"
+                    : a > "" && index == 8 && a > ""
+                    ? "Drive Train"
+                    : a > "" && index == 9
+                    ? "Fuel Type"
+                    : a > "" && index == 10
+                    ? "Power"
+                    : a > "" && index == 11
+                    ? "Condition"
+                    : a > "" && index == 12
+                    ? "Exteroir Color"
+                    : a > "" && index == 13
+                    ? "Interior Color"
+                    : null}
+                </Stack>
+                <Typography>{a}</Typography>
               </Stack>
-              <Typography>{a}</Typography>
-            </Stack>
-          );
-        })}
+            );
+          })}
+        </Stack>
+        <DetailPageBidBox
+          _id={data?._id}
+          startPrice={data?.startPrice}
+          endDate={data?.endTime}
+        />
       </Stack>
     </Stack>
   );

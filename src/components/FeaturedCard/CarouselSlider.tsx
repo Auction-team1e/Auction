@@ -12,7 +12,7 @@ export const CarouselSlider = ({
   brand,
 }: {
   img: string[];
-  _id: number;
+  _id: string;
   brand: string;
 }) => {
   return (
