@@ -13,6 +13,7 @@ type SignUpType = {
   lastName: string;
   email: string;
 };
+
 export type ContextType = {
   selected: string;
   setSelected: Dispatch<React.SetStateAction<string>>;
@@ -47,6 +48,7 @@ const CarProvider = ({ children }: { children: React.ReactNode }) => {
   const [imageUrlFour, setImageUrlFour] = useState<string>("");
   const [endDate, setEndDate] = useState<Dayjs | null>(null);
   const [open, setOpen] = useState<boolean>(false);
+  console.log("🚀 ~ CarProvider ~ open:", open);
   const [scrolling, setScrolling] = useState<boolean>(false);
   const [signUpFields, setSignUpFields] = useState<SignUpType>({
     email: ``,
@@ -54,6 +56,7 @@ const CarProvider = ({ children }: { children: React.ReactNode }) => {
     lastName: ``,
   });
   const [item, setItem] = useState<boolean>(false);
+
   useEffect(() => {
     async function getData() {
       setItem(localStorage.getItem("userEmail") ? true : false);
