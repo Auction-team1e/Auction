@@ -64,7 +64,7 @@ export const Header = () => {
             sx={{ cursor: `pointer` }}
             onClick={() => router.push("/")}
           >
-            GentleLux Auction
+            Prestige
           </Stack>
         </Stack>
         <SearchModal />
