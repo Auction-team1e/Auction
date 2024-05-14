@@ -1,10 +1,9 @@
 "use client";
 
-import { Divider, Stack, Typography } from "@mui/material";
+import { Divider, Link, Stack, Typography } from "@mui/material";
 import { MenuDrawer } from "./MenuDrawer";
 import { SearchModal } from "./SearchModal";
 import { LoginModal } from "./LoginModal";
-import { accParts } from "@/utils/dumData";
 
 export const HeaderDiff = () => {
   return (
@@ -27,14 +26,16 @@ export const HeaderDiff = () => {
       >
         <Stack direction={`row`} alignItems={`center`}>
           <MenuDrawer />
-          <Typography
-            color={"black"}
-            fontSize={24}
-            width={140}
-            sx={{ cursor: `pointer` }}
-          >
-            JamesEdition
-          </Typography>
+          <Link href="/" sx={{ textDecoration: "none" }}>
+            <Typography
+              color={"black"}
+              fontSize={24}
+              width={140}
+              sx={{ cursor: `pointer` }}
+            >
+              Prestige
+            </Typography>
+          </Link>
         </Stack>
         <SearchModal />
         <Stack height={`100%`} direction={`row`} alignItems={`center`} gap={3}>
