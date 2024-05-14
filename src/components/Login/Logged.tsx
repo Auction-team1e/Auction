@@ -12,7 +12,7 @@ type dataType = {
 };
 
 export const Logged = () => {
-  const { scrolling, setItem } = useCarData() as ContextType;
+  const { scrolling, setItem, setFilteredUser } = useCarData() as ContextType;
   const [data, setData] = useState<Array<dataType>>();
   const [localItem, setLocalItem] = useState<string | null>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -34,9 +34,10 @@ export const Logged = () => {
     getData();
   }, []);
 
-  const filteredUser = data?.filter((val) => {
+  const User = data?.filter((val) => {
     return val.email == localItem;
   });
+  setFilteredUser(User && User[0]);
   return (
     <Stack
       onMouseEnter={(event) => setAnchorEl(event.currentTarget)}
@@ -66,7 +67,7 @@ export const Logged = () => {
         justifyContent={`center`}
         fontSize={14}
       >
-        {filteredUser && filteredUser[0]?.firstName}
+        {User && User[0]?.firstName}
         {open == false ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
       </Stack>
       <Menu

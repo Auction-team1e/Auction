@@ -21,11 +21,9 @@ type dataType = { brandTitle: string };
 
 export const MenuDrawer = () => {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
-  const { scrolling, setOpen, item } = useCarData() as ContextType;
+  const { scrolling, setOpen, item, setItem, filteredUser } =
+    useCarData() as ContextType;
   const [data, setData] = useState<Array<dataType>>();
-  const [logger, setLogger] = useState<string>(
-    item == true ? `Log in` : `Sign Out`
-  );
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpenDrawer(newOpen);
@@ -36,10 +34,14 @@ export const MenuDrawer = () => {
       const res = await fetch("http://localhost:4000/api/brand");
       const brands = await res.json();
       setData(brands);
-      setLogger;
     }
     getData();
-  }, []);
+  }, [setItem, setOpen]);
+
+  function signOut() {
+    localStorage.clear();
+    setItem(false);
+  }
 
   const DrawerList = (
     <Box sx={{ width: 315 }} role="presentation" onClick={toggleDrawer(false)}>
@@ -53,7 +55,11 @@ export const MenuDrawer = () => {
           fontSize: "14px",
         }}
       >
-        Welcome!
+        {!item
+          ? `Welcome!`
+          : `Good afternoon, ${filteredUser?.firstName}${` `}${
+              filteredUser?.lastName
+            }`}
       </Typography>
       <Divider />
       <List>
@@ -72,13 +78,23 @@ export const MenuDrawer = () => {
         ))}
       </List>
       <Divider />
+      {item ? (
+        <Link
+          href={`/account`}
+          style={{ textDecoration: "none", color: `black` }}
+        >
+          <ListItemButton>
+            <ListItemText primary={`Account`} sx={{ pl: 6 }} />
+          </ListItemButton>
+        </Link>
+      ) : null}
       <Stack
         onClick={() => {
-          setOpen(true);
+          item ? signOut() : setOpen(true);
         }}
       >
         <ListItemButton>
-          <ListItemText primary={logger} sx={{ pl: 6 }} />
+          <ListItemText primary={item ? `Sign Out` : `Login`} sx={{ pl: 6 }} />
         </ListItemButton>
       </Stack>
     </Box>

@@ -13,6 +13,12 @@ type SignUpType = {
   lastName: string;
   email: string;
 };
+type dataType = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+};
 
 export type ContextType = {
   selected: string;
@@ -35,6 +41,8 @@ export type ContextType = {
   setSignUpFields: Dispatch<React.SetStateAction<SignUpType>>;
   item: boolean;
   setItem: Dispatch<React.SetStateAction<boolean>>;
+  filteredUser: dataType | undefined;
+  setFilteredUser: Dispatch<React.SetStateAction<dataType | undefined>>;
 };
 
 const CarContext = createContext<ContextType | null>(null);
@@ -56,6 +64,7 @@ const CarProvider = ({ children }: { children: React.ReactNode }) => {
     lastName: ``,
   });
   const [item, setItem] = useState<boolean>(false);
+  const [filteredUser, setFilteredUser] = useState<dataType | undefined>();
 
   useEffect(() => {
     async function getData() {
@@ -86,6 +95,8 @@ const CarProvider = ({ children }: { children: React.ReactNode }) => {
         setSignUpFields,
         item,
         setItem,
+        filteredUser,
+        setFilteredUser,
       }}
     >
       {children}

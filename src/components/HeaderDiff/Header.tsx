@@ -2,8 +2,8 @@
 
 import { Divider, Link, Stack, Typography } from "@mui/material";
 import { MenuDrawer } from "./MenuDrawer";
-import { SearchModal } from "./SearchModal";
 import { LoginModal } from "./LoginModal";
+import { SearchModal } from "../Header/SearchModal";
 
 export const HeaderDiff = () => {
   return (

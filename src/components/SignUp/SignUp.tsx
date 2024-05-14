@@ -4,7 +4,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import { fields, signUpBtn } from "@/utils/dumData";
 import { useCarData, ContextType } from "@/context/DataContext";
 import { useFormik } from "formik";
-import { ToastContainer } from "react-toastify";
 import * as Yup from "yup";
 import { Dispatch } from "react";
 
@@ -153,7 +152,6 @@ export const SignUp = ({
           </Link>
         </Stack>
       </Stack>
-      <ToastContainer />
     </>
   );
 };

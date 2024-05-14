@@ -3,8 +3,8 @@ import { Box, Modal, Stack } from "@mui/material";
 import { SignUp } from "../SignUp/SignUp";
 import { useCarData, ContextType } from "@/context/DataContext";
 import { Login } from "../Login/Login";
-import { useEffect, useState } from "react";
 import { SignUpNextStep } from "../SignUp/SignUpNextStep";
+import { useState } from "react";
 import { LoggedForDiff } from "../Login/LoggedForDiff";
 const style = {
   position: "absolute" as "absolute",
@@ -17,20 +17,14 @@ const style = {
 };
 
 export const LoginModal = () => {
-  const { open, setOpen } = useCarData() as ContextType;
+  const { open, setOpen, item } = useCarData() as ContextType;
   const [handle, setHandle] = useState<string>("login");
-  const [item, setItem] = useState<string | null>(null);
 
-  useEffect(() => {
-    async function getData() {
-      const loggedUserToken = localStorage.getItem("userToken");
-      setItem(loggedUserToken);
-    }
-    getData();
-  }, []);
   return (
     <>
-      {item == null ? (
+      {item ? (
+        <LoggedForDiff />
+      ) : (
         <Stack
           width={94.21}
           height={38}
@@ -65,8 +59,6 @@ export const LoginModal = () => {
             </Box>
           </Modal>
         </Stack>
-      ) : (
-        <LoggedForDiff />
       )}
     </>
   );
