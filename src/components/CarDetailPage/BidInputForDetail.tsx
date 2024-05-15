@@ -1,6 +1,12 @@
 "use client";
 
-import { Button, CircularProgress, Input, Stack } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  Input,
+  Stack,
+  useMediaQuery,
+} from "@mui/material";
 import { Dispatch } from "react";
 
 export const BidInputForDetail = ({
@@ -12,12 +18,14 @@ export const BidInputForDetail = ({
   setBidOrder: Dispatch<React.SetStateAction<string | undefined>>;
   loading: boolean;
 }) => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   return (
     <Stack
       borderTop={"1px solid grey"}
-      position={"fixed"}
+      position={isMobile ? "fixed" : "static"}
       p={1}
-      bottom={0}
+      bottom={isMobile ? 0 : "auto"}
       bgcolor={"white"}
       width={"100vw"}
       zIndex={1000}

@@ -27,7 +27,7 @@ export const HeaderDiff = () => {
         bgcolor={`transparent`}
       >
         <Stack direction={`row`}>
-          <MenuDrawer />
+          {isMobile && <MenuDrawer />}
           <Link href="/" sx={{ textDecoration: "none" }}>
             <Typography
               color={"black"}
