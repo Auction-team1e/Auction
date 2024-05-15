@@ -91,7 +91,6 @@ export const FeaturedCard = ({
         headers: { "Content-Type": "application/json" },
       });
       const resJson = await res.json();
-
       const socket = io("https://socketbackend-hfon.onrender.com", {
         transports: ["websocket"],
       });
