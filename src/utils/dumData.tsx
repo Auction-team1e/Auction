@@ -1,3 +1,4 @@
+/* eslint-disable no-secrets/no-secrets */
 import { FBook } from "@/svgs/Fbook";
 
 export const fields = [
