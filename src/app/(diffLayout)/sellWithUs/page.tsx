@@ -28,7 +28,7 @@ const Page = () => {
   const img = sellwithUsImg;
   return (
     <Stack>
-      <Stack padding={"0 5vw"} maxWidth={"1920px"} margin={"0 auto"} mt={10}>
+      <Stack padding={"0 5vw"} maxWidth={"1920px"} margin={"0 auto"} mt={30}>
         <Stack
           mb={"84px"}
           direction={"row"}
