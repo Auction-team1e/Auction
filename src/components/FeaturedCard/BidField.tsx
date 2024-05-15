@@ -10,10 +10,10 @@ export const BidField = ({
   dataPrice,
   label,
 }: {
-  id: number;
+  id: string | undefined;
   auctionId: undefined;
-  bid: string | number;
-  dataPrice: number;
+  bid: string | number | undefined;
+  dataPrice: number | undefined;
   label: string;
 }) => {
   return (

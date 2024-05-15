@@ -1,8 +1,16 @@
 "use client";
-import { Box, Button, Divider, Link, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Divider,
+  Link,
+  Stack,
+  Typography,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { SignUpNextStepInputs } from "@/utils/dumData";
-import { Dispatch } from "react";
+import { Dispatch, useState } from "react";
 import { useCarData, ContextType } from "@/context/DataContext";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -13,8 +21,9 @@ export const SignUpNextStep = ({
 }: {
   setHandle: Dispatch<React.SetStateAction<string>>;
 }) => {
-  const { setOpen, open, signUpFields } = useCarData() as ContextType;
-  const notify = () => toast("Wow so easy!");
+  const { setOpen, open, signUpFields, setItem } = useCarData() as ContextType;
+  const [loading, setLoading] = useState<boolean>(false);
+  const success = () => toast.success("Successfully registered");
 
   const formik = useFormik({
     initialValues: {
@@ -29,21 +38,28 @@ export const SignUpNextStep = ({
         .oneOf([Yup.ref("enterPass")], "Passwords must match")
         .required("Enter your confirmation password"),
     }),
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       const userData = {
         firstName: signUpFields.firstName,
         lastName: signUpFields.lastName,
         email: signUpFields.email,
         password: values.enterPass,
       };
-      console.log("🚀 ~ userData:", userData);
-      setHandle("createPass");
-      notify();
-      fetch("http://localhost:4000/api/signup", {
+      setLoading(true);
+      const res = await fetch("http://localhost:4000/api/signup", {
         method: "POST",
         body: JSON.stringify(userData),
         headers: { "Content-Type": "application/json" },
       });
+      const resJson = await res.json();
+      if (resJson.message) {
+        setLoading(false);
+        success();
+        setOpen(false);
+        localStorage.setItem("userEmail", userData.email);
+        setItem(true);
+        setHandle("login");
+      }
     },
   });
   return (
@@ -99,19 +115,23 @@ export const SignUpNextStep = ({
             8 characters or longer. Combine uppercase and lowercase letters.
           </Typography>
         </Stack>
-        <Button
-          type="submit"
-          sx={{
-            bgcolor: `#151515`,
-            color: `white`,
-            textTransform: `none`,
-            width: 376,
-            height: 53.5,
-            fontSize: 16,
-          }}
-        >
-          Continue
-        </Button>
+        {loading ? (
+          <CircularProgress sx={{ color: `black`, ml: 20 }} />
+        ) : (
+          <Button
+            type="submit"
+            sx={{
+              bgcolor: `#151515`,
+              color: `white`,
+              textTransform: `none`,
+              width: 376,
+              height: 53.5,
+              fontSize: 16,
+            }}
+          >
+            Continue
+          </Button>
+        )}
         <Typography
           mt={5}
           width={376}
@@ -119,7 +139,7 @@ export const SignUpNextStep = ({
           fontSize={14}
           fontWeight={400}
         >
-          By joining, you agree to JamesEdition&apos;s{" "}
+          By joining, you agree to Prestige&apos;s{" "}
           <Link color={`#717171`}>Terms of Service</Link> and{" "}
           <Link color={`#717171`}>Privacy Policy</Link>, as well as to receive
           occasional emails from us.

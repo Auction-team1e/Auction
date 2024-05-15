@@ -2,17 +2,18 @@
 import { useRef, useEffect, useState } from "react";
 import { Stack, Typography, ButtonBase, useMediaQuery } from "@mui/material";
 import { NumericFormat } from "react-number-format";
+import { DetailPageBidBox } from "./DetailPageBidBox";
 const customStyle = {
-  fontSize: "26px",
+  fontSize: { xs: "18px", sm: "26px" },
   color: "#151515",
   fontWeight: 400,
-  lineHeight: "44px",
+  lineHeight: { xs: "28px", sm: "44px" },
 };
 const custStySec = {
-  fontSize: "16px",
+  fontSize: { xs: "14px", sm: "16px" },
   color: "#151515",
   fontWeight: 400,
-  lineHeight: "24px",
+  lineHeight: { xs: "22px", sm: "24px" },
 };
 const moreOrLess = {
   WebkitLineClamp: 2,
@@ -20,7 +21,7 @@ const moreOrLess = {
   overflow: "hidden",
   display: "-webkit-box",
 };
-type carInfo = {
+type dataType = {
   _id: string;
   carModel: string;
   brand: string;
@@ -30,7 +31,7 @@ type carInfo = {
   img: string[];
   endTime: string;
 };
-export const CarInfo = ({ data }: { data: carInfo | undefined }) => {
+export const CarInfo = ({ data }: { data: dataType | undefined }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showReadMore, setShowReadMore] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
@@ -39,35 +40,43 @@ export const CarInfo = ({ data }: { data: carInfo | undefined }) => {
       setShowReadMore(ref.current.scrollHeight > ref.current.clientHeight);
     }
   }, [data]);
+
   const isMobile = useMediaQuery("(max-width:768px)");
   return (
-    <Stack width={"100%"} maxWidth={"1720px"}>
+    <Stack
+      width={"100%"}
+      maxWidth={"1720px"}
+      padding={isMobile ? "16px" : "32px"}
+    >
       <Stack
-        p={isMobile ? "24px" : "0px"}
+        padding={isMobile ? "16px" : "0px"}
         borderBottom={"1px solid #E0E0E0"}
         gap={"8px"}
       >
-        <Stack direction={"row"} justifyContent={"space-between"}>
+        <Stack
+          direction={"row"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+        >
           <Typography sx={customStyle}>{data?.brand}</Typography>
           <Typography sx={customStyle}>
             <NumericFormat
               value={data?.startPrice}
               thousandSeparator=","
               suffix="$"
-              disabled
+              displayType="text"
               style={{
                 border: "none",
                 fontWeight: "400",
-                fontSize: "28px",
-                color: "black",
-                width: `300px`,
-                backgroundColor: `white`,
+                fontSize: "inherit",
+                color: "inherit",
+                width: "auto",
+                backgroundColor: "white",
                 textAlign: "end",
               }}
             />
           </Typography>
         </Stack>
-
         <Stack mb={isMobile ? "12px" : "24px"}>
           <Typography fontSize={"14px"} fontWeight={"400"} lineHeight={"22px"}>
             {data?.carDetails[1]}
@@ -75,14 +84,14 @@ export const CarInfo = ({ data }: { data: carInfo | undefined }) => {
         </Stack>
       </Stack>
       <Stack
-        p={isMobile ? "24px" : "0px"}
+        padding={isMobile ? "16px" : "0px"}
         mt={isMobile ? "12px" : "25px"}
         gap={2}
       >
         <Typography
-          fontSize={isMobile ? "18px" : "20px"}
+          fontSize={isMobile ? "16px" : "20px"}
           fontWeight={"400"}
-          lineHeight={isMobile ? "28px" : "32px"}
+          lineHeight={isMobile ? "24px" : "32px"}
         >
           About This Car
         </Typography>
@@ -107,56 +116,57 @@ export const CarInfo = ({ data }: { data: carInfo | undefined }) => {
         </Stack>
       </Stack>
       <Stack
-        borderBottom={"1px solid #E0E0E0"}
-        gap={"16px"}
-        mt={isMobile ? "12px" : "25px"}
-        p={isMobile ? 3 : 6}
+        mt={isMobile ? "10px" : "25px"}
+        direction={isMobile ? "column" : "row"}
+        justifyContent={"space-between"}
       >
-        <Typography sx={customStyle}>Car Details</Typography>
-        {data?.carDetails.slice(0, 15).map((a, index) => {
-          return (
-            <Stack
-              key={index}
-              display={"grid"}
-              gridTemplateColumns={"min-content auto"}
-              sx={{ gridColumnGap: "48px", gridRowGap: "16px" }}
-              alignItems={"center"}
-            >
-              <Stack component={"span"} width={100} color={"#717171"}>
-                {a > "" && index == 0
-                  ? "Year"
-                  : a > "" && index == 1
-                  ? "Location"
-                  : a > "" && index == 2
-                  ? "Address"
-                  : a > "" && index == 3
-                  ? "Mileage"
-                  : a > "" && index == 4
-                  ? "Engine"
-                  : a > "" && index == 5
-                  ? "Gearbox"
-                  : a > "" && index == 6
-                  ? "Car type"
-                  : a > "" && index == 7 && a > ""
-                  ? "Drive"
-                  : a > "" && index == 8 && a > ""
-                  ? "Drive Train"
-                  : a > "" && index == 9
-                  ? "Fuel Type"
-                  : a > "" && index == 10
-                  ? "Power"
-                  : a > "" && index == 11
-                  ? "Condition"
-                  : a > "" && index == 12
-                  ? "Exterior Color"
-                  : a > "" && index == 13
-                  ? "Interior Color"
-                  : null}
+        <Stack
+          padding={isMobile ? "16px" : ""}
+          pb={"40px"}
+          borderBottom={"1px solid #E0E0E0"}
+          gap={"16px"}
+        >
+          <Typography sx={customStyle}>Car Details</Typography>
+          {data?.carDetails.slice(0, 15).map((a, index) => {
+            const labels = [
+              "Year",
+              "Location",
+              "Address",
+              "Mileage",
+              "Engine",
+              "Gearbox",
+              "Car type",
+              "Drive",
+              "Drive Train",
+              "Fuel Type",
+              "Power",
+              "Condition",
+              "Exterior Color",
+              "Interior Color",
+            ];
+            return (
+              <Stack
+                key={index}
+                display={"grid"}
+                gridTemplateColumns={"min-content auto"}
+                sx={{ gridColumnGap: "16px", gridRowGap: "8px" }}
+                alignItems={"center"}
+              >
+                <Typography component={"span"} width={100} color={"#717171"}>
+                  {a && labels[index]}
+                </Typography>
+                <Typography>{a}</Typography>
               </Stack>
-              <Typography>{a}</Typography>
-            </Stack>
-          );
-        })}
+            );
+          })}
+        </Stack>
+        <Stack pt={isMobile ? "30px" : ""}>
+          <DetailPageBidBox
+            _id={data?._id}
+            startPrice={data?.startPrice}
+            endDate={data?.endTime}
+          />
+        </Stack>
       </Stack>
     </Stack>
   );

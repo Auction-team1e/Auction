@@ -8,7 +8,7 @@ import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 
 type dataType = {
-  _id: number;
+  _id: string;
   carModel: string;
   brand: string;
   startPrice: number;

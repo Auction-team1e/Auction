@@ -1,3 +1,4 @@
+/* eslint-disable no-secrets/no-secrets */
 import { FBook } from "@/svgs/Fbook";
 
 export const fields = [
@@ -91,4 +92,9 @@ export const accParts = [
   "SAVED SEARCHES",
   "SENT INQUIRIES",
   "ACCOUNT",
+];
+
+export const sellwithUsImg = [
+  "https://static-x.jamesedition.com/assets/seller_landing/cars1-01bf0ee1dfc77f02182d9ec6284670bb5827e6a2263e2b8adf7a0aa8b09af0b4.png",
+  "https://static-x.jamesedition.com/assets/seller_landing/cars2-c8af3d876ad629f3e1f61310d703ab9ecf062e3233f9b9b6e8d39e8097bc53b3.png",
 ];

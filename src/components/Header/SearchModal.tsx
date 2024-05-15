@@ -4,14 +4,12 @@ import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import Link from "next/link";
 const style = {
-  position: "absolute",
-  top: "20%",
-  left: "50.9%",
-  transform: "translate(-50%, -50%)",
-  width: 545,
+  mt: 1.4,
+  width: 575,
+  height: `fit-content`,
   bgcolor: "background.paper",
   borderRadius: `10px`,
-  p: 4,
+  py: 1.8,
 };
 type dataType = {
   _id: number;
@@ -66,12 +64,21 @@ export const SearchModal = () => {
         <SearchIcon sx={{ fontSize: 23 }} />
         Search Cars
       </Stack>
-      <Modal open={open} onClose={() => setOpen(false)}>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        sx={{
+          width: 1,
+          height: 1,
+          display: `flex`,
+          justifyContent: `center`,
+        }}
+      >
         <Box sx={style}>
           <Input
             onChange={(e) => handleSearch(e)}
             placeholder="Search Cars"
-            sx={{ width: 475, borderBottom: `1px solid black`, pb: 1 }}
+            sx={{ width: 475, borderBottom: `1px solid black`, pb: 1, mx: 4 }}
             disableUnderline
           ></Input>
           {activeSearch && activeSearch?.length > 0 && (
@@ -82,6 +89,7 @@ export const SearchModal = () => {
                     style={{ textDecoration: "none" }}
                     key={index}
                     href={`cars/${s.brand}/${s._id}`}
+                    onClick={() => setOpen(false)}
                   >
                     <Stack
                       direction={`row`}
@@ -91,10 +99,10 @@ export const SearchModal = () => {
                         cursor: `pointer`,
                         ":hover": { bgcolor: `#F1F1F1` },
                       }}
-                      height={40}
+                      height={50}
                     >
-                      <SearchIcon sx={{ color: `gray`, mr: 2 }} />
-                      <Typography fontSize={17}>{s.carModel}</Typography>
+                      <SearchIcon sx={{ color: `gray`, mr: 1.7, ml: 3 }} />
+                      <Typography fontSize={18}>{s.carModel}</Typography>
                     </Stack>
                   </Link>
                 );

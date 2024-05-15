@@ -4,7 +4,7 @@ import { Stack, Typography } from "@mui/material";
 import { FeaturedCard } from "./FeaturedCard";
 
 type dataType = {
-  _id: number;
+  _id: string;
   carModel: string;
   brand: string;
   startPrice: number;

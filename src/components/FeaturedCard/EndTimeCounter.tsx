@@ -3,7 +3,11 @@ import { Stack, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 
-export const EndTimeCounter = ({ endDate }: { endDate: string }) => {
+export const EndTimeCounter = ({
+  endDate,
+}: {
+  endDate: string | undefined;
+}) => {
   const [day, setDay] = useState(0);
   const [hour, setHour] = useState(0);
   const [minute, setMinute] = useState(0);

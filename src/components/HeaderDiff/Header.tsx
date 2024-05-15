@@ -1,10 +1,9 @@
 "use client";
 
-import { Divider, Stack, Typography } from "@mui/material";
+import { Divider, Link, Stack, Typography } from "@mui/material";
 import { MenuDrawer } from "./MenuDrawer";
-import { SearchModal } from "./SearchModal";
 import { LoginModal } from "./LoginModal";
-import { accParts } from "@/utils/dumData";
+import { SearchModal } from "../Header/SearchModal";
 
 export const HeaderDiff = () => {
   return (
@@ -27,14 +26,16 @@ export const HeaderDiff = () => {
       >
         <Stack direction={`row`} alignItems={`center`}>
           <MenuDrawer />
-          <Typography
-            color={"black"}
-            fontSize={24}
-            width={140}
-            sx={{ cursor: `pointer` }}
-          >
-            JamesEdition
-          </Typography>
+          <Link href="/" sx={{ textDecoration: "none" }}>
+            <Typography
+              color={"black"}
+              fontSize={24}
+              width={140}
+              sx={{ cursor: `pointer` }}
+            >
+              Prestige
+            </Typography>
+          </Link>
         </Stack>
         <SearchModal />
         <Stack height={`100%`} direction={`row`} alignItems={`center`} gap={3}>
@@ -54,36 +55,6 @@ export const HeaderDiff = () => {
           </Stack>
           <LoginModal />
         </Stack>
-      </Stack>
-      <Divider
-        style={{ width: "100%" }}
-        sx={{ bgcolor: `rgba(255, 255, 255, .2)`, height: 1.5 }}
-      ></Divider>
-      <Stack
-        direction={`row`}
-        alignItems={`center`}
-        justifyContent={`flex-start`}
-        width={1}
-        height={46}
-        gap={2.7}
-        px={13}
-      >
-        {accParts.map((val) => {
-          return (
-            <Typography
-              key={val}
-              color={"#606060"}
-              fontSize={12}
-              fontWeight={500}
-              sx={{
-                cursor: `pointer`,
-                ":hover": { color: `black` },
-              }}
-            >
-              {val}
-            </Typography>
-          );
-        })}
       </Stack>
       <Divider
         style={{ width: "100%" }}
