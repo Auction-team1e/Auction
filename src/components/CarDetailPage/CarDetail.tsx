@@ -1,6 +1,7 @@
 "use client";
 import { BreadCrumbArrow, Camera } from "@/svgs";
 import { Box, ButtonBase, CardMedia, Stack, Typography } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
 type dataType = {
@@ -13,13 +14,16 @@ type dataType = {
   endTime: string;
   _id: string;
 };
+
 export const CarDetail = ({ data }: { data: dataType | undefined }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [mainImageHovered, setMainImageHovered] = useState<boolean>(false);
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
-    <Stack width={"1720px"}>
+    <Stack width={"100%"} maxWidth={isMobile ? "100%" : "1720px"}>
       <Stack
+        pl={isMobile ? "24px" : ""}
         justifyContent={"flex-start"}
         direction={"row"}
         alignItems={"center"}
@@ -45,7 +49,7 @@ export const CarDetail = ({ data }: { data: dataType | undefined }) => {
       >
         <Stack
           overflow="hidden"
-          width={"865px"}
+          width={isMobile ? "100%" : "865px"}
           height={"100%"}
           borderRadius={"8px"}
         >
@@ -60,6 +64,30 @@ export const CarDetail = ({ data }: { data: dataType | undefined }) => {
             onMouseEnter={() => setMainImageHovered(true)}
             onMouseLeave={() => setMainImageHovered(false)}
           >
+            {isMobile && (
+              <Stack position={"absolute"} bottom={"20px"} right={"20px"}>
+                <ButtonBase
+                  sx={{
+                    borderRadius: "100px",
+                    p: "9px 24px",
+                    gap: "8px",
+                    bgcolor: "rgba(21, 21, 21, 0.5)",
+                    "&:hover": {
+                      bgcolor: "rgba(21, 21, 21, 0.8)",
+                    },
+                  }}
+                >
+                  <Camera />
+                  <Typography
+                    sx={{
+                      color: "white",
+                    }}
+                  >
+                    {data?.img.length + " Photos"}
+                  </Typography>
+                </ButtonBase>
+              </Stack>
+            )}
             <CardMedia
               component={"img"}
               src={data?.img[0]}
@@ -71,59 +99,59 @@ export const CarDetail = ({ data }: { data: dataType | undefined }) => {
             />
           </Stack>
         </Stack>
-        <Stack width={"870px"} height={"500px"} flexWrap={"wrap"} gap={"4px"}>
-          {data?.img.map((e: string, index: number) => (
-            <Stack
-              key={index}
-              sx={{ overflow: "hidden", borderRadius: "5px" }}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              <div
-                style={{
-                  width: "428px",
-                  height: "248px",
-                  position: "relative",
-                  transform:
-                    hoveredIndex === index ? "scale(1.02)" : "scale(1)",
-                  transition: "transform 0.5s",
-                }}
+        {!isMobile && (
+          <Stack width={"870px"} height={"500px"} flexWrap={"wrap"} gap={"4px"}>
+            {data?.img.map((e: string, index: number) => (
+              <Stack
+                key={index}
+                sx={{ overflow: "hidden", borderRadius: "5px" }}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
               >
-                <CardMedia
-                  component={"img"}
+                <Box
                   style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
+                    width: "428px",
+                    height: "248px",
+                    position: "relative",
+                    transform:
+                      hoveredIndex === index ? "scale(1.02)" : "scale(1)",
+                    transition: "transform 0.5s",
                   }}
-                  src={e}
-                />
-              </div>
-            </Stack>
-          ))}
-          <Stack position={"absolute"} bottom={"20px"} right={"20px"}>
-            <ButtonBase
-              sx={{
-                borderRadius: "100px",
-                p: "9px 24px",
-                gap: "8px",
-                bgcolor: "rgba(21, 21, 21, 0.5)",
-                "&:hover": {
-                  bgcolor: "rgba(21, 21, 21, 0.8)",
-                },
-              }}
-            >
-              <Camera />
-              <Typography
+                >
+                  <CardMedia
+                    component={"img"}
+                    style={{
+                      objectFit: "cover",
+                    }}
+                    src={e}
+                  />
+                </Box>
+              </Stack>
+            ))}
+            <Stack position={"absolute"} bottom={"20px"} right={"20px"}>
+              <ButtonBase
                 sx={{
-                  color: "white",
+                  borderRadius: "100px",
+                  p: "9px 24px",
+                  gap: "8px",
+                  bgcolor: "rgba(21, 21, 21, 0.5)",
+                  "&:hover": {
+                    bgcolor: "rgba(21, 21, 21, 0.8)",
+                  },
                 }}
               >
-                {data?.img.length + "Photos"}
-              </Typography>
-            </ButtonBase>
+                <Camera />
+                <Typography
+                  sx={{
+                    color: "white",
+                  }}
+                >
+                  {data?.img.length + " Photos"}
+                </Typography>
+              </ButtonBase>
+            </Stack>
           </Stack>
-        </Stack>
+        )}
       </Stack>
     </Stack>
   );

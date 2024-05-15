@@ -1,7 +1,13 @@
 "use client";
 
 import { Telephone } from "@/svgs";
-import { ButtonBase, Stack, TextareaAutosize, Typography } from "@mui/material";
+import {
+  ButtonBase,
+  Stack,
+  TextareaAutosize,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 
 const customStyle = {
   fontSize: "26px",
@@ -17,17 +23,25 @@ const custStySec = {
 };
 
 export const Contact = () => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   return (
-    <Stack mt={"25px"}>
-      <Typography sx={customStyle}>Ask a Question</Typography>
-      <Stack mt={"30px"}>
+    <Stack p={isMobile ? "24px" : "0px"} mt={isMobile ? "15px" : "25px"}>
+      <Typography sx={{ ...customStyle, fontSize: isMobile ? "22px" : "26px" }}>
+        Ask a Question
+      </Typography>
+      <Stack mt={isMobile ? "20px" : "30px"}>
         <Stack>
-          <Stack direction={"row"} gap={"20px"}>
+          <Stack
+            direction={isMobile ? "column" : "row"}
+            gap={isMobile ? "10px" : "20px"}
+          >
             <Stack
               width={"64px"}
               height={"64px"}
               borderRadius={"100%"}
               bgcolor={"black"}
+              sx={{ marginBottom: isMobile ? "15px" : "0" }}
             ></Stack>
             <Stack>
               <Typography sx={custStySec}>Exotic Cars</Typography>
@@ -47,17 +61,20 @@ export const Contact = () => {
               </Stack>
             </Stack>
           </Stack>
-          <Stack mt={"48px"}>
-            <Stack mb={"30px"}>
+          <Stack mt={isMobile ? "30px" : "48px"}>
+            <Stack mb={isMobile ? "20px" : "30px"}>
               <Typography
-                fontSize={"16px"}
+                fontSize={isMobile ? "14px" : "16px"}
                 fontWeight={"500"}
-                lineHeight={"24px"}
+                lineHeight={isMobile ? "20px" : "24px"}
                 mb={"10px"}
               >
                 Contact Agent
               </Typography>
-              <TextareaAutosize color="neutral" minRows={6.5} />
+              <TextareaAutosize
+                color="neutral"
+                minRows={isMobile ? 4.5 : 6.5}
+              />
             </Stack>
             <ButtonBase
               sx={{
@@ -65,10 +82,12 @@ export const Contact = () => {
                 height: "48px",
                 color: "white",
                 bgcolor: "#006C75",
+                fontSize: isMobile ? "14px" : "16px",
+                lineHeight: "15px",
               }}
             >
               <Typography
-                fontSize={"16px"}
+                fontSize={isMobile ? "14px" : "16px"}
                 fontWeight={"500"}
                 lineHeight={"15px"}
               >

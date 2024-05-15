@@ -1,19 +1,19 @@
 "use client";
-
-import { Divider, Link, Stack, Typography } from "@mui/material";
-import { MenuDrawer } from "./MenuDrawer";
+import { Divider, Stack, Typography, useMediaQuery } from "@mui/material";
 import { SearchModal } from "./SearchModal";
-import { LoginModal } from "./LoginModal";
 import { useEffect, useState } from "react";
 import { useCarData, ContextType } from "@/context/DataContext";
 import { useRouter } from "next/navigation";
 import { ToastContainer } from "react-toastify";
+import { LoginModal } from "./LoginModal";
+import { MenuDrawer } from "./MenuDrawer";
 
 type dataType = { brandTitle: string; img: string };
 
 export const Header = () => {
   const [data, setData] = useState<Array<dataType>>();
   const { scrolling, setScrolling } = useCarData() as ContextType;
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const router = useRouter();
 
   const handleScroll = () => {
@@ -56,7 +56,11 @@ export const Header = () => {
         justifyContent={`space-between`}
         bgcolor={`transparent`}
       >
-        <Stack direction={`row`} alignItems={`center`}>
+        <Stack
+          gap={isMobile ? "315px" : ""}
+          direction={`row`}
+          alignItems={`center`}
+        >
           <MenuDrawer />
           <ToastContainer containerId="containerB" />
           <Stack
@@ -71,32 +75,29 @@ export const Header = () => {
         </Stack>
         <SearchModal />
         <Stack height={`100%`} direction={`row`} alignItems={`center`} gap={3}>
-          <Link href={"/sellWithUs"} style={{ textDecoration: "none" }}>
-            <Stack
-              height={`100%`}
-              color={scrolling ? "black" : `white`}
-              sx={
-                scrolling
-                  ? {
-                      cursor: `pointer`,
-                      ":hover": {
-                        borderBottom: `1px solid black`,
-                      },
-                    }
-                  : {
-                      cursor: `pointer`,
-                      ":hover": {
-                        borderBottom: `1px solid white`,
-                      },
-                    }
-              }
-              justifyContent={`center`}
-              fontSize={14}
-            >
-              Sell With Us
-            </Stack>
-          </Link>
-
+          <Stack
+            height={`100%`}
+            color={scrolling ? "black" : `white`}
+            sx={
+              scrolling
+                ? {
+                    cursor: `pointer`,
+                    ":hover": {
+                      borderBottom: `1px solid black`,
+                    },
+                  }
+                : {
+                    cursor: `pointer`,
+                    ":hover": {
+                      borderBottom: `1px solid white`,
+                    },
+                  }
+            }
+            justifyContent={`center`}
+            fontSize={14}
+          >
+            Sell With Us
+          </Stack>
           <LoginModal />
         </Stack>
       </Stack>
@@ -104,6 +105,7 @@ export const Header = () => {
         style={{ width: "100%" }}
         sx={{ bgcolor: `rgba(255, 255, 255, .2)`, height: 1.5 }}
       ></Divider>
+
       <Stack
         direction={`row`}
         alignItems={`center`}
@@ -126,6 +128,7 @@ export const Header = () => {
           );
         })}
       </Stack>
+
       <Divider
         style={{ width: "100%" }}
         sx={{ bgcolor: `rgba(255, 255, 255, .2)`, height: 1.5 }}
