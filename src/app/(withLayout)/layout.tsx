@@ -6,6 +6,7 @@ import { Header } from "@/components/Header/Header";
 import "react-toastify/dist/ReactToastify.css";
 import CarProvider from "@/context/DataContext";
 import { MainLogo } from "@/svgs/TabLogo";
+import { Footer } from "@/components/Footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +25,7 @@ const RootLayout = ({
       <CarProvider>
         <Header />
         {children}
-        {/* <Footer /> */}
+        <Footer />
       </CarProvider>
     </div>
   );
