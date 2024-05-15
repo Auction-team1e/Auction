@@ -1,5 +1,5 @@
 "use client";
-import { Divider, Stack, Typography, useMediaQuery } from "@mui/material";
+import { Divider, Link, Stack, Typography, useMediaQuery } from "@mui/material";
 import { SearchModal } from "./SearchModal";
 import { useEffect, useState } from "react";
 import { useCarData, ContextType } from "@/context/DataContext";
