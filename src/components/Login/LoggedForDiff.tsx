@@ -1,9 +1,9 @@
+import { useCarData, ContextType } from "@/context/DataContext";
 import { Menu, MenuItem, Stack } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useCarData, ContextType } from "@/context/DataContext";
 type dataType = {
   email: string;
   firstName: string;
@@ -12,10 +12,10 @@ type dataType = {
 };
 
 export const LoggedForDiff = () => {
+  const { setItem, setFilteredUser } = useCarData() as ContextType;
   const [data, setData] = useState<Array<dataType>>();
   const [localItem, setLocalItem] = useState<string | null>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { setItem } = useCarData() as ContextType;
   const open = Boolean(anchorEl);
   const router = useRouter();
 
@@ -34,12 +34,13 @@ export const LoggedForDiff = () => {
     getData();
   }, []);
 
-  const filteredUser = data?.filter((val) => {
+  const User = data?.filter((val) => {
     return val.email == localItem;
   });
+  setFilteredUser(User && User[0]);
   return (
     <Stack
-      onMouseOver={(event) => setAnchorEl(event.currentTarget)}
+      onMouseEnter={(event) => setAnchorEl(event.currentTarget)}
       onMouseLeave={() => setAnchorEl(null)}
       position={`relative`}
     >
@@ -57,7 +58,7 @@ export const LoggedForDiff = () => {
         justifyContent={`center`}
         fontSize={14}
       >
-        {filteredUser && filteredUser[0]?.firstName}
+        {User && User[0]?.firstName}
         {open == false ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
       </Stack>
       <Menu
@@ -77,13 +78,7 @@ export const LoggedForDiff = () => {
         onClose={handleClose}
       >
         <MenuItem sx={{ fontSize: 15, marginTop: 0.7 }} onClick={handleClose}>
-          Just For You
-        </MenuItem>
-        <MenuItem sx={{ fontSize: 15, marginTop: 0.7 }} onClick={handleClose}>
           Saved Listings
-        </MenuItem>
-        <MenuItem sx={{ fontSize: 15, marginTop: 0.7 }} onClick={handleClose}>
-          Saved Searches
         </MenuItem>
         <MenuItem
           sx={{ fontSize: 15, marginTop: 0.7 }}

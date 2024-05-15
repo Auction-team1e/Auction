@@ -85,7 +85,9 @@ export const Login = ({
         <form onSubmit={formik.handleSubmit}>
           <LoginFields formik={formik} />
           <Stack alignItems={`center`}>
-            {loading == false ? (
+            {loading ? (
+              <CircularProgress sx={{ color: `black` }} />
+            ) : (
               <Button
                 type="submit"
                 sx={{
@@ -99,8 +101,6 @@ export const Login = ({
               >
                 Continue
               </Button>
-            ) : (
-              <CircularProgress sx={{ color: `black` }} />
             )}
           </Stack>
         </form>

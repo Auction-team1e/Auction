@@ -7,6 +7,7 @@ import { LoginModal } from "./LoginModal";
 import { useEffect, useState } from "react";
 import { useCarData, ContextType } from "@/context/DataContext";
 import { useRouter } from "next/navigation";
+import { ToastContainer } from "react-toastify";
 
 type dataType = { brandTitle: string; img: string };
 
@@ -57,6 +58,7 @@ export const Header = () => {
       >
         <Stack direction={`row`} alignItems={`center`}>
           <MenuDrawer />
+          <ToastContainer containerId="containerB" />
           <Stack
             color={scrolling ? "black" : `white`}
             fontSize={24}

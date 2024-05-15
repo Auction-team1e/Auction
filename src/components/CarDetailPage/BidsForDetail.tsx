@@ -15,11 +15,17 @@ export const BidsForDetail = ({ id }: { id: string | undefined }) => {
 
   useEffect(() => {
     async function getData() {
-      const res = await fetch(
-        `http://localhost:4000/api/findthiscar?slug=${id}`
-      );
-      const cars = await res.json();
-      setData(cars?.result?.bidContestants.reverse());
+      if (id) {
+        const res = await fetch(
+          `http://localhost:4000/api/findthiscar?slug=${id}`,
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+        const cars = await res.json();
+        setData(cars?.result?.bidContestants?.reverse());
+      }
     }
     getData();
   }, [id]);

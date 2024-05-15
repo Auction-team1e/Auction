@@ -13,6 +13,13 @@ type SignUpType = {
   lastName: string;
   email: string;
 };
+type dataType = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+};
+
 export type ContextType = {
   selected: string;
   setSelected: Dispatch<React.SetStateAction<string>>;
@@ -34,6 +41,8 @@ export type ContextType = {
   setSignUpFields: Dispatch<React.SetStateAction<SignUpType>>;
   item: boolean;
   setItem: Dispatch<React.SetStateAction<boolean>>;
+  filteredUser: dataType | undefined;
+  setFilteredUser: Dispatch<React.SetStateAction<dataType | undefined>>;
 };
 
 const CarContext = createContext<ContextType | null>(null);
@@ -47,6 +56,7 @@ const CarProvider = ({ children }: { children: React.ReactNode }) => {
   const [imageUrlFour, setImageUrlFour] = useState<string>("");
   const [endDate, setEndDate] = useState<Dayjs | null>(null);
   const [open, setOpen] = useState<boolean>(false);
+  console.log("🚀 ~ CarProvider ~ open:", open);
   const [scrolling, setScrolling] = useState<boolean>(false);
   const [signUpFields, setSignUpFields] = useState<SignUpType>({
     email: ``,
@@ -54,6 +64,8 @@ const CarProvider = ({ children }: { children: React.ReactNode }) => {
     lastName: ``,
   });
   const [item, setItem] = useState<boolean>(false);
+  const [filteredUser, setFilteredUser] = useState<dataType | undefined>();
+
   useEffect(() => {
     async function getData() {
       setItem(localStorage.getItem("userEmail") ? true : false);
@@ -83,6 +95,8 @@ const CarProvider = ({ children }: { children: React.ReactNode }) => {
         setSignUpFields,
         item,
         setItem,
+        filteredUser,
+        setFilteredUser,
       }}
     >
       {children}

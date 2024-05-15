@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Box,
   Divider,
@@ -5,7 +7,6 @@ import {
   List,
   ListItem,
   ListItemButton,
-  ListItemIcon,
   ListItemText,
   Stack,
   Typography,
@@ -14,16 +15,18 @@ import {
 import { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useCarData, ContextType } from "@/context/DataContext";
+import Link from "next/link";
 
 type dataType = { brandTitle: string };
 
 export const MenuDrawer = () => {
-  const [open, setOpen] = useState(false);
-  const { scrolling } = useCarData() as ContextType;
+  const [openDrawer, setOpenDrawer] = useState<boolean>(false);
+  const { scrolling, setOpen, item, setItem, filteredUser } =
+    useCarData() as ContextType;
   const [data, setData] = useState<Array<dataType>>();
 
   const toggleDrawer = (newOpen: boolean) => () => {
-    setOpen(newOpen);
+    setOpenDrawer(newOpen);
   };
 
   useEffect(() => {
@@ -33,7 +36,12 @@ export const MenuDrawer = () => {
       setData(brands);
     }
     getData();
-  }, []);
+  }, [setItem, setOpen]);
+
+  function signOut() {
+    localStorage.clear();
+    setItem(false);
+  }
 
   const DrawerList = (
     <Box sx={{ width: 315 }} role="presentation" onClick={toggleDrawer(false)}>
@@ -47,32 +55,48 @@ export const MenuDrawer = () => {
           fontSize: "14px",
         }}
       >
-        Welcome!
+        {!item
+          ? `Welcome!`
+          : `Good afternoon, ${filteredUser?.firstName}${` `}${
+              filteredUser?.lastName
+            }`}
       </Typography>
       <Divider />
       <List>
         {data?.map((text, index) => (
-          <ListItem key={index} disablePadding>
-            <ListItemButton>
-              <ListItemIcon></ListItemIcon>
-              <ListItemText />
-            </ListItemButton>
-          </ListItem>
+          <Link
+            key={index}
+            href={`/cars/${text.brandTitle}`}
+            style={{ textDecoration: "none", color: `black` }}
+          >
+            <ListItem key={index} disablePadding>
+              <ListItemButton>
+                <ListItemText primary={text.brandTitle} sx={{ pl: 6 }} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
       </List>
       <Divider />
-      <List>
-        {["Journal", "Sell with us", "About", "Contact", "Log in"].map(
-          (text, index) => (
-            <ListItem key={index} disablePadding>
-              <ListItemButton>
-                <ListItemIcon></ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          )
-        )}
-      </List>
+      {item ? (
+        <Link
+          href={`/account`}
+          style={{ textDecoration: "none", color: `black` }}
+        >
+          <ListItemButton>
+            <ListItemText primary={`Account`} sx={{ pl: 6 }} />
+          </ListItemButton>
+        </Link>
+      ) : null}
+      <Stack
+        onClick={() => {
+          item ? signOut() : setOpen(true);
+        }}
+      >
+        <ListItemButton>
+          <ListItemText primary={item ? `Sign Out` : `Login`} sx={{ pl: 6 }} />
+        </ListItemButton>
+      </Stack>
     </Box>
   );
   return (
@@ -81,7 +105,7 @@ export const MenuDrawer = () => {
         sx={scrolling ? { color: `black` } : { color: `white` }}
         onClick={toggleDrawer(true)}
       />
-      <Drawer open={open} onClose={toggleDrawer(false)}>
+      <Drawer open={openDrawer} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
     </Stack>
