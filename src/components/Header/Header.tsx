@@ -1,6 +1,6 @@
 "use client";
 
-import { Divider, Stack, Typography } from "@mui/material";
+import { Divider, Link, Stack, Typography } from "@mui/material";
 import { MenuDrawer } from "./MenuDrawer";
 import { SearchModal } from "./SearchModal";
 import { LoginModal } from "./LoginModal";
@@ -71,29 +71,32 @@ export const Header = () => {
         </Stack>
         <SearchModal />
         <Stack height={`100%`} direction={`row`} alignItems={`center`} gap={3}>
-          <Stack
-            height={`100%`}
-            color={scrolling ? "black" : `white`}
-            sx={
-              scrolling
-                ? {
-                    cursor: `pointer`,
-                    ":hover": {
-                      borderBottom: `1px solid black`,
-                    },
-                  }
-                : {
-                    cursor: `pointer`,
-                    ":hover": {
-                      borderBottom: `1px solid white`,
-                    },
-                  }
-            }
-            justifyContent={`center`}
-            fontSize={14}
-          >
-            Sell With Us
-          </Stack>
+          <Link href={"/sellWithUs"} style={{ textDecoration: "none" }}>
+            <Stack
+              height={`100%`}
+              color={scrolling ? "black" : `white`}
+              sx={
+                scrolling
+                  ? {
+                      cursor: `pointer`,
+                      ":hover": {
+                        borderBottom: `1px solid black`,
+                      },
+                    }
+                  : {
+                      cursor: `pointer`,
+                      ":hover": {
+                        borderBottom: `1px solid white`,
+                      },
+                    }
+              }
+              justifyContent={`center`}
+              fontSize={14}
+            >
+              Sell With Us
+            </Stack>
+          </Link>
+
           <LoginModal />
         </Stack>
       </Stack>
