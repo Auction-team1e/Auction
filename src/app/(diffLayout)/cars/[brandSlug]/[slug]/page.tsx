@@ -33,7 +33,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
     getData();
   }, [params.slug]);
   return (
-    <Stack width={"100%"} alignItems={"center"} py={30}>
+    <Stack width={"100%"} alignItems={"center"} pb={10}>
       <Stack>
         <CarDetail data={data} />
         <CarInfo data={data} />

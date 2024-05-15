@@ -1,6 +1,6 @@
 "use client";
 
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, useMediaQuery } from "@mui/material";
 import { FooterSelect } from "./FooterSelect";
 import {
   currency,
@@ -9,11 +9,13 @@ import {
   language,
 } from "@/utils/dumData";
 import { useEffect, useState } from "react";
+import { FooterForMobile } from "./FooterForMobile";
 
 type dataType = { brandTitle: string; img: string };
 
 export const Footer = () => {
   const [data, setData] = useState<Array<dataType>>();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   useEffect(() => {
     async function getData() {
@@ -23,6 +25,11 @@ export const Footer = () => {
     }
     getData();
   }, []);
+
+  if (isMobile) {
+    return <FooterForMobile />;
+  }
+
   return (
     <Stack bgcolor={"black"} color={"white"} pt={"48px"} alignItems={`center`}>
       <Stack direction={"row"} width={1673} justifyContent={`space-between`}>
@@ -36,13 +43,11 @@ export const Footer = () => {
             >
               JAMESEDITION
             </Typography>
-            {footerTitles.map((a, index) => {
-              return (
-                <Stack gap={"20px"} key={index}>
-                  {a}
-                </Stack>
-              );
-            })}
+            {footerTitles.map((a, index) => (
+              <Stack gap={"20px"} key={index}>
+                {a}
+              </Stack>
+            ))}
           </Stack>
           <Stack width={"200px"} height={"700px"} gap={"16px"}>
             <Typography
@@ -53,13 +58,11 @@ export const Footer = () => {
             >
               BRANDS
             </Typography>
-            {data?.map((b, index) => {
-              return (
-                <Stack gap={"20px"} key={index}>
-                  {b.brandTitle}
-                </Stack>
-              );
-            })}
+            {data?.map((b, index) => (
+              <Stack gap={"20px"} key={index}>
+                {b.brandTitle}
+              </Stack>
+            ))}
           </Stack>
           <Stack width={"200px"} height={"700px"} gap={"16px"}>
             <Typography
@@ -70,13 +73,11 @@ export const Footer = () => {
             >
               FOR BUSINESS
             </Typography>
-            {footerSubtitles.map((a, index) => {
-              return (
-                <Stack gap={"20px"} key={index}>
-                  {a}
-                </Stack>
-              );
-            })}
+            {footerSubtitles.map((a, index) => (
+              <Stack gap={"20px"} key={index}>
+                {a}
+              </Stack>
+            ))}
           </Stack>
         </Stack>
         <Stack width={"200px"} gap={"16px"}>

@@ -1,6 +1,4 @@
-"use client";
-
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, useMediaQuery } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useCarData, ContextType } from "@/context/DataContext";
 import { ToastContainer, toast } from "react-toastify";
@@ -30,6 +28,9 @@ export const DetailPageBidBox = ({
   const failed = () => toast.error("Your order must be next minimum or more");
   const mustLogged = () => toast.error("You must be logged");
   const succesfully = () => toast.success("Your order succesfully placed");
+
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   useEffect(() => {
     async function getData() {
       setUserEmail(localStorage.getItem("userEmail"));
@@ -46,6 +47,7 @@ export const DetailPageBidBox = ({
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const socket = io("https://socketbackend-53dj.onrender.com", {
     transports: ["websocket"],
   });
@@ -87,11 +89,12 @@ export const DetailPageBidBox = ({
       failed();
     }
   };
+
   let other = startPrice! + (startPrice! * 10) / 100;
+
   return (
     <Stack
-      width={751}
-      height={`fit-content`}
+      width={isMobile ? "100%" : 751}
       justifyContent={`space-between`}
       gap={1.7}
     >
@@ -126,7 +129,10 @@ export const DetailPageBidBox = ({
             </Stack>
           </Stack>
         </Stack>
-        <form onSubmit={handleSubmit}>
+        <form
+          style={{ display: "flex", justifyContent: "center" }}
+          onSubmit={handleSubmit}
+        >
           <BidInputForDetail
             bidOrder={bidOrder}
             setBidOrder={setBidOrder}

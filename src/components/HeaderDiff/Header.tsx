@@ -1,11 +1,13 @@
 "use client";
 
-import { Divider, Link, Stack, Typography } from "@mui/material";
+import { Divider, Link, Stack, Typography, useMediaQuery } from "@mui/material";
 import { MenuDrawer } from "./MenuDrawer";
 import { LoginModal } from "./LoginModal";
 import { SearchModal } from "../Header/SearchModal";
 
 export const HeaderDiff = () => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   return (
     <Stack
       sx={{ transition: `all 0.3s ease` }}
@@ -20,16 +22,16 @@ export const HeaderDiff = () => {
         width={1}
         direction={`row`}
         alignItems={`center`}
-        px={7}
+        px={isMobile ? 2 : 7}
         justifyContent={`space-between`}
         bgcolor={`transparent`}
       >
-        <Stack direction={`row`} alignItems={`center`}>
+        <Stack direction={`row`}>
           <MenuDrawer />
           <Link href="/" sx={{ textDecoration: "none" }}>
             <Typography
               color={"black"}
-              fontSize={24}
+              fontSize={isMobile ? 18 : 24}
               width={140}
               sx={{ cursor: `pointer` }}
             >
@@ -37,22 +39,24 @@ export const HeaderDiff = () => {
             </Typography>
           </Link>
         </Stack>
-        <SearchModal />
+        {!isMobile && <SearchModal />}
         <Stack height={`100%`} direction={`row`} alignItems={`center`} gap={3}>
-          <Stack
-            height={`100%`}
-            color={"black"}
-            sx={{
-              cursor: `pointer`,
-              ":hover": {
-                borderBottom: `1px solid black`,
-              },
-            }}
-            justifyContent={`center`}
-            fontSize={14}
-          >
-            Sell With Us
-          </Stack>
+          {!isMobile && (
+            <Stack
+              height={`100%`}
+              color={"black"}
+              sx={{
+                cursor: `pointer`,
+                ":hover": {
+                  borderBottom: `1px solid black`,
+                },
+              }}
+              justifyContent={`center`}
+              fontSize={14}
+            >
+              Sell With Us
+            </Stack>
+          )}
           <LoginModal />
         </Stack>
       </Stack>

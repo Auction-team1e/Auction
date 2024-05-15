@@ -13,7 +13,18 @@ export const BidInputForDetail = ({
   loading: boolean;
 }) => {
   return (
-    <Stack gap={"18px"} justifyContent={"center"} direction={"row"}>
+    <Stack
+      borderTop={"1px solid grey"}
+      position={"fixed"}
+      p={1}
+      bottom={0}
+      bgcolor={"white"}
+      width={"100vw"}
+      zIndex={1000}
+      gap={"18px"}
+      justifyContent={"center"}
+      direction={"row"}
+    >
       <Input
         id="bidNum"
         value={bidOrder || ``}
@@ -39,7 +50,7 @@ export const BidInputForDetail = ({
               backgroundColor: "#006C75",
               color: "white",
               height: "40px",
-              width: 190,
+              width: 120,
               fontSize: 12,
               ":hover": {
                 backgroundColor: `#006C75b3`,

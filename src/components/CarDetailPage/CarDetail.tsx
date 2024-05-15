@@ -4,6 +4,7 @@ import { Box, ButtonBase, CardMedia, Stack, Typography } from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
+
 type dataType = {
   brand: string;
   carModel: string;
@@ -21,14 +22,19 @@ export const CarDetail = ({ data }: { data: dataType | undefined }) => {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
-    <Stack width={"100%"} maxWidth={isMobile ? "100%" : "1720px"}>
+    <Stack
+      mt={isMobile ? 10 : 15}
+      width={"100%"}
+      maxWidth={"1720px"}
+      p={isMobile ? 2 : 4}
+    >
       <Stack
-        pl={isMobile ? "24px" : ""}
+        pl={isMobile ? "16px" : ""}
         justifyContent={"flex-start"}
         direction={"row"}
         alignItems={"center"}
         gap={"10px"}
-        marginBottom={"15px"}
+        mb={"15px"}
       >
         <Link href={`/cars/${data?.brand}`} style={{ textDecoration: "none" }}>
           <Box fontSize={"14px"} fontWeight={"400"} color={"#717171"}>
@@ -43,14 +49,14 @@ export const CarDetail = ({ data }: { data: dataType | undefined }) => {
       <Stack
         position="relative"
         gap={"4px"}
-        direction={"row"}
+        direction={isMobile ? "column" : "row"}
         width={"100%"}
-        height={"500px"}
+        height={isMobile ? "auto" : "500px"}
       >
         <Stack
           overflow="hidden"
           width={isMobile ? "100%" : "865px"}
-          height={"100%"}
+          height={isMobile ? "auto" : "100%"}
           borderRadius={"8px"}
         >
           <Stack
@@ -65,25 +71,19 @@ export const CarDetail = ({ data }: { data: dataType | undefined }) => {
             onMouseLeave={() => setMainImageHovered(false)}
           >
             {isMobile && (
-              <Stack position={"absolute"} bottom={"20px"} right={"20px"}>
+              <Stack position={"absolute"} bottom={"30px"} right={"10px"}>
                 <ButtonBase
                   sx={{
+                    overflow: "hidden",
                     borderRadius: "100px",
-                    p: "9px 24px",
-                    gap: "8px",
+                    p: "6px 18px",
+                    gap: "6px",
                     bgcolor: "rgba(21, 21, 21, 0.5)",
-                    "&:hover": {
-                      bgcolor: "rgba(21, 21, 21, 0.8)",
-                    },
                   }}
                 >
                   <Camera />
-                  <Typography
-                    sx={{
-                      color: "white",
-                    }}
-                  >
-                    {data?.img.length + " Photos"}
+                  <Typography sx={{ color: "white" }}>
+                    {data?.img.length} Photos
                   </Typography>
                 </ButtonBase>
               </Stack>
@@ -93,7 +93,7 @@ export const CarDetail = ({ data }: { data: dataType | undefined }) => {
               src={data?.img[0]}
               style={{
                 width: "100%",
-                height: "100%",
+                height: isMobile ? "auto" : "100%",
                 objectFit: "cover",
               }}
             />
@@ -121,6 +121,8 @@ export const CarDetail = ({ data }: { data: dataType | undefined }) => {
                   <CardMedia
                     component={"img"}
                     style={{
+                      width: "100%",
+                      height: "100%",
                       objectFit: "cover",
                     }}
                     src={e}
@@ -141,12 +143,8 @@ export const CarDetail = ({ data }: { data: dataType | undefined }) => {
                 }}
               >
                 <Camera />
-                <Typography
-                  sx={{
-                    color: "white",
-                  }}
-                >
-                  {data?.img.length + " Photos"}
+                <Typography sx={{ color: "white" }}>
+                  {data?.img.length} Photos
                 </Typography>
               </ButtonBase>
             </Stack>
