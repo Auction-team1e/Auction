@@ -10,6 +10,7 @@ import {
 } from "@/utils/dumData";
 import { useEffect, useState } from "react";
 import { FooterForMobile } from "./FooterForMobile";
+import Link from "next/link";
 
 type dataType = { brandTitle: string; img: string };
 
@@ -58,11 +59,17 @@ export const Footer = () => {
             >
               BRANDS
             </Typography>
-            {data?.map((b, index) => (
-              <Stack gap={"20px"} key={index}>
-                {b.brandTitle}
-              </Stack>
-            ))}
+            {data?.map((b, index) => {
+              return (
+                <Link
+                  href={`/cars/${b.brandTitle}`}
+                  key={index}
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  <Stack gap={"20px"}>{b.brandTitle}</Stack>
+                </Link>
+              );
+            })}
           </Stack>
           <Stack width={"200px"} height={"700px"} gap={"16px"}>
             <Typography
@@ -73,11 +80,17 @@ export const Footer = () => {
             >
               FOR BUSINESS
             </Typography>
-            {footerSubtitles.map((a, index) => (
-              <Stack gap={"20px"} key={index}>
-                {a}
-              </Stack>
-            ))}
+            {footerSubtitles.map((a, index) => {
+              return (
+                <Link
+                  key={index}
+                  href={`/${a}`}
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  <Stack gap={"20px"}>{a}</Stack>
+                </Link>
+              );
+            })}
           </Stack>
         </Stack>
         <Stack width={"200px"} gap={"16px"}>

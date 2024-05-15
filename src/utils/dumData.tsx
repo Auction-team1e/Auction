@@ -69,7 +69,7 @@ export const footerTitles = [
   "Privacy",
 ];
 
-export const footerSubtitles = ["Sell With Us", "Partner", "Linking"];
+export const footerSubtitles = ["sellWithUs", "Partner", "Linking"];
 
 export const loginFields = [
   { pl: "Email", name: "email" },

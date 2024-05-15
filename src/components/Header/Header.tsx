@@ -116,15 +116,20 @@ export const Header = () => {
       >
         {data?.map((val) => {
           return (
-            <Typography
+            <Link
               key={val.brandTitle}
-              color={scrolling ? "black" : `white`}
-              fontSize={14}
-              fontWeight={100}
-              sx={{ cursor: `pointer` }}
+              href={`/cars/${val.brandTitle}`}
+              style={{ textDecoration: "none" }}
             >
-              {val.brandTitle}
-            </Typography>
+              <Typography
+                color={scrolling ? "black" : `white`}
+                fontSize={14}
+                fontWeight={100}
+                sx={{ cursor: `pointer` }}
+              >
+                {val.brandTitle}
+              </Typography>
+            </Link>
           );
         })}
       </Stack>
