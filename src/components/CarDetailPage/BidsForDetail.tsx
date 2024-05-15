@@ -67,6 +67,7 @@ export const BidsForDetail = ({ id }: { id: string | undefined }) => {
                           border: "none",
                           fontSize: "16px",
                           width: 95,
+                          backgroundColor: `white`,
                         }
                   }
                 />
@@ -83,7 +84,7 @@ export const BidsForDetail = ({ id }: { id: string | undefined }) => {
           </Typography>
           {data?.map((val, index) => (
             <Stack key={index} pt={0.1}>
-              <Stack fontSize={isMobile ? 12 : 15} py={1.32} color={`black`}>
+              <Stack fontSize={isMobile ? 12 : 15} py={1} color={`black`}>
                 {val.userEmail}
               </Stack>
             </Stack>
