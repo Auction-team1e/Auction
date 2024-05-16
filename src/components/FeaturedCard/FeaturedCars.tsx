@@ -12,6 +12,7 @@ type dataType = {
   carDetails: string[];
   img: string[];
   endTime: string;
+  bidContestants: [];
 };
 
 export const FeaturedCars = ({
@@ -47,6 +48,7 @@ export const FeaturedCars = ({
             _id={a._id}
             key={index}
             brand={a.brand}
+            bidContestants={a.bidContestants}
           />
         ))}
       </Stack>

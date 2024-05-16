@@ -16,6 +16,7 @@ type dataType = {
   carDetails: string[];
   img: string[];
   endTime: string;
+  bidContestants: [];
 };
 import { ToastContainer } from "react-toastify";
 
