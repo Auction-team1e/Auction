@@ -43,6 +43,8 @@ export type ContextType = {
   setItem: Dispatch<React.SetStateAction<boolean>>;
   filteredUser: dataType | undefined;
   setFilteredUser: Dispatch<React.SetStateAction<dataType | undefined>>;
+  checkSold: string | undefined;
+  setCheckSold: Dispatch<React.SetStateAction<string | undefined>>;
 };
 
 const CarContext = createContext<ContextType | null>(null);
@@ -64,6 +66,7 @@ const CarProvider = ({ children }: { children: React.ReactNode }) => {
   });
   const [item, setItem] = useState<boolean>(false);
   const [filteredUser, setFilteredUser] = useState<dataType | undefined>();
+  const [checkSold, setCheckSold] = useState<string | undefined>(``);
 
   useEffect(() => {
     async function getData() {
@@ -96,6 +99,8 @@ const CarProvider = ({ children }: { children: React.ReactNode }) => {
         setItem,
         filteredUser,
         setFilteredUser,
+        checkSold,
+        setCheckSold,
       }}
     >
       {children}

@@ -32,6 +32,26 @@ export const DetailPageBidBox = ({
   const endStamp = new Date(endDate);
 
   const isMobile = useMediaQuery("(max-width: 768px)");
+  function date() {
+    const options = {
+      timeZone: "Asia/Ulaanbaatar",
+      hourCycle: "h24" as const,
+      month: "2-digit" as const,
+      day: "2-digit" as const,
+      year: "numeric" as const,
+      hour: "2-digit" as const,
+      minute: "2-digit" as const,
+      second: "2-digit" as const,
+    };
+    const currentTime = new Date();
+    currentTime.setSeconds(0, 0);
+    const mongoliaTime = currentTime.toLocaleString("en-US", options);
+    if (endDate === mongoliaTime) {
+      console.log(endDate);
+      clearInterval(intervalId);
+    }
+  }
+  const intervalId = setInterval(date, 1000);
 
   useEffect(() => {
     const socket = io("https://socketbackend-hfon.onrender.com", {

@@ -79,7 +79,6 @@ export const Inputs = () => {
                 />
               </DemoContainer>
             </LocalizationProvider>
-            <Typography></Typography>
           </Stack>
         </Stack>
       </Stack>

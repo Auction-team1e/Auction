@@ -20,7 +20,7 @@ interface infoType {
 }
 
 export const CarEditModal = ({ carInfos }: { carInfos: infoType }) => {
-  const success = () => toast.success("Invalid email or password");
+  const success = () => toast.success("Succesfully updated");
   const {
     selected,
     imageUrlOne,
@@ -46,7 +46,7 @@ export const CarEditModal = ({ carInfos }: { carInfos: infoType }) => {
       timeZone: "Asia/Ulaanbaatar",
       hour12: false,
     };
-    const mongoliaTime = today.toLocaleString("en-US", options);
+    const mongoliaTime = today.toLocaleString("en-GB", options);
 
     const carInfo = {
       userId: "662493855942867ee5ccfd65",
@@ -77,13 +77,16 @@ export const CarEditModal = ({ carInfos }: { carInfos: infoType }) => {
       ],
     };
     console.log(carInfo);
-    await fetch("http://localhost:4000/api/car", {
+    const res = await fetch("http://localhost:4000/api/car", {
       method: "PUT",
       body: JSON.stringify(carInfo),
       headers: { "Content-Type": "application/json" },
     });
-    success();
-    setOpen(false);
+    const resjson = await res.json();
+    if (resjson.message) {
+      success();
+      setOpen(false);
+    }
   };
 
   return (

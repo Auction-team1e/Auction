@@ -18,6 +18,7 @@ export const FeaturedCard = ({
   carDetail,
   endDate,
   brand,
+  bidContestants,
 }: {
   _id: string;
   carModel: string;
@@ -26,6 +27,7 @@ export const FeaturedCard = ({
   carDetail: string[];
   endDate: string;
   brand: string;
+  bidContestants: [];
 }) => {
   const [bidOrder, setBidOrder] = useState<string>();
   const [newBid, setNewBid] = useState<string | undefined>(undefined);
@@ -41,24 +43,64 @@ export const FeaturedCard = ({
 
   const expiryTimestamp = new Date(endDate);
 
+  function findMaxBidUser(bids: any) {
+    let maxBidPrice = -Infinity;
+    let maxBidUser = null;
+    for (let i = 0; i < bids.length; i++) {
+      const currentBid = bids[i];
+      if (currentBid && typeof currentBid.bidPrice === "string") {
+        const currentBidPrice = parseFloat(currentBid.bidPrice);
+        if (!isNaN(currentBidPrice) && currentBidPrice > maxBidPrice) {
+          maxBidPrice = currentBidPrice;
+          maxBidUser = currentBid.userEmail;
+        }
+      }
+    }
+    return maxBidUser;
+  }
+  function date() {
+    const options = {
+      timeZone: "Asia/Ulaanbaatar",
+      hourCycle: "h24" as const,
+      month: "2-digit" as const,
+      day: "2-digit" as const,
+      year: "numeric" as const,
+      hour: "2-digit" as const,
+      minute: "2-digit" as const,
+      second: "2-digit" as const,
+    };
+    const currentTime = new Date();
+    currentTime.setSeconds(0, 0);
+    const mongoliaTime = currentTime.toLocaleString("en-US", options);
+    if (endDate === mongoliaTime) {
+      const highestBidUser = findMaxBidUser(bidContestants);
+      fetch("http://localhost:4000/api/sendEmail", {
+        method: "POST",
+        body: JSON.stringify({
+          email: highestBidUser,
+          carId: _id,
+        }),
+        headers: { "Content-Type": "application/json" },
+      });
+      console.log("User with the highest bid:", highestBidUser);
+      clearInterval(intervalId);
+    }
+  }
+  const intervalId = setInterval(date, 1000);
   useEffect(() => {
     const socket = io("https://socketbackend-hfon.onrender.com", {
       transports: ["websocket"],
     });
-
     socket.on("connect", () => {
       console.log("Connected to socket");
     });
-
     socket.on("chat-message", (data) => {
       setAuctionId(data._id);
       setNewBid(data.bidOrder);
       setNextBid(Number(data.bidOrder) + (Number(data.bidOrder) * 10) / 100);
       setLoading(false);
     });
-
     setUserEmail(localStorage.getItem("userEmail"));
-
     return () => {
       socket.disconnect();
     };
@@ -69,7 +111,12 @@ export const FeaturedCard = ({
     today.setSeconds(0, 0);
     const options = {
       timeZone: "Asia/Ulaanbaatar",
-      hour12: false,
+      hourCycle: "h24" as const,
+      month: "2-digit" as const,
+      day: "2-digit" as const,
+      year: "numeric" as const,
+      hour: "2-digit" as const,
+      minute: "2-digit" as const,
     };
     const presentTime = today.toLocaleString("en-US", options);
     const carInfo = {
@@ -91,7 +138,6 @@ export const FeaturedCard = ({
         headers: { "Content-Type": "application/json" },
       });
       const resJson = await res.json();
-
       const socket = io("https://socketbackend-hfon.onrender.com", {
         transports: ["websocket"],
       });

@@ -132,6 +132,7 @@ export const RInputs = ({ carInfo }: { carInfo: infoType }) => {
       </Stack>
       <Stack direction={`row`} gap={`8px`} justifyContent={`flex-end`}>
         <Button
+          type="reset"
           sx={{
             width: 121,
             height: 48,

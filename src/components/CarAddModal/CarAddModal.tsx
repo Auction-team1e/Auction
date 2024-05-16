@@ -5,6 +5,7 @@ import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { Inputs } from "./Inputs";
 import { useCarData, ContextType } from "@/context/DataContext";
+import { toast } from "react-toastify";
 
 export const CarAddModal = () => {
   const {
@@ -17,15 +18,22 @@ export const CarAddModal = () => {
   } = useCarData() as ContextType;
 
   const [open, setOpen] = useState(false);
+  const success = () => toast.success("Succesfully declared");
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     var today = new Date();
     today.setSeconds(0, 0);
     const options = {
       timeZone: "Asia/Ulaanbaatar",
-      hour12: false,
+      hourCycle: "h24" as const,
+      month: "2-digit" as const,
+      day: "2-digit" as const,
+      year: "numeric" as const,
+      hour: "2-digit" as const,
+      minute: "2-digit" as const,
+      second: "2-digit" as const,
     };
     const mongoliaTime = today.toLocaleString("en-US", options);
 
@@ -57,11 +65,16 @@ export const CarAddModal = () => {
       ],
       bidContestants: [],
     };
-    fetch("http://localhost:4000/api/car", {
+    const res = await fetch("http://localhost:4000/api/car", {
       method: "POST",
       body: JSON.stringify(carInfo),
       headers: { "Content-Type": "application/json" },
     });
+    const resJson = await res.json();
+    if (resJson.message) {
+      success();
+      setOpen(false);
+    }
   };
 
   return (

@@ -30,14 +30,18 @@ export const Logged = () => {
       setData(users);
       const loggedUserEmail = localStorage.getItem("userEmail");
       setLocalItem(loggedUserEmail);
+      setFilteredUser(
+        users.filter((val: any) => {
+          return val.email == localItem;
+        })
+      );
     }
     getData();
-  }, []);
+  }, [localItem, setFilteredUser]);
 
   const User = data?.filter((val) => {
     return val.email == localItem;
   });
-  setFilteredUser(User && User[0]);
   return (
     <Stack
       onMouseEnter={(event) => setAnchorEl(event.currentTarget)}
