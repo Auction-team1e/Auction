@@ -1,7 +1,6 @@
 "use client";
 import { Divider, Stack, Typography } from "@mui/material";
 import { CarouselSlider } from "./CarouselSlider";
-import { EndTimeCounter } from "./EndTimeCounter";
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 import { BidField } from "./BidField";
@@ -10,6 +9,7 @@ import { Bids } from "./Bids";
 import { useCarData, ContextType } from "@/context/DataContext";
 import { BidInput } from "./BidInput";
 import { toast } from "react-toastify";
+import NewTimer from "./NewTimer";
 export const FeaturedCard = ({
   _id,
   carModel,
@@ -38,25 +38,31 @@ export const FeaturedCard = ({
   const mustLogged = () => toast.error("You must be logged");
   const succesfully = () => toast.success("Your order succesfully placed");
 
+  const expiryTimestamp = new Date(endDate);
+  // const seconds = 600;
+
   useEffect(() => {
-    async function getData() {
-      setUserEmail(localStorage.getItem("userEmail"));
-    }
-    socket.on("connect", () => {
-      console.log("connected socket");
+    const socket = io("https://socketbackend-hfon.onrender.com", {
+      transports: ["websocket"],
     });
+
+    socket.on("connect", () => {
+      console.log("Connected to socket");
+    });
+
     socket.on("chat-message", (data) => {
       setAuctionId(data._id);
       setNewBid(data.bidOrder);
       setNextBid(Number(data.bidOrder) + (Number(data.bidOrder) * 10) / 100);
       setLoading(false);
     });
-    getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    setUserEmail(localStorage.getItem("userEmail"));
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
-  const socket = io("https://socketbackend-53dj.onrender.com", {
-    transports: ["websocket"],
-  });
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     var today = new Date();
@@ -85,6 +91,10 @@ export const FeaturedCard = ({
         headers: { "Content-Type": "application/json" },
       });
       const resJson = await res.json();
+
+      const socket = io("https://socketbackend-hfon.onrender.com", {
+        transports: ["websocket"],
+      });
       socket.emit("send-bid-message", { bidOrder, _id });
       if (resJson.message) {
         succesfully();
@@ -141,7 +151,7 @@ export const FeaturedCard = ({
           </Stack>
           <Divider sx={{ bgcolor: `gray` }} orientation="vertical" flexItem />
           <Stack gap={0.4}>
-            <EndTimeCounter endDate={endDate} />
+            <NewTimer expiryTimestampq={expiryTimestamp} />
             <Bids id={_id} />
           </Stack>
         </Stack>

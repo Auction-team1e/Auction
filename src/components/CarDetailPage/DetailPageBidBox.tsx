@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { useCarData, ContextType } from "@/context/DataContext";
 import { ToastContainer, toast } from "react-toastify";
 import { io } from "socket.io-client";
-import { EndTimeCounter } from "../FeaturedCard/EndTimeCounter";
 import { NumericFormat } from "react-number-format";
 import { BidField } from "../FeaturedCard/BidField";
 import { BidInputForDetail } from "./BidInputForDetail";
 import { BidsForDetail } from "./BidsForDetail";
+import NewTimer from "../FeaturedCard/NewTimer";
 
 export const DetailPageBidBox = ({
   _id,
@@ -16,7 +16,7 @@ export const DetailPageBidBox = ({
 }: {
   _id: string | undefined;
   startPrice: number | undefined;
-  endDate: string | undefined;
+  endDate: string;
 }) => {
   const { item } = useCarData() as ContextType;
   const [userEmail, setUserEmail] = useState<string | null>(null);
@@ -28,29 +28,32 @@ export const DetailPageBidBox = ({
   const failed = () => toast.error("Your order must be next minimum or more");
   const mustLogged = () => toast.error("You must be logged");
   const succesfully = () => toast.success("Your order succesfully placed");
+  const endStamp = new Date(endDate);
 
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   useEffect(() => {
-    async function getData() {
-      setUserEmail(localStorage.getItem("userEmail"));
-    }
-    socket.on("connect", () => {
-      console.log("connected socket");
+    const socket = io("https://socketbackend-hfon.onrender.com", {
+      transports: ["websocket"],
     });
+
+    socket.on("connect", () => {
+      console.log("Connected to socket");
+    });
+
     socket.on("chat-message", (data) => {
       setAuctionId(data._id);
       setNewBid(data.bidOrder);
       setNextBid(Number(data.bidOrder) + (Number(data.bidOrder) * 10) / 100);
       setLoading(false);
     });
-    getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
-  const socket = io("https://socketbackend-53dj.onrender.com", {
-    transports: ["websocket"],
-  });
+    setUserEmail(localStorage.getItem("userEmail"));
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -80,6 +83,9 @@ export const DetailPageBidBox = ({
         headers: { "Content-Type": "application/json" },
       });
       const resJson = await res.json();
+      const socket = io("https://socketbackend-hfon.onrender.com", {
+        transports: ["websocket"],
+      });
       socket.emit("send-bid-message", { bidOrder, _id });
       if (resJson.message) {
         succesfully();
@@ -141,7 +147,7 @@ export const DetailPageBidBox = ({
         </form>
       </Stack>
       <Stack gap={0.4} borderRadius={1} border={`1px solid #d4d4d5`} p={`14px`}>
-        <EndTimeCounter endDate={endDate} />
+        <NewTimer expiryTimestampq={endStamp} />
       </Stack>
     </Stack>
   );

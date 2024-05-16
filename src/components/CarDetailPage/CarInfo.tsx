@@ -161,11 +161,13 @@ export const CarInfo = ({ data }: { data: dataType | undefined }) => {
           })}
         </Stack>
         <Stack pt={isMobile ? "30px" : ""}>
-          <DetailPageBidBox
-            _id={data?._id}
-            startPrice={data?.startPrice}
-            endDate={data?.endTime}
-          />
+          {data?.endTime && (
+            <DetailPageBidBox
+              _id={data?._id}
+              startPrice={data?.startPrice}
+              endDate={data?.endTime}
+            />
+          )}
         </Stack>
       </Stack>
     </Stack>
