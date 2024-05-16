@@ -56,7 +56,6 @@ const CarProvider = ({ children }: { children: React.ReactNode }) => {
   const [imageUrlFour, setImageUrlFour] = useState<string>("");
   const [endDate, setEndDate] = useState<Dayjs | null>(null);
   const [open, setOpen] = useState<boolean>(false);
-  console.log("🚀 ~ CarProvider ~ open:", open);
   const [scrolling, setScrolling] = useState<boolean>(false);
   const [signUpFields, setSignUpFields] = useState<SignUpType>({
     email: ``,
