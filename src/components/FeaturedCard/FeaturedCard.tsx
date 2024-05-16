@@ -59,20 +59,15 @@ export const FeaturedCard = ({
     return maxBidUser;
   }
   function date() {
-    const options = {
-      timeZone: "Asia/Ulaanbaatar",
-      hourCycle: "h24" as const,
-      month: "2-digit" as const,
-      day: "2-digit" as const,
-      year: "numeric" as const,
-      hour: "2-digit" as const,
-      minute: "2-digit" as const,
-      second: "2-digit" as const,
-    };
     const currentTime = new Date();
     currentTime.setSeconds(0, 0);
-    const mongoliaTime = currentTime.toLocaleString("en-US", options);
-    if (endDate === mongoliaTime) {
+
+    // console.log("currentTime", currentTime.toLocaleString());
+    // console.log("endDate", new Date(endDate).toLocaleString());
+    // console.log("mongoliaTime", mongoliaTime);
+
+    if (currentTime.toLocaleString() === new Date(endDate).toLocaleString()) {
+      console.log("true");
       const highestBidUser = findMaxBidUser(bidContestants);
       fetch("http://localhost:4000/api/sendEmail", {
         method: "POST",
