@@ -12,6 +12,7 @@ type dataType = {
   carDetails: string[];
   img: string[];
   endTime: string;
+  bidContestants: Array<{}>;
 };
 
 const Page = ({ params }: { params: { brandSlug: string } }) => {

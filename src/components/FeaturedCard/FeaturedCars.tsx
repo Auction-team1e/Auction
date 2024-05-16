@@ -12,7 +12,7 @@ type dataType = {
   carDetails: string[];
   img: string[];
   endTime: string;
-  bidContestants: [];
+  bidContestants: Array<{}>;
 };
 
 export const FeaturedCars = ({
@@ -20,7 +20,7 @@ export const FeaturedCars = ({
   title,
   listings,
 }: {
-  data: dataType[];
+  data: dataType[] | undefined;
   title: string;
   listings: String | undefined;
 }) => {

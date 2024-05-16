@@ -16,12 +16,12 @@ type dataType = {
   carDetails: string[];
   img: string[];
   endTime: string;
-  bidContestants: [];
+  bidContestants: Array<{}>;
 };
 import { ToastContainer } from "react-toastify";
 
 const Home = () => {
-  const [data, setData] = useState<dataType[]>([]);
+  const [data, setData] = useState<dataType[]>();
 
   useEffect(() => {
     async function getData() {

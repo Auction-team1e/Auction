@@ -27,7 +27,7 @@ export const FeaturedCard = ({
   carDetail: string[];
   endDate: string;
   brand: string;
-  bidContestants: [];
+  bidContestants: Array<{}>;
 }) => {
   const [bidOrder, setBidOrder] = useState<string>();
   const [newBid, setNewBid] = useState<string | undefined>(undefined);
