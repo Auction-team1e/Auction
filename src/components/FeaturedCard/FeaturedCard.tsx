@@ -39,24 +39,27 @@ export const FeaturedCard = ({
   const succesfully = () => toast.success("Your order succesfully placed");
 
   useEffect(() => {
-    async function getData() {
-      setUserEmail(localStorage.getItem("userEmail"));
-    }
-    socket.on("connect", () => {
-      console.log("connected socket");
+    const socket = io("https://socketbackend-hfon.onrender.com", {
+      transports: ["websocket"],
     });
+
+    socket.on("connect", () => {
+      console.log("Connected to socket");
+    });
+
     socket.on("chat-message", (data) => {
       setAuctionId(data._id);
       setNewBid(data.bidOrder);
       setNextBid(Number(data.bidOrder) + (Number(data.bidOrder) * 10) / 100);
       setLoading(false);
     });
-    getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    setUserEmail(localStorage.getItem("userEmail"));
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
-  const socket = io("https://socketbackend-53dj.onrender.com", {
-    transports: ["websocket"],
-  });
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     var today = new Date();
@@ -85,6 +88,9 @@ export const FeaturedCard = ({
         headers: { "Content-Type": "application/json" },
       });
       const resJson = await res.json();
+      const socket = io("https://socketbackend-hfon.onrender.com", {
+        transports: ["websocket"],
+      });
       socket.emit("send-bid-message", { bidOrder, _id });
       if (resJson.message) {
         succesfully();

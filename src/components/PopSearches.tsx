@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useEffect } from "react";
 import { ArrowSmall, ShortArrow, ShortArrowRight } from "@/svgs";
 import { ButtonBase, CardMedia, Stack, Typography } from "@mui/material";
@@ -12,6 +11,8 @@ type ObjType = {
 export const PopSearches = () => {
   const [startIdx, setStartIdx] = useState(0);
   const [brand, setBrand] = useState<Array<ObjType>>([]);
+  const brandBoxWidth = 560;
+  const brandBoxMargin = 20;
 
   useEffect(() => {
     async function fetchCarData() {
@@ -34,17 +35,23 @@ export const PopSearches = () => {
 
   const next = () => {
     setStartIdx((prevStartIdx) =>
-      prevStartIdx == brand.length / 2 ? 0 : prevStartIdx + 2
+      prevStartIdx === brand.length / 2 ? 0 : prevStartIdx + 2
     );
   };
 
   return (
-    <Stack alignItems={"center"} justifyContent={"center"} width={"1730px"}>
-      <Stack marginBottom={"30px"} gap={"1400px"} direction={"row"}>
-        <Typography fontSize={"27px"} fontWeight={400} lineHeight={"38px"}>
+    <Stack alignItems="center" justifyContent="center" width="100%">
+      <Stack
+        maxWidth={"1720px"}
+        width={"100%"}
+        marginBottom="30px"
+        direction="row"
+        justifyContent={"space-between"}
+      >
+        <Typography fontSize="27px" fontWeight={400} lineHeight="38px">
           Popular Searches
         </Typography>
-        <Stack gap={"20px"} direction={"row"}>
+        <Stack gap="20px" direction="row">
           <ButtonBase
             sx={{
               p: "8px",
@@ -67,24 +74,26 @@ export const PopSearches = () => {
           </ButtonBase>
         </Stack>
       </Stack>
-      <Stack overflow={"hidden"} direction={"row"} width={"100%"}>
+      <Stack overflow="hidden" direction="row" maxWidth={"1720px"} width="100%">
         <Stack
-          gap={"20px"}
-          direction={"column"}
-          flexWrap={"wrap"}
-          height={"280px"}
+          gap={brandBoxMargin + "px"}
+          direction="column"
+          flexWrap="wrap"
+          height="280px"
           style={{
             transition: "transform 1s ease",
-            transform: `translateX(-${startIdx * 580}px)`,
+            transform: `translateX(-${
+              startIdx * (brandBoxWidth + brandBoxMargin)
+            }px)`,
           }}
         >
           {brand.map((car, index) => (
             <Stack
-              direction={"row"}
+              direction="row"
               key={index}
-              border={"#E0E0E0 solid 1px"}
-              width={"560px"}
-              height={"128px"}
+              border="#E0E0E0 solid 1px"
+              width={brandBoxWidth + "px"}
+              height="128px"
               sx={{
                 transition: "border-color 0.3s linear",
                 "&:hover": {
@@ -100,18 +109,18 @@ export const PopSearches = () => {
                     objectFit: "cover",
                   },
                 }}
-                width={"128px"}
-                height={"126px"}
+                width="128px"
+                height="126px"
               >
                 <CardMedia
                   image={car.img}
                   alt={`Car ${index}`}
-                  component={"img"}
+                  component="img"
                 />
               </Stack>
-              <Stack direction={"column"} gap={"50px"} p={"15px"}>
+              <Stack direction="column" gap="50px" p="15px">
                 <Typography>{car.brandTitle}</Typography>
-                <Stack gap={"305px"} direction={"row"} alignItems={"center"}>
+                <Stack gap="305px" direction="row" alignItems="center">
                   <Typography>{car.__v}</Typography>
                   <ButtonBase>
                     <ArrowSmall />

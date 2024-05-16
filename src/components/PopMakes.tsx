@@ -1,5 +1,4 @@
-"use client";
-import { Stack, Typography, ButtonBase, CardMedia } from "@mui/material";
+import { Stack, Typography, CardMedia } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -26,45 +25,39 @@ export const PopMakes = () => {
   }, []);
 
   return (
-    <Stack alignItems={"center"} justifyContent={"center"} width={"1730px"}>
-      <Stack marginBottom={"30px"} gap={"1470px"} direction={"row"}>
-        <Typography fontSize={"27px"} fontWeight={400} lineHeight={"38px"}>
+    <Stack alignItems="center" justifyContent="center" width="100%">
+      <Stack
+        justifyContent="center"
+        maxWidth={"1720px"}
+        width="100%"
+        marginBottom="30px"
+      >
+        <Typography fontSize="27px" fontWeight={400} lineHeight="38px">
           Popular Makes
         </Typography>
-        <ButtonBase sx={{ width: "60px", height: "24px", alignSelf: "center" }}>
-          <Typography
-            sx={{
-              cursor: `pointer`,
-              textDecoration: "underline",
-              textUnderlineOffset: `4.3px`,
-              textDecorationColor: "rgba(120, 120, 120, 0.4)",
-              transitionDuration: "0.22s",
-              ":hover": {
-                textDecorationColor: "black",
-                transitionDuration: "0.22s",
-              },
-            }}
-            fontSize={"16px"}
-            fontWeight={500}
-            lineHeight={"24px"}
-          >
-            View all
-          </Typography>
-        </ButtonBase>
       </Stack>
       <Stack
-        justifyContent={"space-between"}
-        gap={"20px"}
+        justifyContent="space-between"
+        gap="20px"
         direction="row"
-        flexWrap={"wrap"}
+        flexWrap="wrap"
+        maxWidth="1730px"
+        width="100%"
+        sx={{
+          "@media (max-width: 600px)": {
+            justifyContent: "center",
+          },
+        }}
       >
         {brand?.map((e: { img: string; brandTitle: string }, index: number) => (
           <Stack
             key={index}
-            width={"195px"}
-            height={"148px"}
             sx={{
-              cursor: `pointer`,
+              width: { xs: "100%", sm: "45%", md: "30%", lg: "20%" },
+              height: { xs: "auto", sm: "auto", md: "auto", lg: "auto" },
+              maxWidth: "190px",
+              maxHeight: "148px",
+              cursor: "pointer",
               border: "#E0E0E0 1px solid",
               transition: "border-color 300ms linear",
               "&:hover": {
@@ -76,10 +69,9 @@ export const PopMakes = () => {
                 objectFit: "cover",
               },
             }}
+            onClick={() => router.push(`/cars/${e.brandTitle}`)}
           >
-            <Stack onClick={() => router.push(`/cars/${e.brandTitle}`)}>
-              <CardMedia image={e.img} alt={`Car ${index}`} component={"img"} />
-            </Stack>
+            <CardMedia image={e.img} alt={`Car ${index}`} component="img" />
           </Stack>
         ))}
       </Stack>

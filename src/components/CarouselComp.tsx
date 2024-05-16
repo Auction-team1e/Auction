@@ -50,7 +50,12 @@ export const Carousel = () => {
   });
 
   return (
-    <Stack width={"full"} overflow={"hidden"} position={"relative"}>
+    <Stack
+      width={"full"}
+      maxWidth={"100vw"}
+      overflow={"hidden"}
+      position={"relative"}
+    >
       <Stack direction={"row"}>
         {cars.map((car, index) => (
           <Stack key={index} position={`relative`}>
@@ -86,7 +91,7 @@ export const Carousel = () => {
       </Stack>
       <Stack position={"absolute"} width={1} alignItems={`center`}>
         <Stack
-          width={1920}
+          width={1}
           justifyContent={"space-between"}
           padding={"710px 96px 60px 96px"}
           direction={"row"}

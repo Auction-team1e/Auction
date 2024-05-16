@@ -32,25 +32,27 @@ export const DetailPageBidBox = ({
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   useEffect(() => {
-    async function getData() {
-      setUserEmail(localStorage.getItem("userEmail"));
-    }
-    socket.on("connect", () => {
-      console.log("connected socket");
+    const socket = io("https://socketbackend-hfon.onrender.com", {
+      transports: ["websocket"],
     });
+
+    socket.on("connect", () => {
+      console.log("Connected to socket");
+    });
+
     socket.on("chat-message", (data) => {
       setAuctionId(data._id);
       setNewBid(data.bidOrder);
       setNextBid(Number(data.bidOrder) + (Number(data.bidOrder) * 10) / 100);
       setLoading(false);
     });
-    getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
-  const socket = io("https://socketbackend-53dj.onrender.com", {
-    transports: ["websocket"],
-  });
+    setUserEmail(localStorage.getItem("userEmail"));
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -80,6 +82,9 @@ export const DetailPageBidBox = ({
         headers: { "Content-Type": "application/json" },
       });
       const resJson = await res.json();
+      const socket = io("https://socketbackend-hfon.onrender.com", {
+        transports: ["websocket"],
+      });
       socket.emit("send-bid-message", { bidOrder, _id });
       if (resJson.message) {
         succesfully();
