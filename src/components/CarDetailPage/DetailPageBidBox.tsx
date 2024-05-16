@@ -28,6 +28,7 @@ export const DetailPageBidBox = ({
   const failed = () => toast.error("Your order must be next minimum or more");
   const mustLogged = () => toast.error("You must be logged");
   const succesfully = () => toast.success("Your order succesfully placed");
+  const [end, setEnd] = useState(true);
   const endStamp = new Date(endDate);
 
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -147,7 +148,7 @@ export const DetailPageBidBox = ({
         </form>
       </Stack>
       <Stack gap={0.4} borderRadius={1} border={`1px solid #d4d4d5`} p={`14px`}>
-        <NewTimer expiryTimestampq={endStamp} />
+        <NewTimer expiryTimestampq={endStamp} end={end} setEnd={setEnd} />
       </Stack>
     </Stack>
   );

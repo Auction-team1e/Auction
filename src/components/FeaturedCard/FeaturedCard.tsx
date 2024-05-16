@@ -37,9 +37,9 @@ export const FeaturedCard = ({
   const failed = () => toast.error("Your order must be next minimum or more");
   const mustLogged = () => toast.error("You must be logged");
   const succesfully = () => toast.success("Your order succesfully placed");
+  const [end, setEnd] = useState(true);
 
   const expiryTimestamp = new Date(endDate);
-  // const seconds = 600;
 
   useEffect(() => {
     const socket = io("https://socketbackend-hfon.onrender.com", {
@@ -105,6 +105,7 @@ export const FeaturedCard = ({
     }
   };
   let other = startPrice + (startPrice * 10) / 100;
+
   return (
     <Stack border={"1px solid #e0e0e0"}>
       <CarouselSlider img={img} _id={_id} brand={brand} />
@@ -114,13 +115,17 @@ export const FeaturedCard = ({
             <Typography fontWeight={700}>{carModel}</Typography>
             <Typography color={"#606060"}>{carDetail[1]}</Typography>
           </Stack>
-          <form onSubmit={handleSubmit}>
-            <BidInput
-              bidOrder={bidOrder}
-              setBidOrder={setBidOrder}
-              loading={loading}
-            />
-          </form>
+          {end == false ? (
+            ""
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <BidInput
+                bidOrder={bidOrder}
+                setBidOrder={setBidOrder}
+                loading={loading}
+              />
+            </form>
+          )}
         </Stack>
         <Stack direction={"row"} mt={"10px"} justifyContent={`space-between`}>
           <Stack gap={0.4}>
@@ -151,7 +156,11 @@ export const FeaturedCard = ({
           </Stack>
           <Divider sx={{ bgcolor: `gray` }} orientation="vertical" flexItem />
           <Stack gap={0.4}>
-            <NewTimer expiryTimestampq={expiryTimestamp} />
+            <NewTimer
+              expiryTimestampq={expiryTimestamp}
+              end={end}
+              setEnd={setEnd}
+            />
             <Bids id={_id} />
           </Stack>
         </Stack>

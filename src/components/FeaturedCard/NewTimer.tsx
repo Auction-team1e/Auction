@@ -1,11 +1,15 @@
 import { Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import { Dispatch } from "react";
 import { useTimer } from "react-timer-hook";
 
 export default function NewTimer({
   expiryTimestampq,
+  end,
+  setEnd,
 }: {
   expiryTimestampq: Date;
+  end: boolean;
+  setEnd: Dispatch<React.SetStateAction<boolean>>;
 }) {
   const expiryTimestamp = new Date(expiryTimestampq);
 
@@ -13,7 +17,7 @@ export default function NewTimer({
     expiryTimestamp,
     onExpire: () => setEnd(false),
   });
-  const [end, setEnd] = useState(true);
+
   return (
     <Stack direction={"row"} gap={"5px"}>
       <Typography>Timed auction :</Typography>
