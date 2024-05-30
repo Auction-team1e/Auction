@@ -23,6 +23,7 @@ import { ToastContainer } from "react-toastify";
 const Home = () => {
   const [data, setData] = useState<dataType[]>();
   const [error, setError] = useState<string | null>(null);
+  console.log("🚀 ~ Home ~ error:", error);
 
   useEffect(() => {
     async function getData() {
