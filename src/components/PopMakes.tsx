@@ -18,10 +18,13 @@ export const PopMakes = () => {
         const res = await fetch(
           `https://auction-back-end.onrender.com/api/brand`
         );
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
         const data = await res.json();
         setBrand(data);
-      } catch (error) {
-        console.error("error fetching car data:", error);
+      } catch (error: any) {
+        console.error("Error fetching data:", error);
       }
     }
     fetchCarData();
