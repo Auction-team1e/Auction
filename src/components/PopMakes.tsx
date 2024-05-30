@@ -15,15 +15,8 @@ export const PopMakes = () => {
   useEffect(() => {
     async function fetchCarData() {
       try {
-        const res = await fetch(
-          `https://auction-back-end.onrender.com/api/brand`,
-          {
-            mode: "no-cors",
-          }
-        );
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
+        const res = await fetch(`http://localhost:4000/api/brand`);
+
         const data = await res.json();
         setBrand(data);
       } catch (error) {
