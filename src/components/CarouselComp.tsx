@@ -29,8 +29,14 @@ export const Carousel = () => {
     async function fetchData() {
       try {
         const res = await fetch(
-          `https://auction-back-end.onrender.com/api/car`
+          `https://auction-back-end.onrender.com/api/car`,
+          {
+            mode: "no-cors",
+          }
         );
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
         const data = await res.json();
         setCars(data.slice(0, 4));
         setCurrentTitle(data[0]?.carModel || "");

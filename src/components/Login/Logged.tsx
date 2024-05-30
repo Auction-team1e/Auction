@@ -25,7 +25,15 @@ export const Logged = () => {
 
   useEffect(() => {
     async function getData() {
-      const res = await fetch("https://auction-back-end.onrender.com/api/user");
+      const res = await fetch(
+        "https://auction-back-end.onrender.com/api/user",
+        {
+          mode: "no-cors",
+        }
+      );
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
       const users = await res.json();
       setData(users);
       const loggedUserEmail = localStorage.getItem("userEmail");

@@ -17,8 +17,14 @@ export const PopSearches = () => {
     async function fetchCarData() {
       try {
         const res = await fetch(
-          `https://auction-back-end.onrender.com/api/brand`
+          `https://auction-back-end.onrender.com/api/brand`,
+          {
+            mode: "no-cors",
+          }
         );
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
         const data = await res.json();
         setBrand(data);
       } catch (error) {

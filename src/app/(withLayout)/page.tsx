@@ -25,7 +25,12 @@ const Home = () => {
 
   useEffect(() => {
     async function getData() {
-      const res = await fetch("https://auction-back-end.onrender.com/api/car");
+      const res = await fetch("https://auction-back-end.onrender.com/api/car", {
+        mode: "no-cors",
+      });
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
       const cars = await res.json();
       setData(cars);
     }
