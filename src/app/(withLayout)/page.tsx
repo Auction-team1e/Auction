@@ -22,24 +22,12 @@ import { ToastContainer } from "react-toastify";
 
 const Home = () => {
   const [data, setData] = useState<dataType[]>();
-  const [error, setError] = useState<string | null>(null);
-  console.log("🚀 ~ Home ~ error:", error);
 
   useEffect(() => {
     async function getData() {
-      try {
-        const res = await fetch(
-          "https://auction-back-end.onrender.com/api/car"
-        );
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        const cars = await res.json();
-        setData(cars);
-      } catch (error: any) {
-        setError("Error fetching data");
-        console.error("Error fetching data:", error);
-      }
+      const res = await fetch("http://localhost:4000/api/car");
+      const cars = await res.json();
+      setData(cars);
     }
     getData();
   }, []);
