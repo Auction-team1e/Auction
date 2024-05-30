@@ -40,7 +40,7 @@ export const BrandAddModal = () => {
       brandTitle: e.target.brand.value,
       img: imageUrl,
     };
-    fetch("http://localhost:4000/api/brand", {
+    fetch("https://auction-back-end.onrender.com/api/brand", {
       method: "POST",
       body: JSON.stringify(brandData),
       headers: { "Content-Type": "application/json" },

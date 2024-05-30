@@ -20,7 +20,9 @@ export const Footer = () => {
 
   useEffect(() => {
     async function getData() {
-      const res = await fetch("http://localhost:4000/api/brand");
+      const res = await fetch(
+        "https://auction-back-end.onrender.com/api/brand"
+      );
       const brands = await res.json();
       setData(brands);
     }

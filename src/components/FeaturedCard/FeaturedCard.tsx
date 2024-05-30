@@ -62,10 +62,6 @@ export const FeaturedCard = ({
     const currentTime = new Date();
     currentTime.setSeconds(0, 0);
 
-    // console.log("currentTime", currentTime.toLocaleString());
-    // console.log("endDate", new Date(endDate).toLocaleString());
-    // console.log("mongoliaTime", mongoliaTime);
-
     if (currentTime.toLocaleString() === new Date(endDate).toLocaleString()) {
       console.log("true");
       const highestBidUser = findMaxBidUser(bidContestants);
@@ -81,7 +77,9 @@ export const FeaturedCard = ({
       clearInterval(intervalId);
     }
   }
-  const intervalId = setInterval(date, 1000);
+  const intervalId = setInterval(() => {
+    date();
+  }, 1000);
   useEffect(() => {
     const socket = io("https://socketbackend-hfon.onrender.com", {
       transports: ["websocket"],

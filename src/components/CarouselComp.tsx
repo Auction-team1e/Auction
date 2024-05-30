@@ -28,7 +28,9 @@ export const Carousel = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch(`http://localhost:4000/api/car`);
+        const res = await fetch(
+          `https://auction-back-end.onrender.com/api/car`
+        );
         const data = await res.json();
         setCars(data.slice(0, 4));
         setCurrentTitle(data[0]?.carModel || "");

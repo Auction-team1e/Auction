@@ -25,7 +25,7 @@ export const Logged = () => {
 
   useEffect(() => {
     async function getData() {
-      const res = await fetch("http://localhost:4000/api/user");
+      const res = await fetch("https://auction-back-end.onrender.com/api/user");
       const users = await res.json();
       setData(users);
       const loggedUserEmail = localStorage.getItem("userEmail");

@@ -29,7 +29,7 @@ export const SearchModal = () => {
 
   useEffect(() => {
     async function getData() {
-      const res = await fetch("http://localhost:4000/api/car");
+      const res = await fetch("https://auction-back-end.onrender.com/api/car");
       const cars = await res.json();
       setData(cars);
     }
